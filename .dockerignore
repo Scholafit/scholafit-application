@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask specific
+# instance/
+.webassets-cache
+
+# Flask migrations
+migrations/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Ignore Docker specific files
+Dockerfile
+docker-compose.override.yml
+
+# Miscellaneous
+*.swp
+*.swo
+*.bak
+*.tmp
+.DS_Store
+
+# Ignore IDE config
+.idea/
+.vscode/
