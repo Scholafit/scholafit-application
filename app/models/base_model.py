@@ -45,7 +45,7 @@ class BaseModel(db.Model):
         Database.save()
     
     def delete(self):
-        """deletes object from the databae"""
+        """deletes object from the database"""
         Database.delete(self)
 
     def to_dict(self):
