@@ -26,6 +26,10 @@ services:
       DB_URL: ${DB_URL}
     ports:
       - 5000:5000
+    volumes:
+      - .:/src
+      - ./instance:/src/instance
+      - ./migrations:/src/migrations
     depends_on:
       db:
         condition: service_healthy
