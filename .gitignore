@@ -69,9 +69,6 @@ instance/
 # Jupyter Notebook
 .ipynb_checkpoints/
 
-# Flask migrations
-migrations/
-
 # Docker
 *.log
 docker-compose.override.yml

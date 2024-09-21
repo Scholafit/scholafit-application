@@ -2,9 +2,12 @@ import os
 
 from .api.v1.views import app_views
 from app.models import *
-from app.models.database import Database
+from app.models.database import db
 from dotenv import load_dotenv
+from flask_migrate import Migrate
 from flask import Flask
+
+migrate = Migrate()
 
 
 def create_app(test_config=None):
@@ -29,8 +32,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    database = Database()
-    database.load_db(app=app)
+    db.init_app(app)
+    migrate.init_app(app, db)
 
 
     return app
