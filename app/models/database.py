@@ -8,12 +8,6 @@ class Base(DeclarativeBase):
 db = SQLAlchemy(model_class=Base)
 
 class Database:
-
-    def load_db(self, app):
-        db.init_app(app)
-
-        with app.app_context():
-            db.create_all()
-    
+    pass
 
     
