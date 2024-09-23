@@ -7,15 +7,17 @@ from flask import make_response, jsonify, request
 
 @app_views.route('/')
 def status():
+    print('calling /')
     return make_response(jsonify({"status": "OK"}), 200)
 
 
 @app_views.route('/students', methods=["POST"])
 def create():
+    print('calling post')
     resp = student_create({
         "first_name": "Student",
         "last_name": 'Test',
-        "email": "teststudent@gmail.com",
+        "email": "teststudent2@gmail.com",
         "age": 23
     })
 
