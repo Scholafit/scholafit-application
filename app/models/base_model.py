@@ -1,4 +1,4 @@
-from .database import db, Database
+from .database import db
 from datetime import datetime, timezone
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -28,25 +28,6 @@ class BaseModel(db.Model):
     def __init__(self):
         self.created_at = datetime.now(timezone.utc)
         self.updated_at = datetime.now(timezone.utc)
-
-    def create(self):
-        """adds the object into the orm session scope.
-
-        This object has only been added to the scope and is being tracked by the orm but has not been added to the database.
-        Returns:
-            returns self
-        """
-        Database.new(self)
-        return self
-
-    def save(self):
-        """creates a record of the object into the database"""
-        Database.new(self)
-        Database.save()
-    
-    def delete(self):
-        """deletes object from the database"""
-        Database.delete(self)
 
     def to_dict(self):
         """converts a model instance into a dictionary of its attributes

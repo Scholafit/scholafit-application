@@ -6,8 +6,11 @@ def create(data):
     
     student = Student(**data)
 
-    return student.create(student)
+    new_student = student.create_student()
 
+    
+
+    return new_student.to_dict()
 
 def get_students():
     return Student.students()

@@ -1,49 +1,55 @@
 
-
+from abc import ABC
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
+from typing import TypeVar
+
+
+T = TypeVar('T')
 
 class Base(DeclarativeBase):
     pass
 
 db = SQLAlchemy(model_class=Base)
 
-class Database:
+def get_db():
+    return db
+
+
+
+class Repository(ABC):
+    def __init__(self, database: SQLAlchemy):
+        self._database = database
     
-    """
-    Provide Database connection.
-
-    """
-    @classmethod
-    def new(cls, obj):
-        """Adds obj to the scoped session.
-
-        Args:
-            obj: instance
-                This is the instance Object being added to the session
-        Returns:
-            None
-        """
-        db.session.add(obj)
+    @property
+    def database(self):
+        return self._database
     
-    @classmethod
-    def save(cls):
-        """saves object to the database
-        """
-        db.session.commit()
-
-    @classmethod
-    def delete(cls, obj):
-        """Deletes obj from the database
+    
+    def add(self, obj):
+        self.database.session.add(obj)
+        return obj
         
-        Args:
-            obj: instance
-                class Instance to be deleted
-        Returns:
-            None
-        """
-        db.session.delete(obj)
-        Database.save()
+    def save(self, obj:T):
+        self.database.session.add(obj)
+        
+        self.database.session.commit()
+        self.database.session.refresh(obj)
+        return obj
+        
+    def delete(self, obj):
+        self.database.session.delete(obj)
+        self.database.session.commit()
+        
+    
+    def get_by_id(self, objClass:T, objId: int) -> T:
+        instance = self.database.session.get(objClass, objId)
+        return instance
+        
+
+
+
+
         
 
     

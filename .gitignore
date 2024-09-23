@@ -75,3 +75,6 @@ docker-compose.override.yml
 
 # VS Code specific
 .vscode/
+
+
+main.py
