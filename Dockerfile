@@ -10,4 +10,6 @@ COPY app/ ./app
 
 EXPOSE 5000
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app.wsgi:g_app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app.wsgi:g_app", "--access-logfile", "-", "--error-logfile", "-", "--log-level", "debug"]
+
+# CMD ["flask", "--app", "app", "run"]
