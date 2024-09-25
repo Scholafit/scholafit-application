@@ -36,5 +36,5 @@ class BaseModel(db.Model):
             dict: A dictionary representation of the model with the
         """
         instance_dict = { key: val for (key, val) in self.__dict__.items() if key != '_sa_instance_state'}
-        
+        instance_dict.pop('password')
         return instance_dict

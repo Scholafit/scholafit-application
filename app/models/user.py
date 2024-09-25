@@ -3,7 +3,7 @@ from .database import Repository, get_db
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String, Boolean, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from .secure_pass import hash_password, verify_password
+from ..services.secure_pass import hash_password
 from .profile import DB_Profile
 
 class DB_User(BaseModel):
@@ -33,9 +33,6 @@ class DB_User(BaseModel):
 class UserRepository(Repository):
     def __init__(self, database: SQLAlchemy):
         super().__init__(database)
-
-    def get_all(self):
-        return self.database.session.query(DB_User).all()
     # Define custom queries here if needed
 
 
@@ -47,6 +44,7 @@ class User:
         user = DB_User(**kwargs)
         saved_user = self.db.save(user)
         return saved_user.to_dict()
+    
     
     def create_user_profile(self, user_id: int, **profile_data):
         user = self.db.get_by_id(DB_User, user_id)
@@ -61,37 +59,23 @@ class User:
         return saved_profile.to_dict()
     
     def get_all(self):
-        users = self.db.get_all()
-        return [user.to_dict() for user in users]
+        users = self.db.get_all(DB_User)
+        return [person.to_dict() for person in users]
     
-    def authenticate(self, email: str, plain_password: str):
-        user = self.db.get_by_filter(DB_User, email=email)  # Assuming you have a method to get by email
-        if user and verify_password(plain_password, user.password):
-            return user.to_dict()
-        return None
-
-    def get_user_by_id(self, user_id: int) -> DB_User | None:
+    def get_user_by_id(self, user_id:int) -> DB_User | None:
         user = self.db.get_by_id(DB_User, user_id)
         if user:
             return user.to_dict()
-
-    def update_user(self, user_id: int, **kwargs):
-        user = self.db.get_by_id(DB_User, user_id)
-        if user:
-            for key, value in kwargs.items():
-                if hasattr(user, key):
-                    setattr(user, key, value)
-            updated_user = self.db.save(user)
-            return updated_user.to_dict()
-
+        return "id does not match any user"
+    
     def delete_user(self, user_id: int):
         user = self.db.get_by_id(DB_User, user_id)
         if user:
             if user.profile:
                 self.db.delete(user.profile)
             self.db.delete(user)
-            return True
-        return False
+            return {"deleted": user.to_dict()}
+        return "User not found"
 
 # Initialize database and repository
 database = get_db()

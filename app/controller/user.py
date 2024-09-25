@@ -1,21 +1,27 @@
-from app.models.user import User
-from app.models.database import db
+from flask import make_response, jsonify, Request
+from app.models.user import user
 
-def create_user(data):
+def create_user(request: Request):
     """
     Create a new user with the provided data.
     Args:
-        data (dict): A dictionary containing user details (firstname, lastname, email, password).
+        data (dict): A dictionary containing user details (username, email, password).
     Returns:
         str: A success message or error message.
     """
+    data = request.json
+    email = data.get("email")
     try:
-        user = User(**data)
-        db.session.add(user)
-        db.session.commit()
-        return {"message": "User created successfully", "user": user.to_dict()}
+        existing_users = [u['email'] for u in user.get_all()]  
+        
+        if email in existing_users:
+            return make_response(jsonify({"error": "Email already exists"}), 409)
+        
+        new_user = user.create_user(**data)
+        return make_response(jsonify({"new_user": new_user}), 201)
+    
     except Exception as e:
-        return f"Error creating user: {str(e)}"
+        return make_response(jsonify({"error": f"An error occurred: {str(e)}"}), 500)
 
 
 def get_user():
@@ -24,20 +30,25 @@ def get_user():
     Returns:
         list: A list of all users in dictionary format.
     """
-    return User.all_users()
+    users = user.get_all()
+    return make_response(jsonify({"all users": users}), 200)
 
-def get_user_by_email(email):
-    """Fetch a user by their email."""
-    user = User.find_by_email(email)
-    if user:
-        return user.to_dict()
-    return None
+def user_by_id(user_id):
+    """Fetch a user by their id"""
+    user_detail = user.get_user_by_id(user_id)
 
-def delete_user_by_email(email):
-    """Delete a user by their email."""
-    user = User.find_by_email(email)
-    if user:
-        db.session.delete(user)
-        db.session.commit()
-        return True
-    return False
+    if user_detail:
+        return make_response(jsonify({"user": user_detail}), 200)
+    
+    else:
+        return make_response(jsonify({"Error": 'user not found'}), 404)
+
+def delete_user_by_id(user_id):
+    """Delete a user by their id"""
+    #user.delete_user(user_id)
+    try:
+        deleted_user = user.delete_user(user_id)
+        return make_response(jsonify({"deleted user": deleted_user}), 201)
+    except Exception as e:
+        return f"Error deleting user: {str(e)}"
+    #return make_response(jsonify({"user": "user deleted successfully"}), 201)
