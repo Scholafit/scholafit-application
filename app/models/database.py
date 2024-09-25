@@ -41,7 +41,9 @@ class Repository(ABC):
         self.database.session.delete(obj)
         self.database.session.commit()
         
-    
+    def get_all(self, objClass: T) -> list[T]:
+        return self.database.session.query(objClass).all()
+
     def get_by_id(self, objClass:T, objId: int) -> T:
         instance = self.database.session.get(objClass, objId)
         return instance
