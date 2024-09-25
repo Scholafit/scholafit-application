@@ -1,15 +1,16 @@
 from .base_model import BaseModel
 from .database import Repository, get_db
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, JSON
+from sqlalchemy import String, JSON, Integer, ForeignKey
 from sqlalchemy.dialects.mysql import ENUM
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class DB_Profile(BaseModel):
 
     __tablename__ = 'profiles'
 
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
     subscription_status: Mapped[ENUM] = mapped_column(ENUM('ACTIVE', 'INACTIVE'), nullable=False)
     isAdult: Mapped[bool] = mapped_column(nullable=False)
     current_education_level: Mapped[str] = mapped_column(String(120), nullable=False)
@@ -26,9 +27,11 @@ class DB_Profile(BaseModel):
     parent_email: Mapped[str | None] = mapped_column(String(120), nullable=True)
     parent_phone_number: Mapped[str | None] = mapped_column(String(15), nullable=True)
 
+    user = relationship("DB_User", back_populates="profile")
 
     def __init__(self,**kwargs):
-        
+
+        self.user_id = kwargs.get('user_id')
         self.subscription_status = kwargs.get('subscription_status')
         self.current_education_level = kwargs.get('current_education_level')
         self.isAdult = True if kwargs.get('isAdult') == 'TRUE' else False
@@ -38,7 +41,7 @@ class ProfileRepository(Repository):
     def __init__(self, database: SQLAlchemy):
         super().__init__(database)
 
-    # select all profiles that have subscription
+    # select all profiles that have subscription and include other functions
     
 
 
@@ -47,8 +50,8 @@ class Profile:
 
         self.db = dbRepository
 
-    def create_profile(self, **kwargs):
-        profile = DB_Profile(**kwargs)
+    def create_profile(self, user_id, **kwargs):
+        profile = DB_Profile(user_id=user_id, **kwargs)
         saved_profile = self.db.save(profile)
         return saved_profile.to_dict()
     
