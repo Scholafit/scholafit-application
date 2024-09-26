@@ -10,6 +10,8 @@ class DB_User(BaseModel):
 
     __tablename__ = 'users'
 
+    first_name: Mapped[str] = mapped_column(String(120), nullable=False)
+    last_name: Mapped[str] = mapped_column(String(120), nullable=False)
     username: Mapped[str] = mapped_column(String(120), nullable=False, unique=True)
     email: Mapped[str] = mapped_column(String(120), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(120), nullable=False)
@@ -21,6 +23,9 @@ class DB_User(BaseModel):
     profile = relationship("DB_Profile", back_populates="user", uselist=False)
 
     def __init__(self, **kwargs):
+
+        self.first_name = kwargs.get('first_name')
+        self.last_name = kwargs.get('last_name')
         self.username = kwargs.get('username')
         self.email = kwargs.get('email')
         plain_password = kwargs.get('password')
