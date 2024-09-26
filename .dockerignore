@@ -16,9 +16,6 @@ venv.bak/
 # instance/
 .webassets-cache
 
-# Flask migrations
-migrations/
-
 # Distribution / packaging
 build/
 dist/
