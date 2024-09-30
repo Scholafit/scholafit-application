@@ -1,12 +1,13 @@
 
 from app.models.base_model import BaseModel
-from app.models.database import Repository
+from app.models.database import Repository, get_db
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Text, ForeignKey, Integer, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 
 
+DB = get_db()
 
 class DB_Question(BaseModel):
 
@@ -98,3 +99,12 @@ class Passage:
     def create_passage(self, passage_text):
         psg = DB_Passage(passage_text)
         return self.db.save(psg).to_dict()
+    
+
+
+question = Question(QuestionRepository(DB))
+
+answerChoices = QuestionAnswer(QuestionAnswerRepository(DB))
+
+passage = Passage(PassageRepository(DB))
+
