@@ -1,11 +1,15 @@
-from ..services.secure_pass import verify_password
+from ..services.secure_pass import verify_password, hash_password
 from flask import session
 from .user import UserRepository, DB_User
 from .database import get_db
+from itsdangerous import URLSafeTimedSerializer
+import os
 
 class AuthService:
     def __init__(self, user_repository: UserRepository):
         self.user_repo = user_repository
+        self.serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))
+        
 
     def login(self, email: str, password: str):
         """
@@ -33,6 +37,29 @@ class AuthService:
     def is_authenticated(self):
         """Check if a user is authenticated by checking the session."""
         return 'user_id' in session
+    
+    def forgot_password(self, email: str):
+        """Send a password reset token to the user's email."""
+        user = self.user_repo.database.session.query(DB_User).filter_by(email=email).first()
+        if user:
+            token = self.serializer.dumps(email, salt='password-reset-salt')
+            #reset_link = f"{current_app.config['FRONTEND_URL']}/reset-password/{token}"
+            #send_email(user.email, reset_link)  # Function to send the email
+            return token
+        return {"error": "Email not found."}
+
+    def reset_password(self, token: str, new_password: str):
+        """Reset the user's password using the token."""
+        try:
+            email = self.serializer.loads(token, salt='password-reset-salt', max_age=3600)
+            user = self.user_repo.database.session.query(DB_User).filter_by(email=email).first()
+            if user:
+                user.password = hash_password(new_password)
+                self.user_repo.database.session.commit()
+                return {"message": "Password has been updated successfully."}
+            return {"error": "User not found."}
+        except Exception as e:
+            return {"error": "Invalid or expired token."}
 
 # Initialize database and repository
 database = get_db()

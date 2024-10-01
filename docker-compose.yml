@@ -8,10 +8,12 @@ services:
     expose:
       - 3306
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_USER_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE_NAME}
+      SECRET_KEY: ${SECRET_KEY}
     volumes:
       - mysql-db:/var/lib/mysql
     healthcheck:
@@ -24,6 +26,7 @@ services:
     build: .
     environment:
       DB_URL: ${DB_URL}
+      SECRET_KEY: ${SECRET_KEY}
     ports:
       - 5000:5000
     depends_on:

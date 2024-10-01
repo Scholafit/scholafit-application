@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String, Boolean, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..services.secure_pass import hash_password
-from .profile import DB_Profile
+from .profile import DB_Profile, Profile
 
 class DB_User(BaseModel):
 
@@ -17,7 +17,7 @@ class DB_User(BaseModel):
     password: Mapped[str] = mapped_column(String(120), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    profile_data: Mapped[dict | None] = mapped_column(JSON, nullable=True)  # Link to profile data if necessary
+    #profile_data: Mapped[dict | None] = mapped_column(JSON, nullable=True)  # Link to profile data if necessary
     roles: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)    # Roles like 'admin', 'user', etc.
 
     profile = relationship("DB_Profile", back_populates="user", uselist=False)
@@ -35,6 +35,12 @@ class DB_User(BaseModel):
         self.profile_data = kwargs.get('profile_data')
         self.roles = kwargs.get('roles', ['user'])
 
+    def to_dict(self):
+        user_dict = super().to_dict()
+        if self.profile:
+            user_dict["profile_data"] = self.profile.to_dict()
+        return user_dict
+
 class UserRepository(Repository):
     def __init__(self, database: SQLAlchemy):
         super().__init__(database)
@@ -46,22 +52,37 @@ class User:
         self.db = dbRepository
 
     def create_user(self, **kwargs):
+        required_fields = ['first_name', 'last_name', 'username', 'email', 'password']
+        for field in required_fields:
+            if field not in kwargs or not kwargs[field]:
+                raise ValueError(f"Missing required field: {field}")
+
         user = DB_User(**kwargs)
         saved_user = self.db.save(user)
-        return saved_user.to_dict()
-    
-    
-    def create_user_profile(self, user_id: int, **profile_data):
-        user = self.db.get_by_id(DB_User, user_id)
-        if not user:
-            return {"error": "User not found"}
 
-        if user.profile:  # Ensure a profile does not already exist for the user
-            return {"error": "Profile already exists for this user"}
-
-        profile = DB_Profile(user_id=user_id, **profile_data)
-        saved_profile = self.db.save(profile)
-        return saved_profile.to_dict()
+        blank_profile_data = {
+            "user_id": saved_user.id,
+            "subscription_status": 'INACTIVE',
+            "isAdult": False,
+            "current_education_level": None,
+            "school_name": None,
+            "expected_graduation_year": None,
+            "desired_course": None,
+            "university_choices": [],
+            "country": None,
+            "state": None,
+            "postal_code": None,
+            "city": None,
+            "parent_first_name": None,
+            "parent_last_name": None,
+            "parent_email": None,
+            "parent_phone_number": None
+        }
+        blank_profile = DB_Profile(**blank_profile_data)
+        new_profile = self.db.save(blank_profile)
+        dict_user = saved_user.to_dict()
+        return dict_user, new_profile.to_dict()
+    
     
     def get_all(self):
         users = self.db.get_all(DB_User)
@@ -71,7 +92,7 @@ class User:
         user = self.db.get_by_id(DB_User, user_id)
         if user:
             return user.to_dict()
-        return "id does not match any user"
+        return None
     
     def delete_user(self, user_id: int):
         user = self.db.get_by_id(DB_User, user_id)

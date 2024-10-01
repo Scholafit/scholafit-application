@@ -36,5 +36,11 @@ class BaseModel(db.Model):
             dict: A dictionary representation of the model with the
         """
         instance_dict = { key: val for (key, val) in self.__dict__.items() if key != '_sa_instance_state'}
-        instance_dict.pop('password')
+        if 'password' in instance_dict:
+            instance_dict.pop('password', None)
         return instance_dict
+    
+    def update_object_from_dict(self, data):
+        for key, value in data.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
