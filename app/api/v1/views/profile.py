@@ -1,13 +1,18 @@
 from . import app_views
-from app.controller.profile import get_user_profile, create_user_profile
+from app.controller.profile import get_user_profile, create_user_profile, get_profiles, update_user_profile
 from flask import request
 
-@app_views.route('/users/profile', methods=['POST'])
-def create_profile():
+@app_views.route('/users/profiles', methods=['GET'])
+def get_all_profile():
     
-    return create_user_profile(request)
+    return get_profiles()
 
 @app_views.route('/users/<profileId>/profiles', methods=['GET'])
 def get_profile(profileId):
    
     return get_user_profile(profileId)
+
+@app_views.route('/users/<profileId>/profiles', methods=['PUT'])
+def update_profile(profileId):
+
+    return update_user_profile(profileId)

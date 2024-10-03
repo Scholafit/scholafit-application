@@ -46,6 +46,7 @@ class MailChimpEmailMessagingService(MessagingServiceProvider):
         }
         
         resp = self.client.messages.send({"message":msg})
+        print(resp)
         
         
 

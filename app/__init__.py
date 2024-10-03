@@ -12,10 +12,11 @@ migrate = Migrate()
 
 def create_app(test_config=None):
     load_dotenv()
-    
+    secret_key = os.getenv('SECRET_KEY')
+
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY=os.getenv('SECRET_KEY'),
+        SECRET_KEY=secret_key,
         SQLALCHEMY_DATABASE_URI=os.getenv('DB_URL')
     )
     app.url_map.strict_slashes = False
