@@ -1,5 +1,5 @@
 from . import app_views
-from app.controller.auth import login, logout, forgot_password, reset_password
+from app.controller.auth import login, logout, forgot_password, reset_password, verify_new_user
 from flask import request
 
 
@@ -18,3 +18,7 @@ def forgot_password_route():
 @app_views.route('/reset-password/<token>', methods=['POST'])
 def reset_password_route(token):
     return reset_password(request, token)
+
+@app_views.route('/verify/<token>', methods=['POST'])
+def verify_user_route(token):
+    return verify_new_user(request, token)

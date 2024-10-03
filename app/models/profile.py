@@ -67,7 +67,6 @@ class Profile:
             return None
         
     def update_profile(self, profile_id: int, **kwargs) -> dict | None:
-    # Query the DB_Profile using the user_id foreign key and update the fields
         profile = self.db.database.session.query(DB_Profile).filter_by(id=profile_id).first()
         if not profile:
             return None

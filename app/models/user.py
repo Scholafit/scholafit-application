@@ -4,7 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String, Boolean, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..services.secure_pass import hash_password
+from ..services.notification import create_email_notification_service
 from .profile import DB_Profile, Profile
+from itsdangerous import URLSafeTimedSerializer
+import os
 
 class DB_User(BaseModel):
 
@@ -21,6 +24,7 @@ class DB_User(BaseModel):
     roles: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)    # Roles like 'admin', 'user', etc.
 
     profile = relationship("DB_Profile", back_populates="user", uselist=False)
+    subscription = relationship("DB_Subscription", back_populates="user", uselist=False)
 
     def __init__(self, **kwargs):
 
@@ -50,6 +54,7 @@ class UserRepository(Repository):
 class User:
     def __init__(self, dbRepository: Repository) -> None:
         self.db = dbRepository
+        self.serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))
 
     def create_user(self, **kwargs):
         required_fields = ['first_name', 'last_name', 'username', 'email', 'password']
@@ -80,6 +85,17 @@ class User:
         }
         blank_profile = DB_Profile(**blank_profile_data)
         new_profile = self.db.save(blank_profile)
+
+
+        token = self.serializer.dumps(saved_user.email, salt='verify-email-salt')
+
+        #Send verification link to the new user
+        subject = f"Congratulations {saved_user.first_name} You are on your way to acing your upcoming examinations"
+        verify_link = f"127.0.0.1:5000/api/v1/verify/{token}"
+        message = f"Please click the following link to verify your user account\n {verify_link}"
+        sender_address = "info@scholafit.com"
+        email_service = create_email_notification_service(sender_address)
+        email_service.notify(saved_user.email, message, subject)
         dict_user = saved_user.to_dict()
         return dict_user, new_profile.to_dict()
     
@@ -99,6 +115,9 @@ class User:
         if user:
             if user.profile:
                 self.db.delete(user.profile)
+            if user.subscription:
+                self.db.delete(user.subscription)
+
             self.db.delete(user)
             return {"deleted": user.to_dict()}
         return "User not found"

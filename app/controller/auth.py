@@ -69,3 +69,20 @@ def reset_password(request: Request, token: str):
         return make_response(jsonify(reset_response), 200)
     except Exception as e:
         return make_response(jsonify({"error": f"An error occurred: {str(e)}"}), 500)
+    
+def verify_new_user(request: Request, token: str):
+    """
+    Handle verification of a user email address
+    Args:
+        request (Request): Request containing new password.
+        token (str): verification token.
+    Returns:
+        JSON: A success message or error message.
+    """
+    try:
+        response = auth_service.verify_user(token)
+        if 'error' in response:
+            return make_response(jsonify(response), 400)
+        return make_response(jsonify(response), 200)
+    except Exception as e:
+        return make_response(jsonify({"error": f"An error occurred: {str(e)}"}), 500)
