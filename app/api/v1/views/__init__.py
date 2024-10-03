@@ -6,3 +6,4 @@ from .profile import *
 from .student import *
 from .user import *
 from .auth import *
+from .subscription import *

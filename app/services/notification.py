@@ -58,7 +58,7 @@ class EmailNotification(Notification):
         self.messagingServiceProvider.send(recepient, message, subject)
 
 
-def get_email_notification_service(sender_address: str):
+def create_email_notification_service(sender_address: str):
     """
     Initializes and returns an email notification service using MailChimp's transactional API.
 
