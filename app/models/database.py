@@ -30,12 +30,14 @@ class Repository(ABC):
         self.database.session.add(obj)
         return obj
         
-    def save(self, obj:T):
-        self.database.session.add(obj)
+    def save(self, obj:T=None):
+        if obj:
+            self.database.session.add(obj)
         
+            self.database.session.commit()
+            self.database.session.refresh(obj)
+            return obj
         self.database.session.commit()
-        self.database.session.refresh(obj)
-        return obj
         
     def delete(self, obj):
         self.database.session.delete(obj)
