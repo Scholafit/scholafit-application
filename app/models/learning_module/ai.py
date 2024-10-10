@@ -23,6 +23,7 @@ def generate_questions(subject:str, number_of_questions: int, client:Anthropic):
         ]
                 }}
             - answers are multiple choice questions
+            - one of the answers has to be the correct answer and marked as true while rest are false
             - explanation: A brief explanation of why the answer is correct
             - questions should be a mix of easy, medium and hard difficulty levels 
             Return all questions in a single JSON array."""

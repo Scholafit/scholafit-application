@@ -2,7 +2,7 @@
 from app.models.base_model import BaseModel
 from app.models.database import Repository, get_db
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Text, ForeignKey, Integer, Boolean
+from sqlalchemy import Text, ForeignKey, Integer, Boolean, select
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 
@@ -22,6 +22,8 @@ class DB_Question(BaseModel):
     passage: Mapped["DB_Passage"] = relationship(back_populates="questions")
     subject: Mapped["DB_Subject"] = relationship(back_populates="questions")
     answer_choices:Mapped[List["DB_QuestionAnswerChoices"]] = relationship(back_populates="question", cascade="all, delete-orphan")
+    subject_tests: Mapped[List["DB_SubjectTestQuestion"]] = relationship(back_populates="question")
+
 
     def __init__(self, *args, **kwargs):
         self.passage_id = kwargs.get('passage_id', None)
@@ -34,8 +36,8 @@ class DB_Question(BaseModel):
 class QuestionRepository(Repository):
     def __init__(self, database: SQLAlchemy):
         super().__init__(database)
-
-
+    
+    
 class Question:
     def __init__(self, questionRepository: Repository):
         self.db = questionRepository
