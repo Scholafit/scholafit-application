@@ -41,9 +41,7 @@ class ProfileRepository(Repository):
     def __init__(self, database: SQLAlchemy):
         super().__init__(database)
 
-    # select all profiles that have subscription and include other functions
     
-
 
 class Profile:
     def __init__(self, dbRepository: Repository) -> None:

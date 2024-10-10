@@ -2,6 +2,7 @@ import os
 
 from .api.v1.views import app_views
 from app.models import *
+from app.models.learning_module import *
 from app.models.database import db
 from dotenv import load_dotenv
 from flask_migrate import Migrate
@@ -35,7 +36,6 @@ def create_app(test_config=None):
 
     db.init_app(app)
     migrate.init_app(app, db)
-
 
     return app
 
