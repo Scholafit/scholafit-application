@@ -1,3 +1,4 @@
+from app.services.notification import get_email_notification_service
 from .database import db
 from .base_model import BaseModel
 
@@ -21,6 +22,7 @@ class Student(BaseModel):
 
     @classmethod
     def students(cls):
+        
         students = db.session.execute(db.select(Student)).scalars()
 
         return [student.to_dict() for student in students]
