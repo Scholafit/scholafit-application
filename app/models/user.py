@@ -69,7 +69,7 @@ class User:
             "user_id": saved_user.id,
             "subscription_status": 'INACTIVE',
             "isAdult": False,
-            "current_education_level": None,
+            "current_education_level": "JSS",
             "school_name": None,
             "expected_graduation_year": None,
             "desired_course": None,

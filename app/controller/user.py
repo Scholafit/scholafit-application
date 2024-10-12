@@ -47,7 +47,13 @@ def add_user_subjects(profile_id: int, request: Request):
     subs = json.loads(subjects["subjects"])
 
     resp = userSubject.create_user_subjects(profile_id, subs)
-    return make_response(jsonify({'subjects': resp}), 201)
+
+    data = []
+    for res in resp:
+        sub_id = res.get("subject_id")
+        sub = subject.get_subject_by_id(sub_id)
+        data.append(sub.name)
+    return make_response(jsonify({'subjects': data}), 201)
 
 
 def create_user_exam(profile_id:int):

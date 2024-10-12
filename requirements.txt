@@ -2,6 +2,7 @@ alembic==1.13.2
 annotated-types==0.7.0
 anthropic==0.34.2
 anyio==4.6.0
+APScheduler==3.10.4
 bcrypt==4.2.0
 blinker==1.8.2
 certifi==2024.8.30
@@ -50,5 +51,7 @@ SQLAlchemy==2.0.35
 tokenizers==0.20.0
 tqdm==4.66.5
 typing_extensions==4.12.2
+tzdata==2024.2
+tzlocal==5.2
 urllib3==2.2.3
 Werkzeug==3.0.4
