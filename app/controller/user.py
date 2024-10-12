@@ -1,5 +1,7 @@
 from flask import make_response, jsonify, Request
 from app.models.user import user
+from sqlalchemy.exc import IntegrityError
+import MySQLdb
 from app.models.learning_module.subject import userSubject, subject
 from app.models.learning_module.test import subjectTest,userTest
 from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record
@@ -15,24 +17,18 @@ def create_user(request: Request):
         str: A success message or error message.
     """
     data = request.json
-    email = data.get("email")
-    username = data.get("username")
     try:
-        existing_email = [u['email'] for u in user.get_all()]  
-        
-        if email in existing_email:
-            return make_response(jsonify({"error": "Email already exists"}), 409)
-        
-        existing_username = [u['username'] for u in user.get_all()]
-        if username in existing_username:
-            return make_response(jsonify({"error": "Username already exists"}), 409)
-        
-        
         new_user = user.create_user(**data)
         return make_response(jsonify({"new_user": new_user[0], "new_profile": new_user[1]}), 201)
-    
-    except Exception as e:
-        return make_response(jsonify({"error": f"An error occurred during user/profile creation: {str(e)}"}), 500)
+    except IntegrityError as e:
+        user.db.database.session.rollback()
+        error_message = str(e.orig)
+        if "Duplicate entry" in error_message:
+            if "users.email" in error_message:
+                return (jsonify({"error": "Email already exists"}), 409)
+            elif "users.username" in error_message:
+                return (jsonify({"error": "Username already exists"}), 409)
+        return (jsonify({"error": "An error occurred during user creation"}), 500)
 
 def create_profile(user_id:int, request: Request):
     

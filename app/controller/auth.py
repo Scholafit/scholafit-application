@@ -10,7 +10,7 @@ def login(request: Request):
         JSON: A success message or error message.
     """
     data = request.json
-    email = data.get('email')
+    email = data.get('identifier')
     password = data.get('password')
 
     try:
