@@ -1,4 +1,4 @@
-from app.services.notification import get_email_notification_service
+from app.services.notification import create_email_notification_service
 from .database import db
 from .base_model import BaseModel
 

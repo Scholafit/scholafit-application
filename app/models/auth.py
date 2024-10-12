@@ -13,7 +13,7 @@ class AuthService:
         self.serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))
         
 
-    def login(self, email: str, password: str):
+    def login(self, identifier: str, password: str):
         """
         Authenticate user based on email and password.
         Args:
@@ -23,7 +23,11 @@ class AuthService:
             dict: A success message or error message.
         """
         # Query to find the user by email
-        specific_user = self.user_repo.database.session.query(DB_User).filter_by(email=email).first()
+        specific_user = (
+        self.user_repo.database.session.query(DB_User)
+        .filter((DB_User.email == identifier) | (DB_User.username == identifier))
+        .first()
+    )
 
         # Validate the user and password
         if specific_user and verify_password(password, specific_user.password):

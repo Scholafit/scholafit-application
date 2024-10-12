@@ -7,6 +7,7 @@ from ..services.secure_pass import hash_password
 from ..services.notification import create_email_notification_service
 from .profile import DB_Profile, Profile
 from itsdangerous import URLSafeTimedSerializer
+import re
 import os
 
 class DB_User(BaseModel):
@@ -56,11 +57,31 @@ class User:
         self.db = dbRepository
         self.serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))
 
+    #Ensure only strong password is used
+    def is_password_strong(self, password: str) -> bool:
+        if len(password) < 8:
+            return False
+        if not re.search(r'[A-Z]', password):
+            return False
+        if not re.search(r'[a-z]', password):
+            return False
+        if not re.search(r'[0-9]', password):
+            return False
+        if not re.search(r'[@$!%*?&#]', password):
+            return False
+        return True
+    
     def create_user(self, **kwargs):
         required_fields = ['first_name', 'last_name', 'username', 'email', 'password']
         for field in required_fields:
             if field not in kwargs or not kwargs[field]:
                 raise ValueError(f"Missing required field: {field}")
+            
+        plain_password = kwargs.get('password')
+        if not self.is_password_strong(plain_password):
+            raise ValueError("Password is not strong enough. It must be at least 8 characters long, "
+                             "contain one uppercase letter, one lowercase letter, one number, "
+                             "and one special character.")
 
         user = DB_User(**kwargs)
         saved_user = self.db.save(user)
