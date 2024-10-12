@@ -43,6 +43,20 @@ services:
         - action: rebuild
           path: requirements.txt
           target: /src/requirements.txt
+  front-end:
+    build:
+      context: ./SCHOLARFIT
+      dockerfile: Dockerfile
+    
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./SCHOLARFIT
+          target: /usr/share/nginx/html
 
 volumes:
         mysql-db:
