@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <script src="js/script.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Pricing Page</title>
@@ -55,7 +56,7 @@
           <p>Access to all study materials and resources.</p><br>
           <p>Priority customer support.</p><br>
 
-          <a class="buttonp1" href="">Subscribe to Premium</a>
+          <a class="buttonp1" id="paystack-button">Subscribe to Premium</a>
 
         </div>
 
@@ -181,6 +182,42 @@
 
       </div>
     </div>
+    <script>
+      // Paystack payment handler
+      document.getElementById('paystack-button').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default button behavior
+  
+        let handler = PaystackPop.setup({
+          key: 'pk_live_3bf7f0996f02d4aa3f',
+          email: 'user@example.com', // User's email
+          amount: 3000 * 100, // Amount in Kobo (Naira * 100)
+          currency: 'NGN', // Currency
+          ref: 'txn_' + Math.floor((Math.random() * 1000000000) + 1), // Generate a unique reference
+          callback: function (response) {
+            // Send the reference to your backend for verification
+            fetch(`/payments/verify/${response.reference}`, {
+              method: 'GET'
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.status === 'success') {
+                alert('Payment successful! Welcome to Premium.');
+                // Optionally, redirect the user to a success page
+                window.location.href = '/premium-success';
+              } else {
+                alert('Payment verification failed. Please contact support.');
+              }
+            })
+            .catch(error => console.error('Error:', error));
+          },
+          onClose: function () {
+            alert('Transaction was not completed, window closed.');
+          }
+        });
+  
+        handler.openIframe(); // Open Paystack payment modal
+      });
+    </script>
 
   </body>
 </html>

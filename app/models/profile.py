@@ -1,7 +1,7 @@
 from .base_model import BaseModel
 from .database import Repository, get_db
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, JSON, Integer, ForeignKey
+from sqlalchemy import String, JSON, Integer, ForeignKey, Float
 from sqlalchemy.dialects.mysql import ENUM
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -12,6 +12,7 @@ class DB_Profile(BaseModel):
 
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
     subscription_status: Mapped[ENUM] = mapped_column(ENUM('ACTIVE', 'INACTIVE'), nullable=True)
+    account_balance: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     isAdult: Mapped[bool] = mapped_column(nullable=True)
     current_education_level: Mapped[str] = mapped_column(String(120), nullable=True)
     school_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
@@ -28,6 +29,7 @@ class DB_Profile(BaseModel):
     parent_phone_number: Mapped[str | None] = mapped_column(String(15), nullable=True)
 
     user = relationship("DB_User", back_populates="profile")
+    payments = relationship("DB_Payment", back_populates="profile")
 
     def __init__(self,**kwargs):
 
