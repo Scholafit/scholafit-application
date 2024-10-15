@@ -1,4 +1,6 @@
 const BASE_URL = 'http:/api/v1'
+
+import {getItemFromSessionStorage} from './utils.js'
 const createOptions = (requestType, body="")=>{
     const options = {
       method: requestType,
@@ -137,13 +139,17 @@ export const generate_test = async (profile_id) => {
 
 export const submitTest = async (test_id) => {
   const url = BASE_URL + `/learner-center/tests/submit/${test_id}`
-  const answers = sessionStorage.getItem('answers')
-  const body = {"answers": answers}
+  const answers = getItemFromSessionStorage("answers")
+  const arrayAnswers = []
+  for (const [key, val] of Object.entries(answers)){
+   
+    arrayAnswers.push(parseInt(val))
+  }
+  const body = {"answers": JSON.stringify(arrayAnswers)}
   const options = createOptions('POST', body)
-
   try {
       const response = await sendRequest(url,options)
-      if (response.status !== 201){
+      if (response.status !== 200){
         const err = await response.json()
         return {
           status: response.status,

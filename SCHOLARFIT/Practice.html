@@ -66,8 +66,11 @@
             </div>
           </div>
           <div class="test__nav-controls">
-            
-            <div id="nxt_question"><p class="Sc">Next</p></div>
+            <div id="prev_question"><p class="Sc">Prev</p></div>
+            <div id="nxt_question"><p class="Sc Sc__active">Next</p></div>
+          </div>
+          <div class="submit__test">
+            <div id="submit__test_btn"><p class="Sc Sc__active">Submit</p></div>
           </div>
   
         </div>
@@ -147,8 +150,9 @@
         <p class="text"> &#169 2023 Scholafit. all rights reserved.</p>
       </div>
     <script type="module">
-      import {loadExam, loadSubjectTest} from './js/renderData.js' 
+      import {loadExam, submitAnswers} from './js/renderData.js' 
       loadExam()
+      submitAnswers()
     </script>
   </body>
 </html>
