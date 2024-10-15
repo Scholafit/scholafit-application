@@ -54,7 +54,7 @@ body {
   fill: #ffffff;
 }
 
-}
+
 .Signup_btn {
   cursor: pointer;
   top: 602px;
@@ -187,7 +187,7 @@ li img {
   margin-bottom: 10%;
   margin-right: 20%;
   outline: solid 1px white;
-  display; flex;
+  display: flex;
   justify-content: center;
 }
 

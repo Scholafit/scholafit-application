@@ -29,9 +29,12 @@
         <h2>Overall Score</h2>
 
       </div>
-      <div class="card2">
+      <div class="card2" >
         <h2>Performance Breakdown by subjects.</h2>
-
+        <div class="performance__breakdown" id="perfomance-breakdown">
+          
+        </div>
+      
       </div>
       <div class="card3">
         <h2>Comparison With Previous Attempts.</h2>
@@ -43,6 +46,9 @@
       </div>
       <div class="card5">
         <h2>Correct Answers for missed questions</h2>
+        <div id="revision">
+          
+        </div>
 
       </div>
       <div class="card6">
@@ -73,6 +79,10 @@
     </div>
 
 
-
+      <script type="module">
+        import {renderResults, renderRevision} from './js/renderData.js'
+        renderResults()
+        renderRevision()
+      </script>
   </body>
 </html>

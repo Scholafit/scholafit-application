@@ -94,6 +94,23 @@ li img {
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
+
+.performance__breakdown {
+
+  width: 90%;
+  margin-inline: auto;
+  max-height: 80%;
+  min-height: 80%;
+}
+
+.subject__score_container {
+  display: flex;
+
+}
+.subject__score_container :first-child {
+  /* border: 2px solid red; */
+  width: 100px
+}
 .card2 {
   top: 144px;
   text-align: left;
@@ -142,10 +159,12 @@ li img {
   margin-bottom: 20px;
   left: 24px;
   width: 1292px;
-  height: 252px;
+  height: auto;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  padding-inline: 3em;
+  padding-block: 5em;
 }
 .card6 {
   top: 1236px;
