@@ -1,7 +1,7 @@
 
 services:
   db:
-    image: mysql
+    image: mysql:9.1.0
     restart: always
     ports:
       - 3306:3306
@@ -19,8 +19,28 @@ services:
       test: "mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD --execute \"SHOW DATABASES;\" || exit 1"
       interval: 10s
       timeout: 10s
-      retries: 5
+      retries: 3
       start_period: 20s
+  redis:
+    image: redis/redis-stack:6.2.6-v17
+    restart: always
+    ports:
+      - 6379:6379
+      - 8001:8001
+    expose:
+      - 6379
+      - 8001
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "$REDIS_PASSWORD", "ping"]
+      interval: 10s 
+      timeout: 10s 
+      retries: 3 
+      start_period: 20s
+    command: [ "redis-server", "--requirepass", "$REDIS_PASSWORD"]
+    volumes:
+      - redis-db:/data
   api:
     build: .
     environment:
@@ -31,6 +51,8 @@ services:
       - 5000:5000
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     volumes:
       - ./migrations:/src/migrations 
@@ -60,3 +82,4 @@ services:
 
 volumes:
         mysql-db:
+        redis-db:
