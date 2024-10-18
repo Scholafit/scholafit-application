@@ -1,8 +1,10 @@
-from flask import make_response, jsonify, Request
+from flask import make_response, jsonify, Request, session
 from app.models.learning_module.subject import userSubject, subject
 from app.models.learning_module.test import subjectTest,userTest
-from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record
+from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record, create_conversation_ai, chat_with_ai
+from uuid import uuid4
 import json
+
 
 def add_user_subjects(profile_id: int, request: Request):
     subjects = request.json
@@ -51,3 +53,56 @@ def get_all_subjects():
     subjects = subject.get_subjects()
 
     return make_response(jsonify({"subjects": subjects}), 200)
+
+
+def create_chat_with_ai(request: Request):
+    session_id = session.get('session_id', None)
+    if not session_id:
+       return make_response(jsonify({"message":"You must be logged"}), 401)
+    req = request.json
+    prompt_message = req["message"]
+    if prompt_message == '':
+       return make_response(jsonify({"message": "Prompt can not be an empty string"}))
+    
+    user_data = session.get(session_id)
+    user_id = user_data["user_id"]
+    conversations = user_data["conversations"]
+    conversation_id = f"conv-{uuid4()}-{user_id}"
+    ai_response = create_conversation_ai(prompt_message.rstrip())
+    
+    
+    conversations[conversation_id] = {
+
+        "title": ai_response["title"],
+        "subject": ai_response.get("subject", None),
+        "conversation": [{"user": prompt_message, "assistant": ai_response["response"]}]
+    }
+
+    session[session_id] = {
+        "user_id": user_id,
+        "conversations": conversations
+    }
+    print(f"this is the ai: {ai_response}")
+    return make_response(jsonify({"response":ai_response, "conversation_id": conversation_id}),200)
+
+
+def continue_chat(conversation_id:str, request: Request):
+    session_id = session.get('session_id', None)
+    req = request.json
+    prompt_message = req["message"]
+    user_data = session.get(session_id)
+    conversations = user_data["conversations"]
+    conversation = conversations[conversation_id]
+
+    response = chat_with_ai(prompt_message, conversation["conversation"])
+
+    conversation["conversation"].append({
+        "user": prompt_message,
+        "assistant": response["response"]
+    })
+    session[session_id] = {
+        "user_id": user_data["user_id"],
+        "conversations": conversations
+    }
+
+    return make_response(jsonify({"response": response, "conversation_id":conversation_id}), 200)

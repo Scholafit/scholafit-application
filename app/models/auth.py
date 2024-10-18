@@ -5,6 +5,8 @@ from .database import get_db
 from itsdangerous import URLSafeTimedSerializer
 import os
 from ..services.notification import create_email_notification_service
+from ..utils.utils import create_session
+from uuid import uuid4
 
 
 class AuthService:
@@ -31,7 +33,7 @@ class AuthService:
 
         # Validate the user and password
         if specific_user and verify_password(password, specific_user.password):
-            session['user_id'] = specific_user.id
+            create_session(specific_user.id)
             return {"message": "Login successful", "user": specific_user.to_dict()}
         return {"error": "Invalid credentials"}
 

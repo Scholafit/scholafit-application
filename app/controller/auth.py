@@ -1,3 +1,4 @@
+
 from flask import make_response, jsonify, Request
 from app.models.auth import auth_service
 
@@ -17,6 +18,7 @@ def login(request: Request):
         login_response = auth_service.login(email, password)
         if "error" in login_response:
             return make_response(jsonify(login_response), 401)
+        
         return make_response(jsonify(login_response), 200)
     except Exception as e:
         return make_response(jsonify({"error": f"An error occurred: {str(e)}"}), 500)
