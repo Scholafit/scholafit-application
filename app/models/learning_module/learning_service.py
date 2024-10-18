@@ -1,7 +1,8 @@
 
 from anthropic import Anthropic
 from app.models.database import get_db
-from .ai import generate_questions
+from app.models.error import AiModelError
+from .ai import generate_questions, AI, create_anthropic_client
 from .question import question, answerChoices, passage, DB_Question
 from .subject import subject
 from .test import userTest, subjectTest, subjectTestQuestion
@@ -27,10 +28,12 @@ def create_subject(sub: str):
 #create question
 #create answer choices
 
-def extract_data_from_response(resp)-> list | None:
+def extract_data_from_response(resp, match_pattern)-> list | None:
+    if len(resp.content) == 0:
+        raise AiModelError('The Ai model returned empty content')
     text_content = resp.content[0].text
-    pattern = r'\[.*\]'
-    match = re.search(pattern, text_content, re.DOTALL)
+    
+    match = re.search(match_pattern, text_content, re.DOTALL)
 
     if match:
         json_string = match.group()
@@ -38,6 +41,8 @@ def extract_data_from_response(resp)-> list | None:
             data = json.loads(json_string)
             return data
         except json.JSONDecodeError as err:
+            print(f'JSONDecodeError: {err}')
+            print(f'json string: {json_string}')
             raise err
 
 
@@ -81,7 +86,8 @@ def create_multiple_choice_question(data: dict, subject_id: int):
 
 def get_questions_from_ai(subject_name: str, num_of_questions: int, client):
     response = generate_questions(subject_name, num_of_questions, client)
-    data = extract_data_from_response(response)
+    data_regex_match_pattern = r'\[.*\]'
+    data = extract_data_from_response(response, data_regex_match_pattern)
     return data
 
 
@@ -200,7 +206,32 @@ def create_user_test_record(profile_id, exam:list[dict[str, any]]):
                 d = subjectTestQuestion.create_test_question_record(sub_test_id,question_id)
 
     return test_id
-            
 
 
+ 
+anthropic_client = create_anthropic_client()
+ai_bot = AI(anthropic_client)    
 
+def create_conversation_ai(prompt_message:str):
+    try:
+
+        response = ai_bot.ai_chat(prompt_message)
+        data_regex_match_pattern = r'\{[\s\S]*\}'
+        data = extract_data_from_response(response, data_regex_match_pattern)
+        return data
+    except AiModelError as e:
+        return str(e)
+    except Exception as e:
+        print(e)
+        
+def chat_with_ai(prompt_message: str, chat_history: list):
+    print(chat_history)
+    try:
+        response = ai_bot.continue_chat_ai(prompt_message, chat_history)
+        data_regex_match_pattern = r'\{[\s\S]*\}'
+        data = extract_data_from_response(response, data_regex_match_pattern)
+        return data
+    except AiModelError as e:
+        return str(e)
+    except Exception as e:
+        print(e)
