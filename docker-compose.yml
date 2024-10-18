@@ -47,6 +47,8 @@ services:
       DB_URL: ${DB_URL}
       SECRET_KEY: ${SECRET_KEY}
       MAILCHIMP_TRANSACTIONAL_API_KEY: ${MAILCHIMP_TRANSACTIONAL_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     ports:
       - 5000:5000
     depends_on:
@@ -71,7 +73,7 @@ services:
       dockerfile: Dockerfile
     
     ports:
-      - "3000:80"
+      - 3000:80
     depends_on:
       - api
     develop:
