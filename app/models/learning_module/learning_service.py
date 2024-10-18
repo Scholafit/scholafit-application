@@ -225,7 +225,7 @@ def create_conversation_ai(prompt_message:str):
         print(e)
         
 def chat_with_ai(prompt_message: str, chat_history: list):
-    print(chat_history)
+   
     try:
         response = ai_bot.continue_chat_ai(prompt_message, chat_history)
         data_regex_match_pattern = r'\{[\s\S]*\}'
