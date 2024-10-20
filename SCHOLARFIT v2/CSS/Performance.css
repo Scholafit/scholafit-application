@@ -1,0 +1,109 @@
+@media only screen and (max-width: 768px){
+  body {
+    display: inherit;
+  }
+}
+
+body {
+  color: #40514E;
+  margin: 0em;
+  text-align: center;
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 3.125em;
+  font-style: normal;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.625em;
+}
+li {
+  float: right;
+}
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 0em 0em;
+  text-decoration: none
+}
+li img {
+  display: block;
+  padding: 0em 0em;
+  text-decoration: none;
+
+}
+.sc {
+  display: block;
+  color: black;
+  font-size: 0.625em;
+  text-align: left;
+  padding: 0em 0em;
+  text-decoration: none
+}
+li a:hover:not(.active){
+  background-color: #eaf6f6;
+}
+
+a {
+  color: #11999E;
+  font-family: 'Lexend', sans-serif;
+  margin: 0.625em 1.25em;
+  text-decoration: none;
+}
+a:hover{
+  color: #eaf6f6;
+}
+.btn_nav {
+  background: #f44336;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 0.5em;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding: 0.3125em 0.625em 0.3125 0.625em;
+  text-decoration: none;
+}
+
+.btn_nav:hover {
+  background: #30e3cb;
+  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+.Panalysis {
+  display: flex;
+}
+.Panalysis > div {
+  margin: 6.25em;
+  padding: 0em;
+}
+.P1 {
+  top: 6.625em;
+  left: 2em;
+  width: 56.6875em;
+  height: 44.75em;
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}
+.P2 {
+  top: 6.625em;
+  left: 60.635em;
+  width: 27.375em;
+  height: 44.75em;
+  background-color: #f0f1ff;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}

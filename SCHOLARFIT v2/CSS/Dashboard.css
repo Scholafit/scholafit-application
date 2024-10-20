@@ -1,0 +1,277 @@
+@media only screen and (max-width: 768px){
+  body {
+    display: inherit;
+  }
+}
+.sc {
+  color: #030303;
+  font-size: 1.5em;
+  font-family: "Lexend Deca";
+  line-height: 2em;
+}
+body {
+  color: #40514E;
+  margin-right: 3.125em;
+  margin-left: 3.125em;
+  width: 130.21%;
+  text-align: left;
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 3.125em;
+  font-style: normal;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+}
+li {
+  float: right;
+}
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 0em 0em;
+  text-decoration: none
+}
+li img {
+  color: #5664f5;
+  fill: #5664f5;
+  font-size: 20px;
+  top: 28px;
+  left: 32px;
+  width: 125%;
+  height: 16px;
+}
+
+li a:hover:not(.active){
+  background-color: #eaf6f6;
+}
+.Recent_activity {
+  display: flex;
+}
+.Recent_activity > div {
+  margin: 1.875em;
+  padding: 0.3125em;
+}
+.Card1a {
+  top: 9em;
+  left: 2em;
+  width: 27.6875em;
+  height: 18.25em;
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}
+.Card1b {
+  top: 9em;
+  left: 31.125em;
+  width: 27.6875em;
+  height: 18.25em;
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}
+.Card1c {
+  top: 9em;
+  left: 60.3125em;
+  width: 27.6875em;
+  height: 18.25em;
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+  text-decoration: none;
+}
+h2 {
+
+  color: #030303;
+  font-size: 1.25em;
+  font-family: "Lexend Deca";
+  font-weight: 600;
+  line-height: 1.75em;
+}
+h1 {
+  color: #030303;
+  font-size: 1.5em;
+  font-family: "Lexend Deca";
+  font-weight: 600;
+  line-height: 2em;
+}
+p {
+ color: #030303;
+ font-size: 1em;
+ font-family: "Lexend Deca";
+ line-height: 1.5em;
+}
+
+
+
+.BtnPr {
+  cursor: pointer;
+  top: 13.25em;
+  left: 61.8125em;
+  width: 24.6875em;
+  height: 3em;
+  padding: 0em 0.5em;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 0.5em;
+  background-color: #5664f5;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: "Lexend Deca";
+  font-weight: 600;
+  line-height: 1.5em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+.BtnPr:hover  {
+  background: #30e3cb;
+  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+
+.btnA {
+  cursor: pointer;
+  top: 17.25em;
+  left: 61.8125em;
+  width: 24.6875em;
+  height: 3em;
+  padding: 0px 0.5em;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 0.5em;
+  background-color: #3b5998;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: "Lexend Deca";
+  font-weight: 600;
+  line-height: 1.5em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+}
+.btnA:hover {
+  background: #30e3cb;
+  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+
+.btnPe {
+  cursor: pointer;
+  top: 21.25em;
+  left: 61.8125em;
+  width: 24.6875em;
+  height: 3;
+  padding: 0em 0.5em;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 0.5em;
+  background-color: #db4437;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: "Lexend Deca";
+  font-weight: 600;
+  line-height: 1.5em;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+}
+.btnPe:hover{
+  background: #30e3cb;
+  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+.Deadlines {
+  display: flex;
+}
+.Deadlines > div {
+  margin: 1.875em;
+  padding: 0.3125em;
+}
+.Card1d {
+  top: 28.75em;
+ left: 2em;
+ width: 42.25em;
+ height: 11.25em;
+ background-color: #ffffff;
+ border-radius: 0.5em;
+ box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}
+.Card1e {
+  top: 28.75em;
+  left: 39.5em;
+  width: 42.25em;
+  height: 11.25em;
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}
+.Notification {
+  display: flex;
+}
+.Notification > div {
+  margin: 1.875em;
+  padding: 0.3125em;
+}
+.Card1f {
+  top: 41.25em;
+ left: 2em;
+ width: 86em;
+ height: 11.25em;
+ background-color: #ffffff;
+ border-radius: 0.5em;
+ box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+}
+.btn_nav {
+  background: #f44336;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 0.5em;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 0.625em;
+  padding: 0.3125em 0.625em 0.3125em 0.625em;
+  text-decoration: none;
+}
+
+.btn_nav:hover {
+  background: #30e3cb;
+  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+.header {
+  padding: 0.3125em 0 0.3125em;
+  height: 120px;
+  width: 1300px;
+  margin-left: -50px;
+  margin-bottom: 3.125em;
+  background-color: #f0f1ff;
+  border-bottom: 0.0625em solid #e5e7eb;
+  box-sizing: border-box;
+  box-shadow: 0.125em -0.125em 0.625em rgba(3,3,3,0.1);
+}
