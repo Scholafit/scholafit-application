@@ -1,8 +1,8 @@
 """Initial migration
 
-Revision ID: a92f8c6a6ed9
+Revision ID: 72a8d4f418d8
 Revises: 
-Create Date: 2024-10-10 20:27:47.278784
+Create Date: 2024-10-20 19:03:20.486772
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import mysql
 
 # revision identifiers, used by Alembic.
-revision = 'a92f8c6a6ed9'
+revision = '72a8d4f418d8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -64,6 +64,7 @@ def upgrade():
     op.create_table('profiles',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('subscription_status', mysql.ENUM('ACTIVE', 'INACTIVE'), nullable=True),
+    sa.Column('account_balance', sa.Float(), nullable=False),
     sa.Column('isAdult', sa.Boolean(), nullable=True),
     sa.Column('current_education_level', sa.String(length=120), nullable=True),
     sa.Column('school_name', sa.String(length=120), nullable=True),
@@ -107,6 +108,18 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('payments',
+    sa.Column('profile_id', sa.Integer(), nullable=False),
+    sa.Column('reference', sa.String(length=255), nullable=False),
+    sa.Column('amount', sa.Float(), nullable=False),
+    sa.Column('status', sa.String(length=50), nullable=False),
+    sa.Column('currency', sa.String(length=10), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['profile_id'], ['profiles.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('question_choices',
@@ -195,6 +208,7 @@ def downgrade():
     op.drop_table('user_questions_history')
     op.drop_table('tests')
     op.drop_table('question_choices')
+    op.drop_table('payments')
     op.drop_table('subscriptions')
     op.drop_table('questions')
     op.drop_table('profiles')
