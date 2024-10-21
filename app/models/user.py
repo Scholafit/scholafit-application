@@ -89,6 +89,7 @@ class User:
         blank_profile_data = {
             "user_id": saved_user.id,
             "subscription_status": 'INACTIVE',
+            "account_balance": 0.0,
             "isAdult": False,
             "current_education_level": "JSS",
             "school_name": None,
