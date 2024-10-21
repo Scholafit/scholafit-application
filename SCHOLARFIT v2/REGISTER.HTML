@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <script src="scriptr.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGISTER</title>
+</head>
+<link rel="stylesheet" href="css/REGISTER.css">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+  <body>
+    <div class="header">
+      <ul>
+        <li style="float:left"><img class="active" src="user-plus.svg" alt="cap_img"></li>
+        <li style="float:left" class="sc">Register</li>
+        <li><a class="btn_nav" href="INDEX.HTML">Home</a></li>
+      </ul>
+
+    </div>
+    <div class="form">
+      <div class="Form_content">
+        <div class="tittle">
+          <h1>Create your Account</h1>
+          <img class="icon" src="user-plus.svg" alt="Graduation_cap">
+        </div>
+        <div class="line">
+          <hr style="height: 2px ; border-width:0; color: blue; background-color: blue">
+
+        </div>
+        <form action="http://127.0.0.1:5000/api/v1/users" method="post">
+            <label for="fname">firstname</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your Firtsname">
+
+            <label for="lname">lastname</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Enter your Lastname">
+            <label for="lname">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your Username">
+            <label for="lname">email</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email">
+
+            <label for="pname">Password</label>
+            <input type="text" id="Password" oninput="checkPasswordStrength()" name="Password" placeholder="Select your password">
+            <div class="pstrength"><p>Password Stregth:</p></div> <div id="password-strength"></div>
+            <script src="scriptr.js"></script>
+            <input class="submit" type="submit" value="Sign up">
+
+            <button class="fb" type="submit" name="button">Facebook</button>  <button class="go" type="submit" name="button">Google</button>
+
+        <div>
+
+            <div class="footer">
+                <div class="textf">
+                    <p>By creating an account you agree to our  <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a> </p>
+                    <p>Already have an account?  <a href="LOGIN.HTML">Log in</a> </p>
+
+                </div>
+
+            </div>
+            <script src="scriptr.js"></script>
+
+
+
+</body>
+</html>

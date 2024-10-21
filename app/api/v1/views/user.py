@@ -1,5 +1,5 @@
 from . import app_views
-from app.controller.user import create_user, get_user, user_by_id, delete_user_by_id, create_profile, add_user_subjects, create_user_exam, submit_exam
+from app.controller.user import create_user, get_user, user_by_id, delete_user_by_id, create_profile
 from flask import request
 
 # Create a user
@@ -29,18 +29,3 @@ def create_user_profile(user_id):
     return create_profile(user_id, request)
 
 
-# create subjects
-@app_views.route('/users/profile/subjects/<int:profile_id>', methods=['POST'])
-def user_subjects(profile_id):
-    return add_user_subjects(profile_id, request)
-
-# generate tests
-@app_views.route('/users/tests/<int:profile_id>', methods=['POST'])
-def get_test(profile_id):
-    return create_user_exam(profile_id)
-
-# submit the test
-@app_views.route('/users/tests/submit/<int:test_id>', methods=['POST'])
-def submit_user_exam(test_id):
-    print('submitting')
-    return submit_exam(test_id, request)

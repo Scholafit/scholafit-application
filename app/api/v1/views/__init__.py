@@ -7,4 +7,4 @@ from .student import *
 from .user import *
 from .auth import *
 from .subscription import *
-from .payment import *
+from .learning_module import *

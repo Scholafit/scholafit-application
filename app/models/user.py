@@ -91,7 +91,7 @@ class User:
             "subscription_status": 'INACTIVE',
             "account_balance": 0.0,
             "isAdult": False,
-            "current_education_level": None,
+            "current_education_level": "JSS",
             "school_name": None,
             "expected_graduation_year": None,
             "desired_course": None,

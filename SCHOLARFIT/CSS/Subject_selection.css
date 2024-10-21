@@ -136,6 +136,10 @@ a:hover{
   line-height: 49px;
   outline: none;
 }
+
+.utme__subjects {
+  width: 100%;
+}
 .book {
   color: #5664f5;
   fill: #5664f5;
