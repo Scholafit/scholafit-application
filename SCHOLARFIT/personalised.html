@@ -8,79 +8,80 @@
     <title>Personalised Learning Plan</title>
   </head>
   <link rel="stylesheet" href="css/personalised.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
-<div class="header">
-
-  <ul>
-    <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
-    <li style="float:left" class="sc">Scholafit</li>
-    <li><a class="btn_nav" href="index.html">Log Out</a></li>
-    <li><a class="btn_nav1" href="dashboard.html">Profile</a></li>
-    <li><a class="btn_nav2" href="dashboard.html">Dashboard</a></li>
-
-  </ul>
-
-
-</div>
-
 <body>
-    <div class="Personalised">
-      <div class="card1">
-        <h2>Topics & Progress</h2>
-        <div class="card1a"><br>
-
+  <div class="personalised-wrapper">
+    <div class="header">
+      <div class="container row header-wrapper">
+        <div class="logo row">
+          <img class="active" src="img/favicon.ico" alt="cap_img">
+          <p>Scholafit</p>
         </div>
-        <div class="card1b">
-
+        <div class="row personalised-menu">
+          <a class="" href="dashboard.html">
+            <button class="btn btn-primary-sm">Dashboard</button>
+          </a>
+          <a class="" href="profilescreen.html">
+            <button class="btn btn-secondary-sm">Profile</button>
+          </a>
+          <a class="" href="login.html">
+            <button class="btn btn-danger-sm">Log Out</button>
+          </a>
         </div>
-        <div class="card1c">
-
-        </div>
-
       </div>
-      <div class="card2">
-        <h2>Personalised Learning Plan</h2>
-        <div class="card2a">
-          <h2>AI Tutor: Rita </h2>
-          <div class="card2ai">
-            <img class="image" src="fine_lady.png" alt="AI_lady">
-            <h2>Ask Rita a Question ..</h2>
-            <form class="AI" action="index.html" method="post">
-              <input class="input" type="text" name="AI" value= "Type your question here... ">
-            </form>
-
-          </div>
-
-        </div>
-        <div class="card2b">
-          <h2>Study Sessions</h2>
-          <div class="card2bi">
-            <a href="#">
-              <button class="button" type="button" name="button">View Materials</button>
-            </a>
-
-          </div>
-          <div class="card2bii">
-            <a href="#">
-              <button class="button2" type="button" name="button">View Materials</button>
-            </a>
-
-          </div>
-          <div class="card2biii">
-            <a href="#">
-              <button class="button3" type="button" name="button">View Materials</button>
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
     </div>
+    <div>
+      <div class="Personalised">
+        <div class="">
+          <h2 class="heading">Personalised Learning Plan</h2>
+          <div class="row personalised-main">
+            <div class="ai-box">
+              <h2 class="heading">AI Tutor: Rita </h2>
+              <div class="ai-box-inner">
+                <img class="image" src="img/fine_lady.png" alt="AI_lady">
+                <h2 class="heading">Ask Rita a Question ..</h2>
+                <form class="AI" action="index.html" method="post">
+                  <input class="input" type="text" name="AI" value= "Type your question here... ">
+                  <button type="submit" class="btn btn-submit-prompt">
+                    <img src="img/arrow-up.svg" alt="">
+                  </button>
+                </form>
+                <small class="disclaimer">Rita can make mistakes. Please double check responses.</small>
+              </div>
+            </div>
+            <div class="previous-chats">
+              <div class="prev-chats-wrapper">
+                <div class="start-chat-btn">
+                  <button class="btn btn-secondary-sm">start new chat</button>
+                </div>
+                <div class="chat-categories">
+                  <p class="primary-text prev-chats-heading">Recent discussions</p>
+                  <div class="chats">
+                    <p class="chat">Importance of algebra</p>
+                    <p class="chat">Federal goverments</p>
+                    <p class="chat">Geography</p>
+                    <p class="chat">Physics</p>
+                  </div>
+                </div>
+                <div class="chat-categories">
+                  <p class="primary-text prev-chats-heading">Older discussions</p>
+                  <div class="chats">
+                    <p class="chat">Water tables</p>
+                    <p class="chat">Calculus 2</p>
+                    <p class="chat">thermodynamics</p>
+                    <p class="chat">fluid theory</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 </body>
 
 </html>

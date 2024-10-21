@@ -7,75 +7,161 @@
     <title>Profile Screen</title>
   </head>
   <link rel="stylesheet" href="css/profilescreen.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
-<div class="header">
-
-  <ul>
-    <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
-    <li style="float:left" class="sc">Scholafit</li>
-    <li><a class="btn_nav" href="">Print/Share</a></li>
-
-  </ul>
-
-
-</div>
-  <body>
-    <div class="profile">
-      <h2>Performance Analysis</h2>
-      <div class="card1">
-        <h2>Overall Score</h2>
-
-      </div>
-      <div class="card2" >
-        <h2>Performance Breakdown by subjects.</h2>
-        <div class="performance__breakdown" id="perfomance-breakdown">
-          
+<body>
+    <div class="header">
+      <div class="header_wrapper container row">
+        <div class="logo row">
+          <img src="img/favicon.ico" alt="">
+          <p>Scholafit</p>
         </div>
-      
-      </div>
-      <div class="card3">
-        <h2>Comparison With Previous Attempts.</h2>
-
-      </div>
-      <div class="card4">
-        <h2>Strength and Weaknesses</h2>
-
-      </div>
-      <div class="card5">
-        <h2>Correct Answers for missed questions</h2>
-        <div id="revision">
-          
+        <div>
+          <button class="btn btn-primary-sm">Print</button>
         </div>
-
       </div>
-      <div class="card6">
-        <a href="#">
-          <button class="button3" type="button" name="button">Ask Rita</button>
-        </a>
-        <div class="card6a">
-          <h2>Personalized Study recommendation</h2>
-          <p>Utilize AI-powered tools to identify weak areas and improve your understanding</p>
-          <p>Engage with adaptive learning platforms that use AI to tailor content to your needs.</p>
-          <p>Incoporate AI-driven practice tests to simulate real exam conditions and get instant feedback.</p>
-          <p>Use AI-flashcards for efficient memorisation and recall of key concepts.</p>
+    </div>
+    <div class="profile-screen container">
+      <h2 class="heading-md">Performance Analysis</h2>
+      <div class="profile">
+        <div class="perf-analysis row">
+          <div class="card">
+            <h2 class="heading">Overall Score</h2>
+            <div class="card-content card-content__results">
+              <p>120 / 150</p>
+            </div>
+          </div>
+          <div class="card" >
+            <h2 class="heading">Performance Breakdown by subjects.</h2>
+            <div class="card-content card-content__demo_img" >
+              <img src="img/bar-chart-side.svg" alt="">
+            </div>
+          </div>
         </div>
-
+        <div class="comparison-line-graph">
+          <div class="card">
+            <h2 class="heading">Comparison With Previous Attempts.</h2>
+            <div class="card-content card-content__demo_img" >
+              <img src="img/line-chart-svgrepo-com.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="strength-weakness">
+          <div class="card">
+            <h2 class="heading">Strength and Weaknesses</h2>
+            <div class="card-content card-content__p">
+              <p>Strength 1: Descriptions goes here.</p>
+              <p>Strength 2: Detailed descriptions of Strength.</p>
+              <p>Weakness 1: Describe the students weakness here.</p>
+              <p>Weakness 2: Detailed explanation of the weakness.</p>
+            </div>
+          </div>
+        </div>
+        <div class="revision">
+          <div class="card">
+            <h2 class="heading">Correct Answers for missed questions</h2>
+            <div class="card-content">
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>
+              <div class="q_n_a">
+                <div class="question row">
+                  <p>What is the square root of 25?</p>
+                  <img src="img/caret-down-sm-svgrepo-com.svg" alt="">
+                </div>
+                <div class="answer">
+                  <p>The square root of 25 is 5.</p>
+                  <p>The square root of a number is a value that, when multiplied by itself, gives the original number.</p>
+                </div>
+              </div>             
+            </div>
+          </div>
+        </div>
+        <div class="ai-recommendation card row">
+          <div class="">
+            <h2 class="heading">Personalized Study recommendation</h2>
+            <div class="card-content">
+              <p>Utilize AI-powered tools to identify weak areas and improve your understanding</p>
+              <p>Engage with adaptive learning platforms that use AI to tailor content to your needs.</p>
+              <p>Incoporate AI-driven practice tests to simulate real exam conditions and get instant feedback.</p>
+              <p>Use AI-flashcards for efficient memorisation and recall of key concepts.</p>
+            </div>
+          </div>
+          <div>
+            <a href="personalised.html">
+              <button class="btn btn-primary">Ask Rita</button>
+            </a>
+          </div>
+        </div>
+        <div class="butn">
+          <a href="practice.html">
+            <button class="btn btn-secondary-sm">Retake Test</button>
+          </a>
+        </div>
       </div>
-      <div class="butn">
-        <ul>
-          <li style="float:left"><a class="button1" href="">Review Soecific question</a></li>
-          <li><a class="button2" href="">Retake Test</a></li>
-        </ul>
-
-      </div>
-      <div class="footer">
-        <p class="text"> &#169 2023 Scholafit. all rights reserved.</p>
-
-      </div>
-
+    </div>
+    <div class="footer">
+      <p class="text"> &#169 2023 Scholafit. all rights reserved.</p>
     </div>
 
 
