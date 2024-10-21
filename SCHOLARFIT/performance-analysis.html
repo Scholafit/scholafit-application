@@ -2,48 +2,92 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Performance Analysis</title>
   </head>
-  <link rel="stylesheet" href="css/Performance.css">
+  <link rel="stylesheet" href="css/performance.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
   <body>
     <div class="header">
-      <ul>
-        <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
-        <li style="float:left" class="sc">Scholafit</li>
-        <li><a class="btn_nav" href="profilescreen.html">Upgrade Now</a></li>
-      </ul>
-
-    </div>
-    <div class="Panalysis">
-      <div class="P1">
-        <h2>Performance Analysis</h2>
-
-      </div>
-      <div class="P2">
-        <h2>Upgrade to Premium</h2>
-        <p>Unlock full access to advanced performance analytics <br> personalised learning plans and more.</p>
-        <div class="Upgrade_button">
-          <a class="btn_nav" href="profilescreen.html">Upgrade Now</a>
-
+      <div class="header_wrapper container row">
+        <div class="logo row">
+          <img src="img/favicon.ico" alt="">
+          <p>Scholafit</p>
         </div>
-        <h2>Success Stories</h2>
-        <p>"Scholafit helped me improve my scores tremendously. <br> The personalised learning plans are amazing! - Jane Smith.</p>
-        <p>"With Scholarfit's premium features, I was able to focus on my weaknesses and excel in my exams."- John Doe </p>
-
+        <div>
+          <a href="">
+            <button class="btn btn-success-sm">Upgrade Now</button>
+          </a>
+        </div>
       </div>
-
     </div>
-    <ul>
-      <li style="float:left"><a class="btn_nav" href="Practice.html">Retake Test</a></li>
-      <li><a class="btn_nav" href="DASHBOARD.HTML">Return To Dashboard</a></li>
-    </ul>
+    <div class="analysis-page">
+      <div class="Panalysis row">
+        <div class="panalysis_analysis">
+          <div class="card">
+            <h2 class="heading">Performance Analysis</h2>
+            <div class="card-content">
+              <h3>Overall Score</h3>
+              <div class="row score-graph">
+                <img src="img/bar-chart-graph-demo.svg" alt="">
+                <p>Your overall score is 75.Well done! Keep up the good work.</p>
+              </div>
+              <div class="subject-scores ">
+                <h2 class="heading">Score by subject</h2>
+                <div class="subject-scores__wrapper row">
+                  <div class="subject">
+                    <p class="title">Subject</p>
+                    <p>Mathematics</p>
+                    <p>English</p>
+                    <p>Physics</p>
+                    <p>Chemistry</p>
+                  </div>
+                  <div class="score"> 
+                    <p class="title">Score</p>
+                    <p>85</p>
+                    <p>78</p>
+                    <p>82</p>
+                    <p>79</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="recommendations">
+              <h2 class="heading">AI-Generated recommendations</h2>
+              <p>Based on your results, we recommend focusing on improving your time management skill in Mathematics and enhancing your vocabulary in English.</p>
+            </div>
+          </div>
+        </div>
+        <div class="upgrade">
+          <h2 class="heading">Upgrade to Premium</h2>
+          <p>Unlock full access to advanced performance analytics <br> personalised learning plans and more.</p>
+          <div class="Upgrade_button">
+            <a href="">
+              <button class="btn btn-success-sm">Upgrade Now</button>
+            </a>
+          </div>
+          <h2 class="heading">Success Stories</h2>
+          <p>"Scholafit helped me improve my scores tremendously. <br> The personalised learning plans are amazing! - Jane Smith.</p>
+          <p>"With Scholarfit's premium features, I was able to focus on my weaknesses and excel in my exams."- John Doe </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer_wrapper container row">
+        <a href="">
+          <button class="btn btn-secondary-sm">Retake Test</button>
+        </a>
+        <a href="">
+          <button class="btn btn-secondary-sm">Return to Dashboard</button>
+        </a>
+      </div>
+    </div>
 
   </body>
 </html>

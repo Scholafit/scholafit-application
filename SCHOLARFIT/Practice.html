@@ -7,154 +7,195 @@
     <title>Practice test</title>
   </head>
   <link rel="stylesheet" href="css/practice.css">
+  <link rel="stylesheet" href="css/index.css">
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
-
-
 <body>
-    <div class="practice__header">
-      <div class="practice__header-upper">
-        <div>
-          <img class="active" src="favicon.ico" alt="cap_img">
-        </div>
-        <div class="sc">
-          <p>Scholafit</p>
-        </div>
+  <div class="header">
+    <div class="header_wrapper container row">
+      <div class="logo row">
+        <img src="img/favicon.ico" alt="">
+        <p>Scholafit</p>
       </div>
-      <div class="practice__header-lower">
-        <div class="Practice_Test">
-          <p>Student Quiz Platform</p>
-        </div>
-        <div class="Time_left">
-          <p>Time left: <span>1hr</span></p>
-        </div>
-      </div>
+      <p>Practice Test</p>
+      <p class="timer">Time Left: 01:30:00</p>
     </div>
+  </div>
 
-      <div class="practice_test">
-        <div id="subject_tabs">
-          <div class="btn_nav btn_nav__active subj"><p>English</p></div>
-          <div class="btn_nav btn_nav__not_active subj"><p>English in Literature</p></div>
-          <div class="btn_nav btn_nav__not_active subj"><p>Mathematics</p></div>
-          <div class="btn_nav btn_nav__not_active subj"><p>Animal Husbandry</p></div>
-        </div>
-        <div class="card3">
-          <div id="flash_card">
-            <!-- <p id="passage_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque pariatur libero maiores delectus, aperiam soluta placeat distinctio dolores ut beatae quam ipsam consequatur asperiores dolor voluptate dolorum rem, aut nostrum odit alias laborum? Magnam quasi quo quae ab distinctio impedit maiores rem, fugit et! Tempora dignissimos non odio nobis nisi.</p>
-            <div id="q_n_a">
-              <p><span>1.</span>What is the main theme of the passage</p>
-              <div id="choices">
-                <div>
-                  <input type="radio" name="answer" id="ch-1">
-                  <label for="ch-1" >answer 1</label>
-                </div>
-                <div>
-                  <input type="radio" name="answer" id="ch-2">
-                  <label for="ch-2" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit distinctio neque libero. Illo iusto, optio eos provident ut ad quae?</label>
-                </div>
-                <div>
-                  <input type="radio" name="answer" id="ch-3">
-                  <label for="ch-3" >answer 3</label>
-                </div>
-                <div>
-                  <input type="radio" name="answer" id="ch-4">
-                  <label for="ch-4" >answer 4</label>
-                </div>
-              </div> -->
+  <div class="practice_wrapper row">
+    <div class="practice_test">
+      <div id="subject_tabs">
+        <div class="btn btn-primary-sm"><p>English</p></div>
+        <div class="btn btn-secondary-sm "><p>English in Literature</p></div>
+        <div class="btn btn-secondary-sm "><p>Mathematics</p></div>
+        <div class="btn btn-secondary-sm "><p>Animal Husbandry</p></div>
+      </div>
+      <div class="question-panel">
+        <div class="card">
+          <h3>Question 1</h3>
+          <div class="card-content">
+            <p>What is the capital city of Nigeria?</p>
+            <div class="choices">
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Abuja</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Lagos</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Benin City</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Port Hacourt</label>
+              </div>
             </div>
           </div>
-          <div class="test__nav-controls">
-            <div id="prev_question"><p class="Sc">Prev</p></div>
-            <div id="nxt_question"><p class="Sc Sc__active">Next</p></div>
+        </div> 
+        <div class="card">
+          <h3>Question 2</h3>
+          <div class="card-content">
+            <p>What is the capital city of South Africa?</p>
+            <div class="choices">
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Johanessburg</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Pretoria</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Cape Town</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Durban</label>
+              </div>
+            </div>
           </div>
-          <div class="submit__test">
-            <div id="submit__test_btn"><p class="Sc Sc__active">Submit</p></div>
+        </div> 
+        <div class="card">
+          <h3>Question 3</h3>
+          <div class="card-content">
+            <p>What is the capital city of Kenya?</p>
+            <div class="choices">
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Kisumu</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Mombasa</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Nairobi</label>
+              </div>
+              <div class="choice-row">
+                <input type="radio" name="answer" id="">
+                <label for="answer">Nakuru</label>
+              </div>
+            </div>
           </div>
-  
-        </div>
-        <div class="card1">
-          <h2>Navigation</h2>
-          <div class="Question">
-            <div class="Qc">1</div>
-            <div class="Qc">2</div>
-            <div class="Qc">3</div>
-            <div class="Qc">4</div>
-            <div class="Qc">5</div>
-            <div class="Qc">6</div>
-            <div class="Qc">7</div>
-            <div class="Qc">8</div>
-            <div class="Qc">9</div>
-            <div class="Qc">9</div>
-            <div class="Qc">10</div>
-            <div class="Qc">11</div>
-            <div class="Qc">12</div>
-            <div class="Qc">13</div>
-            <div class="Qc">14</div>
-            <div class="Qc">15</div>
-            <div class="Qc">16</div>
-            <div class="Qc">17</div>
-            <div class="Qc">18</div>
-            <div class="Qc">19</div>
-            <div class="Qc">20</div>
-            <div class="Qc">21</div>
-            <div class="Qc">22</div>
-            <div class="Qc">23</div>
-            <div class="Qc">24</div>
-            <div class="Qc">25</div>
-            <div class="Qc">26</div>
-            <div class="Qc">27</div>
-            <div class="Qc">28</div>
-            <div class="Qc">29</div>
-            <div class="Qc">30</div>
-            <div class="Qc">31</div>
-            <div class="Qc">32</div>
-            <div class="Qc">33</div>
-            <div class="Qc">34</div>
-            <div class="Qc">35</div>
-            <div class="Qc">36</div>
-            <div class="Qc">37</div>
-            <div class="Qc">38</div>
-            <div class="Qc">39</div>
-            <div class="Qc">40</div>
-            <div class="Qc">41</div>
-            <div class="Qc">42</div>
-            <div class="Qc">43</div>
-            <div class="Qc">44</div>
-            <div class="Qc">45</div>
-            <div class="Qc">46</div>
-            <div class="Qc">47</div>
-            <div class="Qc">48</div>
-            <div class="Qc">49</div>
-            <div class="Qc">50</div>
-            <div class="Qc">51</div>
-            <div class="Qc">52</div>
-            <div class="Qc">53</div>
-            <div class="Qc">54</div>
-            <div class="Qc">55</div>
-            <div class="Qc">56</div>
-            <div class="Qc">57</div>
-            <div class="Qc">58</div>
-            <div class="Qc">59</div>
-            <div class="Qc">60</div>
-  
-          </div>
-  
-        </div>
-  
-        </div>
-  
+        </div> 
       </div>
-      <div class="footer">
-        <p class="text"> &#169 2023 Scholafit. all rights reserved.</p>
+      <div class="test__nav-controls row">
+        <button class="btn btn-secondary-sm">Prev</button>
+        <button class="btn btn-secondary-sm">Next</button>
       </div>
-    <script type="module">
-      import {loadExam, submitAnswers} from './js/renderData.js' 
-      loadExam()
-      submitAnswers()
-    </script>
-  </body>
+    </div>
+    <div class="navigation">
+      <div class="card">
+        <h2 class="heading">Navigation</h2>
+        <div class="Question row">
+          <div class="Qc">1</div>
+          <div class="Qc">2</div>
+          <div class="Qc">3</div>
+          <div class="Qc">4</div>
+          <div class="Qc">5</div>
+          <div class="Qc">6</div>
+          <div class="Qc">7</div>
+          <div class="Qc">8</div>
+          <div class="Qc">9</div>
+          <div class="Qc">9</div>
+          <div class="Qc">10</div>
+          <div class="Qc">11</div>
+          <div class="Qc">12</div>
+          <div class="Qc">13</div>
+          <div class="Qc">14</div>
+          <div class="Qc">15</div>
+          <div class="Qc">16</div>
+          <div class="Qc">17</div>
+          <div class="Qc">18</div>
+          <div class="Qc">19</div>
+          <div class="Qc">20</div>
+          <div class="Qc">21</div>
+          <div class="Qc">22</div>
+          <div class="Qc">23</div>
+          <div class="Qc">24</div>
+          <div class="Qc">25</div>
+          <div class="Qc">26</div>
+          <div class="Qc">27</div>
+          <div class="Qc">28</div>
+          <div class="Qc">29</div>
+          <div class="Qc">30</div>
+          <div class="Qc">31</div>
+          <div class="Qc">32</div>
+          <div class="Qc">33</div>
+          <div class="Qc">34</div>
+          <div class="Qc">35</div>
+          <div class="Qc">36</div>
+          <div class="Qc">37</div>
+          <div class="Qc">38</div>
+          <div class="Qc">39</div>
+          <div class="Qc">40</div>
+          <div class="Qc">41</div>
+          <div class="Qc">42</div>
+          <div class="Qc">43</div>
+          <div class="Qc">44</div>
+          <div class="Qc">45</div>
+          <div class="Qc">46</div>
+          <div class="Qc">47</div>
+          <div class="Qc">48</div>
+          <div class="Qc">49</div>
+          <div class="Qc">50</div>
+          <div class="Qc">51</div>
+          <div class="Qc">52</div>
+          <div class="Qc">53</div>
+          <div class="Qc">54</div>
+          <div class="Qc">55</div>
+          <div class="Qc">56</div>
+          <div class="Qc">57</div>
+          <div class="Qc">58</div>
+          <div class="Qc">59</div>
+          <div class="Qc">60</div>
+        </div>
+      </div>
+      <div class="keys">
+        <div class="key"></div>
+        <div class="key"></div>
+      </div>
+      <div class="pause-test">
+        <button class="btn btn-secondary-sm">Pause Test</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p class="text"> &#169 2023 Scholafit. all rights reserved.</p>
+  </div>
+<script type="module">
+  // import {loadExam, submitAnswers} from './js/renderData.js' 
+  // loadExam()
+  // submitAnswers()
+</script>
+</body>
 </html>
 
 

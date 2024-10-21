@@ -6,65 +6,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
 </head>
-<link rel="stylesheet" href="css/Dashboard.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/index.css">
 <link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 <body>
   <div class="header">
-
-    <ul>
-      <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
-      <li style="float:left" class="sc">Scholafit</li>
-      <li><a class="btn_nav" href="index.html">Home</a></li>
-      <li><h2>Welcome back</h2>  <h2>[student name]</h2>  </li>
-
-    </ul>
-    <h1 id="intro">Good to see you, [     ]!  Keep pushing towards your goals!</h1>
-
-
+      <div class="header_wrapper container row">
+        <div class="logo row">
+          <img class="active" src="img/favicon.ico" alt="cap_img">
+          <p>Scholafit</p>
+        </div>
+        <h2 class="heading">Welcome back, <span>Chioma</span></h2>
+      </div>
   </div>
-  <div class="Recent_activity">
-    <div class="Card1a">
-      <h2>Recent Activity</h2>
-
+  <div class="dashboard container">
+      <p class="dashboard-welcome">Good to see you, Chioma! Keep pushing towards your goals!</p>
+    <div class="recent_activity row">
+      <div class="card">
+        <h2 class="">Recent Activity</h2>
+        <div class="card-content card-content__p">
+          <p>Completed practice test 3</p>
+          <p>Reviewed study material on algebra</p>
+          <p>Scored 85% on mock test</p>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="heading">Overall Readiness</h2>
+        <div class="card-content card-content__demo_img">
+          <img src="img/bar-chart-graph-demo.svg" alt="">
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="heading">Quick Start</h2>
+        <div class="card-content card-content__links">
+          <a href="practice.html"><button class="btn btn-primary-sm">Practice Tests</button></a>
+          <a href="personalised.html"><button class="btn btn-secondary-sm">Ask Rita</button></a>
+          <a href="performance-analysis.html"><button class="btn btn-success-sm">Performance Analysis</button></a>
+        </div>
+      </div>
     </div>
-    <div class="Card1b">
-      <h2>Overall Readiness</h2>
-
+    <div class="Deadlines row">
+      <div class="card">
+        <h2 class="heading">Upcoming deadlines</h2>
+        <div class="card-content card-content__p">
+          <p>UTME Registration Deadline: <strong>15th March</strong></p>
+          <p>Exam date: <strong>25th April</strong></p>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="heading">Recommended Study Topics</h2>
+        <div class="card-content card-content__p">
+          <p>Calculus</p>
+          <p>Physics: Mechanics</p>
+          <p>Chemistry: Organic reactions</p>
+        </div>
+      </div>
     </div>
-    <div class="Card1c">
-      <h2>Quick Start</h2>
-      <a class="BtnPrr" href="practice.html">
-        <p class="BtnPr">Practice Tests</p>
-      </a>
-      <a class="btnAr" href="personalised.html">
-        <p class="btnA">Ask Rita</p>
-      </a>
-      <a class="btnPer" href="performance-analysis.html">
-        <p class="btnPe">Performance Analysis</p>
-      </a>
-
+    <div class="Notification">
+      <div class="card">
+        <h2 class="heading">Notification Center</h2>
+        <div class="card-content card-content__p">
+            <p>New content added: Trigonometry</p>
+            <p>Message from scholafit: Keep up the great work</p>
+            <p>Update: Exam guidelines realeased</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="Deadlines">
-    <div class="Card1d">
-      <h2>Upcoming deadlines</h2>
-      <p>UTME Registration Deadline: </p>
-      <p>Exam date: </p>
-
-    </div>
-    <div class="Card1e">
-      <h2>Recommended Study Topics</h2>
-
-    </div>
-  </div>
-  <div class="Notification">
-    <div class="Card1f">
-      <h2>Notification Center</h2>
-
-    </div>
-
   </div>
 </body>
