@@ -1,284 +1,307 @@
 body {
-  color: #40514E;
-  margin: 0px;
-  text-align: center;
-  font-family: "Lexend Deca", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 3.125em;
-  font-style: normal;
+  position: relative;
+  overflow-x: hidden;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
+.header {
+  padding-block: 1em;
+  background-color: #f0f1ff;
+  border-bottom: 0.0625em solid #e5e7eb;
+  box-shadow: 0.125em -0.125em 0.625em rgba(3,3,3,0.1);
+  width: 100%;
   overflow: hidden;
-  font-size: 0.625em;
+  
 }
-li {
-  float: right;
+
+.header_wrapper {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  
 }
-li a {
+.logo {
+  align-items: center;
+}
+
+.m-menu-img {
+  width: 35px;
+  height: 35px;
+}
+
+nav a {
   display: block;
-  color: black;
+}
+.menu {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  box-shadow: 2px 2px 10px 2px rgba(3, 3, 3, 0.3);
+  background-color: #f0f1ff;
+  padding-inline: 1em;
+  padding-block: 2em;
+  transform: translateX(100%);
+  transition: transform 300ms ease-in;
+  z-index: 90;
+}
+.open-menu {
+  transform: translateX(0);
+}
+.m-menu {
+  padding-top: 2em;
+}
+.m-menu > * {
+  margin-bottom: 2em;
+}
+
+.m-menu p>a {
+  text-decoration-line: none;
+}
+
+.m-menu > a  button {
+  width: 100%;
+}
+.home-body {
+  overflow: hidden;
+}
+.promo-banner {
+  background-color: #3498db;
+  padding-block: 1em;
+  padding-inline: 1em;
+  width: 100%;
+  color: #FFF;
   text-align: center;
-  padding: 0px 0px;
-  text-decoration: none
+  position: relative;
 }
-li img {
+.promo-banner a {
+  color: #fff !important;
+}
+.close-banner {
+  position: absolute;
+  top: 5%;
+  right: 2%;
+  cursor: pointer;
+}
+.intro-section {
+  padding-top: 1em;
+  text-align: center;
+}
+.intro {
+  text-align: center;
+}
+.intro-section__cta_link {
+  margin-top: 2em;
   display: block;
-  padding: 0px 0px;
-  text-decoration: none;
-
-}
-.sc {
-  display: block;
-  color: black;
-  font-size: 0.625em;
-  text-align: left;
-  padding: 0px 0px;
-  text-decoration: none
-}
-li a:hover:not(.active){
-  background-color: #eaf6f6;
 }
 
-a {
-  color: #11999E;
-  font-family: 'Lexend', sans-serif;
-  margin: 0.625em 1.25em;
-  text-decoration: none;
+.Unique_Features {
+  flex-direction: column;
+  row-gap: 2em;
+  
 }
-a:hover{
-  color: #eaf6f6;
-}
+
 .card {
-  top: 27em;
-  left: 4em;
-  width: 26em;
-  height: 15.625em;
+  padding-inline: 1em;
+  padding-block: 2em;
   background-color: #f0f1ff;
   border-radius: 0.5em;
   box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+  text-align: center;
+}
+.card h2 {
+  margin-bottom: 1em;
+}
+.SuccessS {
+  text-align: center;
+  margin-top: 5em;
+  margin-bottom: 2em;
+}
+
+.Success_Stories {
+  flex-direction: column;
+  row-gap: 2em;
 }
 .card2 {
-  top: 42.25em;
-  left: 4em;
-  width: 26em;
-  height: 16.375em;
   background-color: #ffffff;
   border-radius: 0.5em;
   box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
+  height: 300px;
 }
-.card3 {
-  top: 65.625em;
-  left: 4em;
-  width: 26em;
-  height: 10px;
-  background-color: #d0d3f5;
+.card2 .Image {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
   border-radius: 0.5em;
 }
-.footer {
-  padding: 1.25em 0 1.25em;
-  height: 6.25em;
-  background-color: #f0f1ff;
-  border-top: 0.125em solid #e5e7eb;
-  box-sizing: border-box;
-}
-.copyright {
-  color: #eaf6f6;
-  font-size: 0.75rem;
-  padding: 1.25em 0;
-}
-.intro {
-  width: 30%;
-  margin: 0 auto 0;
+.card2 p {
+  margin-top: 1em;
+  text-align: center;
+  width: 90%;
+  margin-inline: auto;
 }
 
 
-.middle-container {
-  margin: 0 auto 1.6em auto;
-}
-h1 {
-  color: #030303;
-  font-size: 24px;
-  font-family: "Lexend Deca";
-  font-weight: 700;
-  line-height: 28px;
-  text-align: left;
-}
-h2 {
-  color: #030303;
-  font-size: 20px;
-  font-family: "Lexend Deca";
-  font-weight: 18.75em;
-  line-height: 24px;
-  text-align: center;
-}
-
-p {
-  color: #030303;
-  font-size: 14px;
-  font-family: "Lexend Deca";
-  font-weight: 0;
-  line-height: 0em;
-  text-align: center;
-}
-.intro2 {
-  color: #030303;
-  font-size: 20px;
-  font-family: "Lexend Deca";
-  line-height: 1.5em;
-  text-align: center;
-}
-.Unique_Features {
-  display: flex;
-}
-.Unique_Features > div {
-  margin: 1.875em;
-  padding: 0.3125em;
-}
-.Success_Stories {
-  display: flex;
-}
-.Success_Stories > div {
-  margin: 1.875em;
-  padding: 0.625em;
-}
 .key_Benefits {
-  display: flex;
-}
-.key_Benefits > div {
-  margin: 1.875em;
-  padding: 0.3125em;
+  flex-direction: column;
+  row-gap: 2em;
+  margin-top: 2em;
 }
 
-.header {
-  padding: 0.3125em 0 0.625em;
-  height: 3.125em;
-  background-color: #f0f1ff;
-  border-bottom: 0.0625em solid #e5e7eb;
-  box-sizing: border-box;
-  box-shadow: 0.125em -0.125em 0.625em rgba(3,3,3,0.1);
-}
-.btn {
-  background: #d93434;
-  background-image: -webkit-linear-gradient(top, #d93434, #b82b2b);
-  background-image: -moz-linear-gradient(top, #d93434, #b82b2b);
-  background-image: -ms-linear-gradient(top, #d93434, #b82b2b);
-  background-image: -o-linear-gradient(top, #d93434, #b82b2b);
-  background-image: linear-gradient(to bottom, #d93434, #b82b2b);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 1.75em;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 0.625em 1.25em 0.625em 1.25em;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background: #3cfcec;
-  text-decoration: none;
-}
-.btn_nav {
-  background: #f44336;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 8;
-  -moz-border-radius: 8;
-  border-radius: 0.5em;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 10px;
-  padding: 0.3125em 0.625em 0.3125em 0.625em;
-  text-decoration: none;
-}
-
-.btn_nav:hover {
-  background: #30e3cb;
-  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
-  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
-  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
-  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
-  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
-  text-decoration: none;
-}
-
-
-p {
-  line-height: 20px;
-}
-
-.One_week_free_Trial {
-  margin-top: 1.25em;
-  margin-bottom: 0.625em;
-
+.key_Benefits .card {
+  background-color: #8f98ff !important;
+  color: #f1f1f1;
 }
 
 .KeyB {
-  margin-top: 5%;
-  margin-left: 5%;
+  text-align: center;
+  margin-top: 5em;
 }
-.SuccessS {
-  margin-top: 3.125em;
-  margin-left: 3.125em;
-}
+
 .UniqueF {
   margin-top: 6.25em;
-  margin-left: 3.125em;
+  text-align: center;
+  margin-bottom: 2em;
 }
-.Image {
-  top: 43.75em;
-  left: 5.5em;
-  width: 12.5em;
-  height: 9.375em;
-  border-radius: 0.5em;
-  background-image: url(./image.png);
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+.copyright {
+  text-align: center;
 }
-.card1 {
-  top: 14.125em;
-  left: 26.25em;
-  width: 12.5em;
-  height: 0.25em;
-  background-color: #5664f5;
-  border-radius: 9999px;
+.footer {
+  padding: 1.25em 0 1.25em;
+  background-color: #f0f1ff;
+  border-top: 0.125em solid #e5e7eb;
+  margin-top: 5em;
 }
-.card3 {
-  top: 65.625em;
-  left: 4em;
-  width: 26em;
-  height: 8.25em;
-  background-color: #d0d3f5;
-  border-radius: 8px;
+.footer-menu {
+  margin-top: 1.5em;
 }
-.card4 {
-  top: 14.125em;
-  left: 51.25em;
-  width: 12.5em;
-  height: 0.25em;
-  background-color: #d0d3f5;
-  border-radius: 9999px;
+.footer-menu a {
+  display: inline-block;
+  margin-left: 1em;
+  text-decoration-line: none;
 }
 
-
-
-@media only screen and (max-width: 768px){
-  body {
-    display: inherit;
+@media only screen and (min-width: 65em){
+  .header {
+    padding-block: .5em;
   }
-  .key_Benefits {
-    display: block;
+  .menu {
+    transform: translateX(0);
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
   }
-  .Success_Stories {
-    display: block;
+  .m-menu {
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    column-gap: 2.5em;
+  }
+  .m-menu > * {
+    margin-bottom: 0;
+  }
+  
+  .m-menu > a  button {
+    width: auto;
+  }
+  .m-menu-img {
+    display: none;
+  }
+
+  .home-body {
+    /* background-color: #cecece; */
+  }
+  .promo-banner {
+    background-color: #3498db;
+    padding-block: 1em;
+    padding-inline: 1em;
+    width: 100%;
+    color: #FFF;
+    text-align: center;
+    position: relative;
+  }
+  .promo-banner a {
+    color: #fff !important;
+  }
+  .close-banner {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    cursor: pointer;
+  }
+  .btn-outline-sp {
+      border: 2px solid var(--primary-color) !important;
+      color: black !important;
+      background-color: transparent !important;
+  }
+  .intro-section {
+    display: grid;
+    justify-content: center;
+  }
+  .intro-section p {
+    width: 60%;
+    text-align: center;
+    margin-block: 2em;
+    justify-self: center;
+    line-height: 2 !important;
+    
   }
   .Unique_Features {
-    display: flow-root;
+      column-gap: 2em;  
+      margin-top: 2em; 
+      flex-direction: row;
+  }
+
+  .SuccessS {
+    text-align: center;
+    margin-top: 10.5em;
+    margin-bottom: 2em;
+  }
+
+  .Success_Stories {
+    justify-content: space-between;
+    column-gap: 2em;
+    flex-direction: row;
+  }
+  .card2 {
+    flex: 1 1 100%;
+    height: 400px;
+  }
+  .card2 .Image {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-radius: 0.5em;
+  }
+
+  .card2 p {
+    margin-top: 1em;
+    text-align: center;
+    width: 90%;
+    margin-inline: auto;
+  }
+  .KeyB {
+    margin-top: 10.5em;
+  }
+  .key_Benefits {
+    column-gap: 2em;
+    
+    flex-direction: row;
+  }
+  .footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-menu {
+    margin-top: 0;
+  }
+  .footer-menu a {
+    display: inline-block;
+    margin-left: 1em;
+    text-decoration-line: none;
   }
 }

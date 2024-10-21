@@ -4,55 +4,51 @@
   <script src="js/script.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Welcome back</title>
 </head>
-<link rel="stylesheet" href="css/Login.css">
+<!-- <link rel="stylesheet" href="css/login.css"> -->
+<link rel="stylesheet" href="css/register.css">
+<link rel="stylesheet" href="css/index.css">
 <link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 <body>
-  <div class="Middle_container">
-
-
-    <div class="header">
-      <ul>
-        <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
-        <li style="float:left" class="sc">Login</li>
-        <li><a class="btn_nav" href="index.html">Home</a></li>
-      </ul>
-
+  <div class="page_wrapper">
+    <div class="registration__header">
+      <div class="container row">
+        <img class="active" src="favicon.ico" alt="cap_img">
+        <a href="index.html">
+          <button class="btn_nav">Home</button>
+        </a>
+      </div>
     </div>
-    <div class="Card">
-      <h1><img src="favicon.ico" alt="Cap_img" class="heading">Scholafit</h1>
-      </div>
-        <form action="" id="login_form">
-          <label for="login_email">Email/Username</label>
-          <input type="text" id="login_email" name="email" placeholder="Enter your Email/Username">
-
-          <label for="login_password">Password</label>
-          <input type="text" id="login_password" name="password" placeholder="Enter your Password">
-          <p>Show password</p>
-          <p>Remember me           <a href="#">Forgot password</a></p>
-          <div>
-              <div class="Signup_btn">
-                <input type="submit" value="Login">
-              </div>
-            <p>Or</p>
-          <div class="btn_f">
-            <div class="facebook">
-              <a class="btnF"href="#">Login with facebook</a>
-            </div>
-            <div class="Google">
-              <a class="btnGoo"href="#">Login with Google</a>
-            </div>
-            <p>Don't have an account ?   <a href="register.html">Sign up</a></p>
-            <p><a href="index.html">Back to Home page</a></p>
+    <div class="form">
+      <div class="form__wrapper">
+        <div class="form_content ">
+          <div class="form__title">
+            <h1 class="heading-md">Scholafit</h1>
           </div>
-
+            <form action="" method="post" id="registration_form" >
+              <div class="form_input">
+                  <label for="email">Email/Username</label>
+                  <input type="email" id="email" name="Email" placeholder="Enter your email/username" required>
+              </div>
+              <div class="form_input">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="Password" placeholder="Enter your password">
+              </div>
+              <button type="submit" class="signup_btn">Log in</button>
+            </form>
+        </div>
+          <div class="registration_terms">
+            <p>Don't have an account? <span class="text-600"><a href="/register.html"> Sign up</a> </span></p>
+          </div>
+          <a href="/index.html">
+            <p class="rdr-homepage">Back to homepage</p>
+          </a>
       </div>
-
-
+    </div>
   </div>
   <script type="module">
     import {submitLoginForm} from './js/renderData.js'

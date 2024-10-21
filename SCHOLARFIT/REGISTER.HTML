@@ -4,69 +4,62 @@
   <script src="js/script.js" defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REGISTER</title>
+  <title>Sign up - Scholafit</title>
 </head>
 <link rel="stylesheet" href="css/register.css">
+<link rel="stylesheet" href="css/index.css">
 <link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
   <body>
-    <div class="header">
-      <ul>
-        <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
-        <li style="float:left" class="sc">Register</li>
-        <li><a class="btn_nav" href="index.html">Home</a></li>
-      </ul>
-
-    </div>
-    <div class="form">
-      <div class="Form_content">
-        <div class="tittle">
-          <h1>Create your Account</h1>
-        </div>
-        <div class="line">
-          <hr style="height: 2px ; border-width:0; color: blue; background-color: blue">
-
-        </div>
-          <form action="" method="post" id="registration_form" >
-            <label  for="fname">First name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Enter your First name">
-
-            <label  for="lname">Last name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Enter your Last name">
-
-            <label for="lname">Email</label>
-            <input type="text" id="email" name="Email" placeholder="Enter your email">
-
-            <label for="pname">Password</label>
-            <input type="text" id="password" name="Password" placeholder="Select your password">
-            <div class="pstrength">
-              <p>Password Stregth:</p>
-
-            </div>
-            <div>
-              <button type="submit" class="Signup_btn">Sign up</button>
-              <!-- <div class="Signup_btn">
-                <input type="submit" value="Sign up">
-              </div> -->
-            <div class="btn_f">
-              <div class="facebook">
-                <a class="btnF"href="#">  facebook</a>
-              </div>
-              <div class="Google">
-                <a class="btnGoo"href="#">Google</a>
-              </div>
-            </div>
+    <div class="page_wrapper">
+      <div class="registration__header">
+          <div class="container row">
+            <img class="active" src="favicon.ico" alt="cap_img">
+            <a href="index.html">
+              <button class="btn_nav">Home</button>
+            </a>
+          </div>
       </div>
-      <div class="footer">
-        <div class="textf">
-          <p>By creating an account you agree to our  <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a> </p>
-          <p>Already have an account?  <a href="#">Log in</a> </p>
-
+      <div class="form">
+        <div class="form__wrapper">
+          <div class="form_content">
+            <div class="form__title">
+              <h1 class="heading-md">Create your Account</h1>
+            </div>
+              <form action="" method="post" id="registration_form" >
+                <div class="form_input">
+                  <label  for="fname">First name</label>
+                  <input type="text" id="fname" name="firstname" placeholder="Enter your First name" required>
+                </div>
+                <div class="form_input">
+                  <label  for="lname">Last name</label>
+                  <input type="text" id="lname" name="lastname" placeholder="Enter your Last name" required>
+                </div>
+                <div class="form_input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="Email" placeholder="Enter your email" required>
+                </div>
+                <div class="form_input">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="Password" placeholder="Enter your password">
+                </div>
+                <div class="form_input">
+                  <label for="confirm_password">Confirm password</label>
+                  <input type="password" id="confirm_password" name="Password" placeholder="Confirm your password">
+                </div>
+                <button type="submit" class="signup_btn">Sign up</button>
+              </form>
+          </div>
+            <div class="registration_terms">
+              <small>By creating an account you agree to our <span class="text-600"><a href="#">Terms of service</a></span> and <span class="text-600"><a href="#">Privacy Policy</a></span> </small>
+              <p>Already have an account? <span class="text-600"><a href="/login.html"> Log in</a> </span></p>
+            </div>
         </div>
-
+  
       </div>
+
       <script type="module">
         import {submitRegistrationForm} from './js/renderData.js'
         
