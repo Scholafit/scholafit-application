@@ -17,11 +17,14 @@ def login(request: Request):
     try:
         login_response = auth_service.login(email, password)
         if "error" in login_response:
-            return make_response(jsonify(login_response), 401)
+            return (jsonify({"status": "error", "code": "Invalid Username or Password", "status_code": 401,
+                             "errors": [{"field": "email", "error": "Invalid Username or Password"}]}), 401)
         
         return make_response(jsonify(login_response), 200)
     except Exception as e:
-        return make_response(jsonify({"error": f"An error occurred: {str(e)}"}), 500)
+        return (jsonify({"status": "error", "code": f"{str(e)}", "status_code": 500,
+                         "errors": [{"field": "email", "error": "Invalid Username or Password"}]}), 500)
+        #return make_response(jsonify({"error": f"An error occurred: {str(e)}"}), 500)
 
 
 def logout():

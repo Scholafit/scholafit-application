@@ -23,14 +23,18 @@ def create_user(request: Request):
         error_message = str(e.orig)
         if "Duplicate entry" in error_message:
             if "users.email" in error_message:
-                return (jsonify({"error": "Email already exists"}), 409)
+                return (jsonify({"status": "error", "code": "Email already exists", "status_code": 409,
+                                 "errors": [{"field": "email", "error": "Email already exist"}]}), 409)
             elif "users.username" in error_message:
-                return (jsonify({"error": "Username already exists"}), 409)
+                return (jsonify({"status": "error", "code": "Username already exists", "status_code": 409,
+                                 "errors": [{"field": "email", "error": "Username already exist"}]}), 409)
     except ValueError as e:
         error_message = str(e)
         if "Password" in error_message:
-            return make_response(jsonify({"error": "Password must be 8 characters long, contain 1 uppercase, 1 lowercase and 1 special character"}),400)
-        return (jsonify({"error": "An error occurred during user creation"}), 500)
+            return (jsonify({"status": "error", "code": "Password must be minimum 8 characters long, contain minimum 1 uppercase, minimum 1 lowercase and minimum 1 special character", "status_code": 409,
+                             "errors": [{"field": "email", "error": "Password not strong enough"}]}), 409)
+        return (jsonify({"status": "error", "code": "An error occurred during user creation", "status_code": 500,
+                         "errors": [{"field": "email", "error": "An error occured during user creation"}]}), 500)
 
 def create_profile(user_id:int, request: Request):
     

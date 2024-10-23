@@ -20,14 +20,19 @@ export const submitRegistrationForm = () => {
             const data = {
                 first_name: formData.get("firstname"),
                 last_name: formData.get("lastname"),
+                username: formData.get("username"),
                 email: formData.get('Email'),
-                password: formData.get('Password'),
-                username: formData.get('Email')
+                password: formData.get('Password')
             }
     
             const response = await signUp(data)
             console.log(response)
             if (response.error && response.status !== 201) {
+                const respData = response["data"]
+                const errorData = response["error"]
+                const message = errorData["code"]
+                alert(message);
+                return;
                 // show form errors
             }
             
@@ -36,7 +41,7 @@ export const submitRegistrationForm = () => {
             const profle = respData["new_profile"]
             const userId = user["id"]
             const profileId = profle["id"]
-            saveToSessionStorage("user",{"userId": userId, "profileId": profileId})
+            saveToSessionStorage("user",{"userId": userId, "profileId": profileId, "firstname": user.first_name})
             window.location.replace('/dashboard.html')
             
 
@@ -53,24 +58,28 @@ export const submitLoginForm = () => {
             evt.preventDefault()
             const formData = new FormData(loginForm)
             const data = {
-                
-                identifier: formData.get('email'),
-                password: formData.get('password'),
-                username: formData.get('email')
+                identifier: formData.get('identifier'),
+                password: formData.get('password')
+                //username: formData.get('email')
             }
     
             const response = await login(data)
             console.log(response)
             if (response.error && response.status !== 201) {
+                const respData = response["data"]
+                const errorData = response["error"]
+                const message = errorData["code"]
+                alert(message);
+                return;
                 // show form errors
             }
             
             const respData = response["data"]
             const user = respData["user"]
-            const profile = user["profile_data"]
+            const profile = user.profile_data
             const userId = user["id"]
             const profileId = profile["id"]
-            saveToSessionStorage("user",{"userId": userId, "profileId": profileId})
+            saveToSessionStorage("user", {"userId": userId, "profileId": profileId, "firstname": user.first_name})
             window.location.replace('/dashboard.html')
             
 
