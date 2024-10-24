@@ -48,7 +48,7 @@ def verify_payment(reference):
         payment.update_payment_status(payments, 'SUCCESS')
         return make_response(jsonify(profile.to_dict()), 200)
     if response.get('data') and response['data']['status'] == 'abandoned':
-        return make_response(jsonify({"error": "Abandoned Payment"}), 402)
+        return make_response(jsonify({"error": response}), 402)
 
     return make_response(jsonify({"error": "Payment verification failed"}), 400)
 
@@ -67,11 +67,11 @@ def verify_payment_premium(reference):
     response = requests.get(url, headers=headers).json()
     if response.get('data') and response['data']['status'] == 'success':
         profile = profileRepo.get_by_id(DB_Profile, payments.profile_id)
-        subscription.create_subscription(user_id=profile.user_id, plan='PREMIUM')
+        subscription.create_subscription(user_id=profile.user_id, plan='premium')
         #payment.update_profile_balance(profile, payments.amount)
         payment.update_payment_status(payments, 'SUCCESS')
         return make_response(jsonify(profile.to_dict()), 200)
     if response.get('data') and response['data']['status'] == 'abandoned':
-        return make_response(jsonify({"error": "Abandoned Payment"}), 402)
+        return make_response(jsonify({"error": response}), 402)
 
     return make_response(jsonify({"error": "Payment verification failed"}), 400)
