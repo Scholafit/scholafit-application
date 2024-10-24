@@ -14,7 +14,7 @@ def verify_payment_status(reference):
 def get_payment_by_ref(reference):
     return get_payment(reference)
 
-@app_views.route('/payments/premium', methods=['GET'])
+@app_views.route('/payments/premium', methods=['POST'])
 def sub_premium():
     return create_payment_premium(request)
 

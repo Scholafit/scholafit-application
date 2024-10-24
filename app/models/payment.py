@@ -58,6 +58,7 @@ class Payment:
         if response.status_code == 200:
             print('good response')
             data = response.json()
+            print(data)
             return data['data']['authorization_url'], data['data']['reference']
         else:
             print(response.status_code)
@@ -71,6 +72,7 @@ class Payment:
             print('success')
             # Save payment details in your database
             payments = DB_Payment(profile_id=profile_id, reference=reference, amount=amount)
+            print(reference)
             self.db.save(payments)
             # Redirect user to Paystack payment page
             return make_response(jsonify({"authorization_url": auth_url, "reference": reference}), 200)
@@ -99,7 +101,7 @@ class Payment:
         reference = str(uuid.uuid4())
         payment_data = {
             "email": email,
-            "amount": int(amount * 100),
+            "amount": int(5000 * 100),
             "reference": reference,
             "callback_url": f"https://localhost:5000/api/v1/payments/verify-premium/{reference}"
         }

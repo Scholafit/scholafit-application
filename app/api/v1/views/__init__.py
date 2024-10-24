@@ -8,3 +8,4 @@ from .user import *
 from .auth import *
 from .subscription import *
 from .learning_module import *
+from .payment import *

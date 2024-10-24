@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <script src="js/script.js"></script>
-    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="https://js.paystack.co/v1/inline.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Pricing Page</title>
   </head>
   <link rel="stylesheet" href="css/pricing.css">
-  <link rel="icon" href="favicon.ico">
+  <link rel="icon" href="./img/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 <div class="header">
 
   <ul>
-    <li style="float:left"><img class="active" src="favicon.ico" alt="cap_img"></li>
+    <li style="float:left"><img class="active" src="img/favicon.ico" alt="cap_img"></li>
     <li style="float:left" class="sc">Scholafit</li>
     <li><a class="btn_nav" href="">Home</a></li>
 
@@ -56,7 +56,7 @@
           <p>Access to all study materials and resources.</p><br>
           <p>Priority customer support.</p><br>
 
-          <a class="buttonp1">Subscribe to Premium</a>
+          <button type="submit" class="buttonp1" id="subcribe-premium">Subscribe to Premium</button>
 
         </div>
 
@@ -159,7 +159,7 @@
       </div>
       <div class="card10">
         <div class="TA">
-          <img class="TO" src="Chinelo.png" alt="Mark_img">
+          <img class="TO" src="img/Chinelo.png" alt="Mark_img">
 
         </div>
         <div class="TAU">
@@ -182,6 +182,10 @@
 
       </div>
     </div>
-
+    <script type="module">
+      import {clickSubscribeButton} from './js/subscription.js'
+      
+      clickSubscribeButton()
+    </script>
   </body>
 </html>
