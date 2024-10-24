@@ -107,3 +107,15 @@ a:hover{
   border-radius: 0.5em;
   box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
+
+@media only screen and (max-width: 768px) {
+  .Panalysis {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .P1, .P2 {
+    width: 90%;
+    margin: 1em 0;
+  }
+}
