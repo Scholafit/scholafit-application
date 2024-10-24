@@ -275,3 +275,70 @@ li img {
   background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
   text-decoration: none;
 }
+
+@media only screen and (max-width: 768px) {
+  body {
+    display: block;
+    margin: 0;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 10px 0;
+    height: auto;
+    text-align: center;
+  }
+
+  .profile, .div {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .card1, .card2, .card3, .card4, .card5, .card6, .card6a {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 14px;
+  }
+
+  .button1, .button3 {
+    width: 90%;
+    margin: 10px auto;
+    height: 50px;
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    height: auto;
+  }
+
+  .btn_nav {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  ul {
+    padding-right: 0;
+  }
+
+  li a {
+    padding-right: 10px;
+    font-size: 12px;
+  }
+
+  li img {
+    width: 16px;
+    height: auto;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
