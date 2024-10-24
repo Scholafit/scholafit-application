@@ -374,9 +374,60 @@ li img {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.TA {
-  margin-left: -1.875em;
+/* General Styling for Testimonials */
+.testimonial-card {
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Style for Testimonial Images */
+.testimonial-img {
+  width: 150px; /* Default size for larger screens */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 50%; /* Make image circular */
+  margin-bottom: 10px; /* Add space between image and text */
+}
+
+/* Style for Testimonial Author and Role */
+.testimonial-author {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.testimonial-role {
+  color: #555;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+/* Media Query for Medium Screens (Tablets) */
+@media only screen and (max-width: 768px) {
+  .testimonial-card {
+    max-width: 70%; /* Adjust width for tablets */
+  }
+
+  .testimonial-img {
+    width: 120px; /* Slightly smaller image for tablets */
+  }
+}
+
+/* Media Query for Smaller Screens (Mobile) */
+@media only screen and (max-width: 480px) {
+  .testimonial-card {
+    max-width: 90%; /* Adjust width for mobile */
+  }
+
+  .testimonial-img {
+    width: 100px; /* Smaller image size for mobile */
+  }
+}
+
 .text6 {
   color: #5664f5;
   font-size: 1.25em;
@@ -402,4 +453,78 @@ li img {
   font-family: "Lexend Deca";
   font-weight: 600;
   line-height: 1.75em;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    display: block;
+    padding: 0 1em;
+  }
+
+  ul {
+    padding-right: 0;
+  }
+
+  li a {
+    display: block;
+    padding: 0.5em 0;
+  }
+
+  .pricing {
+    height: auto;
+    padding: 1em;
+  }
+
+  .div {
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin: 0;
+  }
+
+  .card1, .card2, .card3, .card4, .card5, .card6, .card7, .card8, .card9, .card10 {
+    width: 80%;
+   margin: 1em;
+   padding: 5em;
+   text-align: center;
+  }
+
+  
+
+  .header {
+    height: auto;
+    padding: 1em;
+  }
+
+  .footer {
+    width: 100%;
+    padding: 1em;
+    margin-top: 2em;
+    text-align: center;
+  }
+
+  .btn_nav, .buttonp, .buttonp1 {
+    width: 100%;
+    margin-top: 1em;
+    padding: 0.75em;
+    font-size: 1em;
+  }
+
+  .text1, .text2, .text3, .text4, .text5, .text6, .PU {
+    font-size: 0.875em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .headingsec {
+    font-size: 1.5em;
+    margin-top: 1em;
+  }
+
+  .TO {
+    width: 100%;
+    margin-top: 1em;
+  }
 }
