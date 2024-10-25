@@ -9,8 +9,8 @@
 
 body {
   color: #40514E;
-  margin-right: 0px;
-  margin-left: 0px;
+  margin-right: 0em;
+  margin-left: 0em;
   text-align: center;
   font-family: "Lexend Deca", sans-serif;
   font-optical-sizing: auto;
@@ -31,12 +31,12 @@ li a {
   display: flex;
   color: black;
   text-align: center;
-  padding-right: 50px;
+  padding-right: 3.125em;
   text-decoration: none
 }
 li img {
   display: block;
-  padding: 0px 0px;
+  padding: 0em 0em;
   text-decoration: none;
 }
 .btn_nav {
@@ -48,11 +48,11 @@ li img {
   background-image: linear-gradient(to bottom, #3498db, #2980b9);
   -webkit-border-radius: 8;
   -moz-border-radius: 8;
-  border-radius: 8px;
+  border-radius: 0.5em;
   font-family: Arial;
   color: #ffffff;
-  font-size: 20px;
-  padding: 5px 10px 5px 10px;
+  font-size: 1.25em;
+  padding: 0.3125em 0.625em 0.3125em 0.625em;
   text-decoration: none;
 }
 
@@ -66,12 +66,12 @@ li img {
   text-decoration: none;
 }
 .header {
-  padding: 5px 0 5px;
-  height: 60px;
+  padding: 0.3125em 0 0.3125em;
+  height: 3.75em;
   background-color: #f0f1ff;
   border-bottom: 1px solid #e5e7eb;
   box-sizing: border-box;
-  box-shadow: 2px -2px 10px rgba(3,3,3,0.1);
+  box-shadow: 0.125em -0.125em 0.625em rgba(3,3,3,0.1);
 }
 .pricing {
   position: relative;
@@ -85,162 +85,162 @@ li img {
   width: 50%;
 }
 .card1 {
-  top: 284px;
-  left: 112px;
-  width: 384px;
-  margin-left: 100px;
-  height: 464px;
+  top: 17.75em;
+  left: 7em;
+  width: 24em;
+  margin-left: 6.25em;
+  height: 29em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card2 {
-  top: 284px;
-  left: 528px;
-  margin-left: 500px;
-  margin-top: -494px;
-  width: 384px;
-  height: 464px;
+  top: 17.75em;
+  left: 33em;
+  margin-left: 31.25em;
+  margin-top: -30.875em;
+  width: 24em;
+  height: 29em;
   background-color: #f0f1ff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card3 {
-  top: 284px;
-  left: 944px;
-  margin-left: 900px;
-  margin-top: -484px;
-  width: 384px;
-  height: 464px;
+  top: 17.75em;
+  left: 59em;
+  margin-left: 56.25em;
+  margin-top: -30.25em;
+  width: 24em;
+  height: 29em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card4 {
-  top: 856px;
-  left: 112px;
-  margin-top: 50px;
-  margin-left: 50px;
-  width: 1216px;
-  height: 402px;
+  top: 53.5em;
+  left: 7em;
+  margin-top: 3.125em;
+  margin-left: 3.125em;
+  width: 76em;
+  height: 25.125em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card5 {
   top: 1366px;
-  left: 112px;
-  width: 1216px;
-  height: 132px;
-  margin-top: 100px;
-  margin-left: 50px;
+  left: 7em;
+  width: 76em;
+  height: 8.25em;
+  margin-top: 6.25em;
+  margin-left: 3.125em;
   background-color: #ffffff;
   text-align: left;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card6 {
-  top: 1514px;
-  left: 112px;
-  width: 1216px;
-  height: 108px;
-  margin-top: 20px;
-  margin-left: 50px;
+  top: 94.625em;
+  left: 7em;
+  width: 76em;
+  height: 6.75em;
+  margin-top: 1.25em;
+  margin-left: 3.125em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card7 {
-  top: 1638px;
-  left: 112px;
-  width: 1216px;
-  margin-top: 20px;
-  margin-left: 50px;
-  height: 156px;
+  top: 102.375em;
+  left: 7em;
+  width: 76em;
+  margin-top: 1.25em;
+  margin-left: 3.125em;
+  height: 9.75em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card8 {
-  top: 1902px;
-  left: 112px;
-  width: 384px;
-  height: 220px;
-  margin-top: 100px;
-  margin-left: 50px;
+  top: 118.875em;
+  left: 7em;
+  width: 24em;
+  height: 13.75em;
+  margin-top: 6.25em;
+  margin-left: 3.125em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card9 {
-  top: 1902px;
-  left: 528px;
-  width: 384px;
-  height: 220px;
-  margin-left: 470px;
-  margin-top: -220px;
+  top: 118.875em;
+  left: 33em;
+  width: 24em;
+  height: 13.75em;
+  margin-left: 29.375em;
+  margin-top: -13.75em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .card10 {
-  top: 1902px;
-  left: 944px;
-  margin-left: 890px;
-  margin-top: -220px;
-  width: 384px;
-  height: 220px;
+  top: 118.875em;
+  left: 59em;
+  margin-left: 55.625em;
+  margin-top: -13.75em;
+  width: 24em;
+  height: 13.75em;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+  border-radius: 1em;
+  box-shadow: 0em 0.25em 0.75em rgba(0,0,0,0.25);
 }
 .footer {
-  top: 1536px;
-  left: 0px;
-  width: 1350px;
-  margin-top: 100px;
-  height: 56px;
+  top: 96em;
+  left: 0em;
+  width: 84.375em;
+  margin-top: 6.25em;
+  height: 3.5em;
   background-color: #f0f1ff;
   border-top: 1px solid #e5e7eb;
   box-sizing: border-box;
-  box-shadow: 2px -2px 10px rgba(3,3,3,0.1);
+  box-shadow: 0.125em -0.125em 0.625em rgba(3,3,3,0.1);
 }
 .text1 {
   color: #030303;
   text-align: left;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
-  font-size: 14px;
+  margin-left: 1.25em;
+  margin-right: 1.25em;
+  margin-top: 1.25em;
+  font-size: 0.875em;
   font-family: "Lexend Deca";
-  line-height: 24px;
+  line-height: 1.5em;
   text-decoration: none;
 }
 .text1a {
   color: #5664f5;
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 1.25em;
+  font-size: 1.125em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 32px;
+  line-height: 2em;
 }
 .buttonp {
   cursor: pointer;
-  top: 588px;
-  left: 136px;
-  width: 170px;
-  margin-right: 180px;
-  height: 40px;
-  padding: 0px 8px;
+  top: 36.75em;
+  left: 8.5em;
+  width: 10.625em;
+  margin-right: 11.25em;
+  height: 2.5em;
+  padding: 0em 0.5em;
   border: 0;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 1em;
   background-color: #5664f5;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 1em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.5em;
   text-decoration: none;
   outline: none;
 }
@@ -255,20 +255,20 @@ li img {
 }
 .buttonp1 {
   cursor: pointer;
-  top: 612px;
-  left: 552px;
-  width: 225px;
-  height: 40px;
-  padding: 0px 8px;
-  border: 0;
+  top: 38.25em;
+  left: 34.5em;
+  width: 14.0625em;
+  height: 2.5em;
+  padding: 0em 0.5em;
+  border: 0em;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 1em;
   background-color: #5664f5;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 1em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 24px;
+  line-height: 1.5em;
   text-decoration: none;
   outline: none;
 }
@@ -284,122 +284,247 @@ li img {
 .text2 {
   color: #030303;
   text-align: left;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
-  line-height: 0px;
-  margin-bottom: 100px;
-  padding-bottom: 50px;
-  font-size: 12px;
+  margin-left: 1.25em;
+  margin-right: 1.25em;
+  margin-top: 0em;
+  line-height: 0em;
+  margin-bottom: 6.25em;
+  padding-bottom: 3.125em;
+  font-size: 0.75em;
   font-family: "Lexend Deca";
-  line-height: 24px;
+  line-height: 1.5em;
   text-decoration: none;
 }
 .text2a {
   color: #5664f5;
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 1.25em;
+  font-size: 1.125em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 32px;
+  line-height: 2em;
 }
 .headingsec {
   color: #030303;
-  font-size: 30px;
-  margin-top: 30px;
+  font-size: 1.875em;
+  margin-top: 1.875em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 36px;
+  line-height: 2.25em;
   text-align: center;
 }
 .text3 {
   color: #5664f5;
-  font-size: 20px;
+  font-size: 1.25em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.75em;
   text-align: left;
-  margin-left: 5px;
+  margin-left: 0.3125em;
 }
 .text3a {
   color: #030303;
-  font-size: 16px;
+  font-size: 1em;
   font-family: "Lexend Deca";
-  line-height: 24px;
+  line-height: 1.5em;
   text-align: left;
-  margin-left: 10px;
+  margin-left: 0.625em;
 }
 .text4 {
   color: #5664f5;
-  font-size: 20px;
+  font-size: 1.25em;
   text-align: left;
-  margin-left: 10px;
+  margin-left: 0.625em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.75em;
 }
 .text4a {
   text-align: left;
   color: #030303;
-  margin-left: 10px;
-  font-size: 16px;
+  margin-left: 0.625em;
+  font-size: 1em;
   font-family: "Lexend Deca";
-  line-height: 24px;
+  line-height: 1.5em;
 }
 .text5 {
   color: #5664f5;
-  font-size: 20px;
+  font-size: 1.25em;
   text-align: left;
   margin-left: 10px;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.75em;
 }
 .text5a {
   text-align: left;
   color: #030303;
-  margin-left: 10px;
+  margin-left: 0.625em;
   font-size: 16px;
   font-family: "Lexend Deca";
-  line-height: 24px;
+  line-height: 1.5em;
 }
 .TO {
-  top: 1926px;
-  left: 132px;
-  width: 60px;
-  margin-right: 250px;
-  margin-top: 20px;
-  height: 60px;
-  border-radius: 9999px;
+  top: 120.375;
+  left: 88.25em;
+  width: 3.75em;
+  margin-right: 15.625em;
+  margin-top: 1.25em;
+  height: 3.75em;
+  border-radius: 624.9375em;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.TA {
-  margin-left: -30px;
+/* General Styling for Testimonials */
+.testimonial-card {
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Style for Testimonial Images */
+.testimonial-img {
+  width: 150px; /* Default size for larger screens */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 50%; /* Make image circular */
+  margin-bottom: 10px; /* Add space between image and text */
+}
+
+/* Style for Testimonial Author and Role */
+.testimonial-author {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.testimonial-role {
+  color: #555;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+/* Media Query for Medium Screens (Tablets) */
+@media only screen and (max-width: 768px) {
+  .testimonial-card {
+    max-width: 70%; /* Adjust width for tablets */
+  }
+
+  .testimonial-img {
+    width: 120px; /* Slightly smaller image for tablets */
+  }
+}
+
+/* Media Query for Smaller Screens (Mobile) */
+@media only screen and (max-width: 480px) {
+  .testimonial-card {
+    max-width: 90%; /* Adjust width for mobile */
+  }
+
+  .testimonial-img {
+    width: 100px; /* Smaller image size for mobile */
+  }
+}
+
 .text6 {
   color: #5664f5;
-  font-size: 20px;
+  font-size: 1.25em;
   margin-top: -60px;
-  margin-right: 100px;
+  margin-right: 6.25em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.75em;
 }
 .PU {
   color: #030303;
-  margin-top: -20px;
-  margin-right: 50px;
+  margin-top: -1.25em;
+  margin-right: 3.125em;
   font-size: 16px;
   font-family: "Lexend Deca";
-  line-height: 24px;
+  line-height: 1.5em;
 }
 .text7 {
   color: #5664f5;
-  font-size: 20px;
-  margin-top: -60px;
-  margin-right: 50px;
+  font-size: 1.25em;
+  margin-top: -3.75em;
+  margin-right: 3.125em;
   font-family: "Lexend Deca";
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.75em;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    display: block;
+    padding: 0 1em;
+  }
+
+  ul {
+    padding-right: 0;
+  }
+
+  li a {
+    display: block;
+    padding: 0.5em 0;
+  }
+
+  .pricing {
+    height: auto;
+    padding: 1em;
+  }
+
+  .div {
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin: 0;
+  }
+
+  .card1, .card2, .card3, .card4, .card5, .card6, .card7, .card8, .card9, .card10 {
+    width: 80%;
+   margin: 1em;
+   padding: 5em;
+   text-align: center;
+  }
+
+  
+
+  .header {
+    height: auto;
+    padding: 1em;
+  }
+
+  .footer {
+    width: 100%;
+    padding: 1em;
+    margin-top: 2em;
+    text-align: center;
+  }
+
+  .btn_nav, .buttonp, .buttonp1 {
+    width: 100%;
+    margin-top: 1em;
+    padding: 0.75em;
+    font-size: 1em;
+  }
+
+  .text1, .text2, .text3, .text4, .text5, .text6, .PU {
+    font-size: 0.875em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .headingsec {
+    font-size: 1.5em;
+    margin-top: 1em;
+  }
+
+  .TO {
+    width: 100%;
+    margin-top: 1em;
+  }
 }
