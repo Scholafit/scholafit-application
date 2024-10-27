@@ -9,6 +9,11 @@ export const getAllPreviousChats = async() => {
     }
 }
 
+
+const updateChatSideBar = ()=> {
+    // update the sidebar with data from previous chat
+    // update sidebar with new data from new chat
+}
 const renderChats = (chats, new_chat) => {
     console.log(chats)
     const aiBox = document.getElementById('ai-box')
@@ -20,7 +25,7 @@ const renderChats = (chats, new_chat) => {
         aiBox.classList.add('chat-mode')
         hideOnChatMode.forEach(hcm => hcm.classList.add('cm_no__show'))
     }   
-    
+
     let x = 1
     let user = userFirstName[0].toUpperCase()
     while (x <= chats.length){
