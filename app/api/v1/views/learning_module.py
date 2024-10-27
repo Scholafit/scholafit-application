@@ -1,5 +1,5 @@
 from . import app_views
-from app.controller.learning_module import add_user_subjects, create_user_exam, submit_exam, get_all_subjects, create_chat_with_ai, continue_chat, initial_profile_build
+from app.controller.learning_module import add_user_subjects, create_user_exam, submit_exam, get_all_subjects, create_chat_with_ai, continue_chat, get_chats,get_chat_by_id,initial_profile_build
 from flask import request
 
 # create subjects
@@ -28,6 +28,19 @@ def submit_user_exam(test_id):
 def get_available_subjects():
     
     return get_all_subjects()
+
+
+#get previous chats
+@app_views.route('/learner-center/ai', methods=['GET'])
+def fetch_chats():
+    return get_chats()
+
+#get chat by id
+
+@app_views.route('/learner-center/ai/<string:conversation_id>', methods=['POST'])
+def fetch_chat_by_id(conversation_id):
+    return get_chat_by_id(conversation_id)
+
 
 # start conversation with AI
 @app_views.route('/learner-center/ai', methods=['POST'])

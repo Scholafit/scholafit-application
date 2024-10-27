@@ -1,7 +1,8 @@
 from flask import make_response, jsonify, Request, session
 from app.models.learning_module.subject import userSubject, subject
 from app.models.learning_module.test import subjectTest,userTest
-from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record, create_conversation_ai, chat_with_ai, init_user_profile
+from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record, create_conversation_ai, chat_with_ai, create_user_profile
+from datetime import datetime, timezone
 from uuid import uuid4
 import json
 
@@ -58,23 +59,34 @@ def get_all_subjects():
 def create_chat_with_ai(request: Request):
     session_id = session.get('session_id', None)
     if not session_id:
-       return make_response(jsonify({"message":"You must be logged"}), 401)
+       return make_response(jsonify({
+            "error": "Credentials provided are invalid",
+            "status": "INVALID_CREDENTIALS",
+            "status_code": 401,
+            "errors": []
+        }), 401)
     req = request.json
     prompt_message = req["message"]
     if prompt_message == '':
-       return make_response(jsonify({"message": "Prompt can not be an empty string"}))
+       return make_response(jsonify({
+            "error": "prompt message cannot be an empty string",
+            "status": "CLIENT_ERR",
+            "status_code": 400,
+            "errors": []
+        }), 400)
     
     user_data = session.get(session_id)
     user_id = user_data["user_id"]
     conversations = user_data["conversations"]
-    conversation_id = f"conv-{uuid4()}-{user_id}"
+    conversation_id = f"{uuid4()}-{user_id}"
     ai_response = create_conversation_ai(prompt_message.rstrip())
     
-    
+    updated_at = datetime.now(timezone.utc)
     conversations[conversation_id] = {
 
         "title": ai_response["title"],
         "subject": ai_response.get("subject", None),
+        "updated_at": updated_at,
         "conversation": [{"user": prompt_message, "assistant": ai_response["response"]}]
     }
 
@@ -83,7 +95,8 @@ def create_chat_with_ai(request: Request):
         "conversations": conversations
     }
     print(f"this is the ai: {ai_response}")
-    return make_response(jsonify({"response":ai_response, "conversation_id": conversation_id}),200)
+    ai_response["updated_at"] = updated_at
+    return make_response(jsonify({"response":ai_response, "conversation_id": conversation_id}),201)
 
 
 def continue_chat(conversation_id:str, request: Request):
@@ -93,9 +106,18 @@ def continue_chat(conversation_id:str, request: Request):
     user_data = session.get(session_id)
     conversations = user_data["conversations"]
     conversation = conversations[conversation_id]
+    if len(conversation) == 0:
+        return make_response(jsonify({
+            "error": "Invalid id",
+            "status": "CLIENT_ERR",
+            "status_code": 400,
+            "errors": []
+        }), 400)
 
     response = chat_with_ai(prompt_message, conversation["conversation"])
 
+    updated_at = datetime.now(timezone.utc)
+    conversation["updated_at"] = updated_at
     conversation["conversation"].append({
         "user": prompt_message,
         "assistant": response["response"]
@@ -104,8 +126,46 @@ def continue_chat(conversation_id:str, request: Request):
         "user_id": user_data["user_id"],
         "conversations": conversations
     }
-
+    response["updated_at"] = updated_at
     return make_response(jsonify({"response": response, "conversation_id":conversation_id}), 200)
+
+def get_chats():
+    session_id = session.get('session_id', None)
+    if not session_id:
+        return make_response(jsonify({
+            "error": "Credentials provided are invalid",
+            "status": "INVALID_CREDENTIALS",
+            "status_code": 401,
+            "errors": []
+        }), 401)
+    user_data = session.get(session_id)
+    conversations = user_data["conversations"]
+    return make_response(jsonify({
+        "chats": conversations
+    }), 200)
+
+def get_chat_by_id(conversation_id: str):
+    session_id = session.get('session_id', None)
+    if not session_id:
+        return make_response(jsonify({
+            "error": "Credentials provided are invalid",
+            "status": "INVALID_CREDENTIALS",
+            "status_code": 401,
+            "errors": []
+        }), 401)
+    user_data = session.get(session_id)
+    conversations = user_data["conversations"]
+    conversation = conversations[conversation_id]
+    if not conversation or len(conversation) == 0:
+        return make_response(jsonify({
+            "error": "Conversation not found",
+            "status": "NOT_FOUND",
+            "status_code": 404,
+            "errors": []
+        }), 404)
+    return make_response(jsonify({
+            "chat": conversation
+        }), 200)
 
 
 def initial_profile_build(profile_id, request: Request):
@@ -113,7 +173,7 @@ def initial_profile_build(profile_id, request: Request):
     profile_data = req["profile_data"]
     subjects = req["subject_data"]
     print(req)
-    response = init_user_profile(profile_data,subjects, profile_id)
+    response = create_user_profile(profile_data,subjects, profile_id)
 
     if not response:
         return make_response(jsonify({
