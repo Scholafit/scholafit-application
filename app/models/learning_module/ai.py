@@ -87,7 +87,8 @@ class AI:
                 - one of the answers has to be the correct answer and marked as true while rest are false
                 - explanation: A brief explanation of why the answer is correct
                 - questions should be a mix of easy, medium and hard difficulty levels 
-                Return all questions in a single JSON array."""
+                - make sure each question is unique
+                Return all questions in a single VALID JSON array. Every thing should be well terminated"""
         return self.send_prompt(PROMPT_MESSAGE, SYSTEM_MESSAGE)
 
     def ai_chat(self, prompt_message: str):

@@ -30,10 +30,9 @@ def get_user_profile(userId: int):
 
 def update_user_profile(profileId: int):
     data = request.get_json()
-
     updated_profile = profile.update_profile(profileId, **data)
 
     if updated_profile is None:
         return make_response(jsonify({"error": "Profile not found"}), 404)
 
-    return make_response(jsonify({"Updated_profile": updated_profile, "msg": "SUCCESS"}), 200)
+    return make_response(jsonify({"updated_profile": updated_profile, "msg": "SUCCESS"}), 200)

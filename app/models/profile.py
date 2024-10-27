@@ -72,7 +72,11 @@ class Profile:
             return None
     
         for key, value in kwargs.items():
-            if hasattr(profile, key):
+            if key == 'university_choices':
+                choices = profile.university_choices
+                choices.append(value)
+                setattr(profile, key, choices)
+            elif hasattr(profile, key):
                 setattr(profile, key, value)
     
         self.db.database.session.commit()

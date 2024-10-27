@@ -76,6 +76,38 @@ export const login = async (credentials) => {
     }
 }
 
+export const updateUserProfile = async (profileId, data) => {
+  const url = BASE_URL + `/learner-center/learner-profile/${profileId}`
+  const options = createOptions('POST', data)
+  try {
+    const response = await sendRequest(url, options)
+    if (response.status !== 200) {
+        const err = await response.json()
+        console.log(err)
+        return {
+            status: response.status,
+            data: null,
+            error: err
+        }
+    }
+   const resp = await response.json()
+   console.log(resp)
+   const data = resp["response"]
+    return {
+        status: response.status,
+        data: data,
+        error: null
+    }
+    
+  } catch (err) {
+    return {
+        status: 500,
+        data: null,
+        error: err
+    }
+  }
+}
+
 export const fetchSubjects = async ()=> {
     const url = BASE_URL + '/learner-center/subjects'
     const options = createOptions('GET')

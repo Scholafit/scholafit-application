@@ -14,11 +14,11 @@ services:
       MYSQL_PASSWORD: ${DB_USER_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE_NAME}
       DB_URL: ${DB_URL}
-    #command: --skip-grant-tables
+    
     volumes:
       - mysql-db:/var/lib/mysql
     healthcheck:
-      #test: ["CMD-SHELL", "mysql --user=moses --password=Flask123! --execute 'SHOW DATABASES;' || exit 1"]
+      
       test: "mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD --execute \"SHOW DATABASES;\" || exit 1"
       interval: 10s
       timeout: 20s

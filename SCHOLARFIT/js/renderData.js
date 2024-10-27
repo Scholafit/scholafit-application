@@ -1,6 +1,7 @@
 
-import { generate_test, signUp, login, submitTest } from "./apiService.js"
+import { generate_test, signUp, login, submitTest, updateUserProfile } from "./apiService.js"
 import {saveToSessionStorage, getItemFromSessionStorage } from './utils.js'
+import {exam} from './data.js'
 
 const TOTAL_SUBJECTS = 4
 
@@ -42,7 +43,8 @@ export const submitRegistrationForm = () => {
             const userId = user["id"]
             const profileId = profle["id"]
             saveToSessionStorage("user",{"userId": userId, "profileId": profileId, "firstname": user.first_name})
-            window.location.replace('/dashboard.html')
+
+            window.location.replace('/profile_customize.html')
             
 
         })
@@ -87,7 +89,51 @@ export const submitLoginForm = () => {
     }
 } 
 
+export const updateProfile = () => {
+    // add guard clause that user and profileId are present
+    const user = getItemFromSessionStorage("user")
+    const profileId = user["profileId"]
+    const profileForm = document.getElementById('profile-form')
+    if (profileForm){
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const formData = new FormData(profileForm)
+            const selectedSubjects = []
+            for (let[key, value] of formData.entries()){
+                if (key === 'subjects'){
+                    selectedSubjects.push(value)
+                }
+            }
+            if (selectedSubjects.length > 4){
+                // add better error handling here
+                return
+            }
+            const data = {
+                profile_data: {
+                    desired_course: formData.get('course'),
+                    university_choices: formData.get('uni'),
+                    expected_graduation_year: formData.get('grad').slice(0,4),
+                    school_name: formData.get('school')
+                },
+                subject_data: selectedSubjects
+            }
+            const response = await updateUserProfile(profileId,data)
+            if (response.status === 401){
+                // profile does not exist create or login
+                window.location.replace('/login.html')
+            }
+            if (response.status === 500){
+                window.location.href="/500.html"
+            }
+            if (response.status === 404){
+                console.log(response)
+            }
 
+            window.location.replace('/dashboard.html')
+            
+        })
+    }
+}   
 export const loadSubjects = (data) => {
     let subjectDisplay = document.querySelectorAll('.utme__subjects')
     if (data["status"] === 200){
@@ -112,209 +158,409 @@ const subjectTabs = document.querySelectorAll(".subj")
 const nextButton = document.getElementById("nxt_question")
 const prevButton = document.getElementById("prev_question")
 const submitButton = document.getElementById('submit__test_btn')
-export const loadExam = async () => {
-    const user = getItemFromSessionStorage("user")
-    const profileId = user.profileId
-    
-    const respData = await generate_test(parseInt(profileId))
-    const data = respData["data"]
-    const testId = data["test_id"]
-    saveToSessionStorage("testId", testId)
-    saveToSessionStorage("answers", {})
-    const exams = data["exam"]
+const navigationPad = document.getElementById('navigation__nav')
 
-    subjectTabs[0].textContent = "English"
+nextButton.addEventListener('click', ()=> {
+    const currSubject = getItemFromSessionStorage("active_sub")
+    const questions = nextQuestions(currSubject["index"], subjectTabs)
+    renderQuestion(questions)
+
+})
+
+prevButton.addEventListener('click', ()=> {
+    const currSubject = getItemFromSessionStorage("active_sub")
+    const questions = previousQuestions(currSubject["index"], subjectTabs)
+    renderQuestion(questions)
+})
+
+navigationPad.addEventListener('click', (e) => {
+    if (e.target.classList.contains('Qc')){
+        let num = e.target.textContent
+        let question = navigateByQuestionNumber(num)
+        
+        renderQuestion([question])
+    }
+})
+const setSubjectNames = (data, subjectTabs) => {
     let x = 1
-    exams.forEach((exam) =>{
-        saveToSessionStorage(exam["subject_name"], exam)
-        saveToSessionStorage(`${exam["subject_name"]}_current_q`, 0)
-        
-        if (exam["subject_name"] !== "english"){
-            subjectTabs[x].textContent = titleCase(exam["subject_name"])
+    subjectTabs[0].textContent = "English"
+    
+    data.forEach((ex) =>{
+        let subject_name = ex["subject_name"].toLowerCase()
+        if (subject_name !== "english"){
+            subjectTabs[x].textContent = titleCase(subject_name)
             x+= 1
-        }   
-        
+        }    
     })
-
+}
+const selectSubject = (subjectTabs) => {
     subjectTabs.forEach((tab, idx) => {
         tab.addEventListener('click', (e) => {
             let subject = e.target.textContent
-            saveToSessionStorage(`active_sub`, subject.toLowerCase())
+            saveToSessionStorage(`active_sub`, {"sub":subject.toLowerCase(), "index": idx})
             subjectTabs.forEach(tb => {
-                tb.classList.remove('btn_nav__active') 
+                tb.classList.remove('active__btn') 
+                tb.classList.remove('active__finished')
             })
-            e.target.classList.add('btn_nav__active')
-            getCurrentQuestion(subject.toLowerCase())
+            e.target.classList.add('active__btn')
+            if (e.target.classList.contains('finished__btn')){
+
+                e.target.classList.add('active__finished')
+            }
+            const {page, pages, subj} = getQuestions()
+            
+            const questions = pages[page]
+            buildNavigationCard()
+            renderQuestion(questions)
         })
-        saveToSessionStorage(`${tab.textContent.toLowerCase()}_idx`, idx)
     })
-
     subjectTabs[0].click()
-    // saveToSessionStorage(`${subjectTabs[0].textContent.toLowerCase()}_current_q`, 1)
-    nextButton.addEventListener('click', (e) => {
-        
-        let subject = getItemFromSessionStorage(`active_sub`)
-        getCurrentQuestion(subject, true, false)
-        
-    })
-
-    prevButton.addEventListener('click', (e) =>{
-        
-        let subject = getItemFromSessionStorage(`active_sub`)
-        getCurrentQuestion(subject, false, true)
-        if (!nextButton.firstChild.classList.contains('Sc__active')){
-            nextButton.firstChild.classList.add('Sc__active')
+    
+}
+const createPages = (subject, subjectData) => {
+    const QUESTIONS_PER_PAGE = 3
+    const data = {}
+    data["currentPage"] = 0
+    data["questionsDone"] = 0
+    const pages = []
+    data["pages"] = pages
+    let x = 0
+    
+    if (subjectData.length === 1 && !subjectData[0]["passage"]){
+        const questions = subjectData[0]["questions"]
+        let number = 1
+        while (x < questions.length) {
+            let pg = questions.slice(x, x + QUESTIONS_PER_PAGE)
+            pg = pg.map(p => {
+                p = {...p, 'number': number}
+                number++;
+                return p
+            })
+            pages.push(pg)
+            x += QUESTIONS_PER_PAGE
+        }
+        data["totalQuestions"] = number -1
+        saveToSessionStorage(subject.toLowerCase(), data)
+        return
+    }
+    let number = 1
+    subjectData.forEach(sbData => {
+        if (sbData["passage"]){
+            sbData["questions"] = sbData["questions"].map(p => {
+                p = {...p, 'number': number}
+                number++;
+                return p
+            })
+           
+            pages.push([sbData])
+        } else {
+            const questions = sbData["questions"]
+            while (x < questions.length) {
+                let pg = questions.slice(x, x + QUESTIONS_PER_PAGE)
+                pg = pg.map(p => {
+                p = {...p, 'number': number}
+                number++;
+                return p
+                })
+                pages.push(pg)
+                x += QUESTIONS_PER_PAGE
+            }
         }
     })
+    data["totalQuestions"] = number - 1
+    saveToSessionStorage(subject.toLowerCase(), data)
+}
+export const loadExam = async () => {
+    // const user = getItemFromSessionStorage("user")
+    // const profileId = user.profileId
+    
+    // const respData = await generate_test(parseInt(profileId))
+    // const data = respData["data"]
+    // const testId = data["test_id"]
+    // saveToSessionStorage("testId", testId)
+    // saveToSessionStorage("answers", {})
+    // const exams = data["exam"]
+    const exams = exam["test_questions"]
+    setSubjectNames(exams, subjectTabs)
 
+    selectSubject(subjectTabs)
+    exams.forEach(ex => {
+        let subName = ex["subject_name"]
+        let data = ex["data"]
+        createPages(subName, data)
+    })
+    saveToSessionStorage("answers", {})
+    startCountdown(12 * 60)
+    
 }
 
-const getNextQuestion = (subjectName, questions) => {
-    let currentQuestion = getItemFromSessionStorage(`${subjectName}_current_q`)
-    let currSubjectIdx = getItemFromSessionStorage(`${subjectName}_idx`)
-    if (currentQuestion < questions.length - 1){
-        currentQuestion++;
-        saveToSessionStorage(`${subjectName}_current_q`, currentQuestion)
-        return {"question": questions[currentQuestion], "order": currentQuestion, "subject": subjectName}
-    } 
-    if (currentQuestion === questions.length - 1 && currSubjectIdx != TOTAL_SUBJECTS - 1){
-        subjectTabs[currSubjectIdx +1].click()
-        let nextSub = subjectTabs[currSubjectIdx + 1].textContent.toLowerCase()
-        let nextSubCurrQuestion = getItemFromSessionStorage(`${nextSub}_current_q`)
-        return {"question": null, "order": nextSubCurrQuestion, "subject": nextSub}
-    }
-
-    let complete = currSubjectIdx === TOTAL_SUBJECTS - 1 ? true: false
-    return {"question": null, "order": null, "subject": null, "complete": complete}
+const getQuestions = () => {
+    const activeSubject = getItemFromSessionStorage("active_sub")
+    const currentSubjectData = getItemFromSessionStorage(activeSubject["sub"])
+    const page = currentSubjectData["currentPage"]
+    const questions = currentSubjectData["pages"]
+    return {"page": page, "pages": questions, "subject": activeSubject["sub"]}
+}
+const updateCurrentPage = (currPage, subject)=> {
+    let itemToUpdate = getItemFromSessionStorage(subject)
+    itemToUpdate["currentPage"] = currPage
+    saveToSessionStorage(subject, itemToUpdate)
 }
 
-const getPrevQuestion = (subjectName, questions) => {
-    let currentQuestion = getItemFromSessionStorage(`${subjectName}_current_q`)
-    let currSubjectIdx = getItemFromSessionStorage(`${subjectName}_idx`)
-    if (currentQuestion > 0){
 
-        currentQuestion--;
-        saveToSessionStorage(`${subjectName}_current_q`, currentQuestion)
-        return {"question": questions[currentQuestion], "order": currentQuestion, "subject": subjectName}
+const nextQuestions = (targetIdx, subjectTabs) => {
+    const {page, pages, subject} = getQuestions()
+    if (page < pages.length - 1){
+
+        updateCurrentPage(page+1,subject)
+        return pages[page + 1]
     }
+
+    if (targetIdx < subjectTabs.length - 1){
+        subjectTabs[targetIdx + 1].click()
+        const {page, pages, subject} = getQuestions()
+        return pages[page]
+    }
+    return pages[page]
+}
+
+const previousQuestions = (targetIdx, subjectTabs) => {
+    const {page, pages, subject} = getQuestions()
+    if (page > 0){
+        updateCurrentPage(page -1,subject)
+        return pages[page - 1]
+    }
+    if (targetIdx > 0) {
+        subjectTabs[targetIdx - 1].click()
+        const {page, pages, subject} = getQuestions()
+        return pages[page]
+    }
+    return pages[page]
+}
+
+const navigateByQuestionNumber = (questionNumber) => {
+    const activeSub = getItemFromSessionStorage("active_sub")
+    const active_subData = getItemFromSessionStorage(activeSub["sub"])
+    const pages = active_subData["pages"]
+    for (let x = 0; x < pages.length; x++){
+        let page = pages[x]
+        for (let y = 0; y < page.length; y++){
+            let questionObj = page[y]
+            if (questionObj["passage"]){
+                let questions = questionObj["questions"]
+                for (let z = 0; z < questions.length; z++){
+                    let question = questions[z]
+                    if (question["number"] == questionNumber){
+                        updateCurrentPage(x, activeSub["sub"])
+                        return questionObj
+                    } 
+                }
+            }
+            if (questionObj["number"] == questionNumber){
+                updateCurrentPage(x, activeSub["sub"])
+                return questionObj  
+            } 
+        }
+    }
+}
+
+const updateUserAnswers = (questionId, answer)=> {
+    const answers = getItemFromSessionStorage("answers")
+    answers[`questionId-${questionId}`] = answer
+    saveToSessionStorage("answers", answers)
+}   
+const getUserAnswers = (questionId) => {
+    const answers = getItemFromSessionStorage("answers")
+    return answers[`questionId-${questionId}`]
+}
+const getAnsweredQuestionIds = () => {
+    const answers = getItemFromSessionStorage("answers")
+    const ids = []
+    for (let [key,val] of Object.entries(answers)){
+        ids.push(key.split('-')[1])
+    }
+    return ids
+}
+
+
+const buildNavigationCard = ()=>{
    
-    if (currentQuestion === 0 && currSubjectIdx != 0) {
-        subjectTabs[currSubjectIdx - 1].click()
-        let prevSub = subjectTabs[currSubjectIdx - 1].textContent.toLowerCase()
-        let prevSubCurrQuestion = getItemFromSessionStorage(`${prevSub}_current_q`)
-        return {"question": null, "order": prevSubCurrQuestion, "subject": prevSub}   
+    const activeSub = getItemFromSessionStorage("active_sub")
+   
+    const active_subData = getItemFromSessionStorage(activeSub["sub"])
+    
+    const totalQuestions = active_subData["totalQuestions"]
+    navigationPad.replaceChildren()
+    let x = 0
+    
+    while (x < totalQuestions){
+        const div = document.createElement('div')
+        div.classList.add('Qc')
+        div.textContent = `${x + 1}`
+        navigationPad.append(div)
+        x++;
     }
-    let start = currSubjectIdx === 0? true: false
-    return {"question": null, "order": null, "subject": null, "start": start}
+    const ids = getAnsweredQuestionIds()
+    ids.forEach(id => {
+        updateNavigationQuestionAnswered(id)
+    })
+}
+const updateNavigationQuestionAnswered = (questionId)=> {
+    const activeSub = getItemFromSessionStorage("active_sub")
+    const active_subData = getItemFromSessionStorage(activeSub["sub"])
+    const pages = active_subData["pages"]
+    let boxToUpdate = null
+    for (let x = 0; x < pages.length; x++){
+        let page = pages[x]
+        for (let y = 0; y < page.length; y++){
+            let questionObj = page[y]
+            if (questionObj["passage"]){
+                let questions = questionObj["questions"]
+                for (let z = 0; z < questions.length; z++){
+                    let question = questions[z]
+                    if (question["question_id"] == questionId){
+                        boxToUpdate = question["number"]
+                        break
+                    } 
+                }
+            }
+            if (questionObj["question_id"] == questionId){
+                boxToUpdate = questionObj["number"]
+                break
+            } 
+        }
+        if (boxToUpdate) break;
+    }
+    navigationPad.childNodes.forEach(child => {
+        if (child.textContent == boxToUpdate){
+            child.classList.add('answered')
+        }
+    })
+
 }
 
-const getCurrentQuestion = (subjectName, next=false, prev=false) => {
-    // get exam get current question
-    
-    let exam = getItemFromSessionStorage(subjectName)
-    let questions = exam["data"]
-    let currentQuestion = getItemFromSessionStorage(`${subjectName}_current_q`)
-    if (next) {
-        prevButton.firstChild.classList.add('Sc__active')
-        const nextQuestionData = getNextQuestion(subjectName, questions)
-        const question = nextQuestionData["question"]
-        const order = nextQuestionData["order"]
-        const sub = nextQuestionData["subject"]
-        if (question && order){
-            renderQuestion(question, order)
-            return
-    
-        } else if (order && !question){
-            console.log(nextQuestionData)
-            exam = getItemFromSessionStorage(sub)
-            questions = exam["data"]
-            renderQuestion(questions[order], order)
-            return
-        }
-        if (nextQuestionData["complete"]){
-            alert("Congratulations You have completed the examination.\n Click Submit to submit your answer.")
-            nextButton.firstChild.classList.remove('Sc__active')
-            submitButton.style.visibility = 'visible'
-
-        }
-        return
+const activateSuccessButtonState = () => {
+    const activeSub = getItemFromSessionStorage("active_sub")
+    const active_subData = getItemFromSessionStorage(activeSub["sub"])
+    let {questionsDone, totalQuestions } = active_subData
+    questionsDone += 1
+    active_subData["questionsDone"] = questionsDone
+    if (questionsDone == totalQuestions) {
+        let currTab = subjectTabs[activeSub["index"]]
+        currTab.classList.remove('active__btn')
+        currTab.classList.add('finished__btn')
     }
-    if (prev) {
-        const prevQuestionData = getPrevQuestion(subjectName, questions)
-        const question = prevQuestionData["question"]
-        const order = prevQuestionData["order"]
-        const sub = prevQuestionData["subject"]
-        if (question && order){
-            renderQuestion(question, order)
-            return
+    const completedSubjects = Array.from(subjectTabs).reduce((acc, el)=>{
+        if (el.classList.contains('finished__btn')){
+            return acc + 1
+        }
+        return acc
+    },0)
     
-        } else if (order && !question){
-            exam = getItemFromSessionStorage(sub)
-            questions = exam["data"]
-            renderQuestion(questions[order], order)
-            return
-        }
-        if (prevQuestionData["start"]){
-            prevButton.firstChild.classList.remove('Sc__active')
-            console.log('we are at the start')
-
-        }
-        return
+    if (completedSubjects === subjectTabs.length){
+        const submitBtn = document.getElementById('submit-test_btn')
+        submitBtn.disabled= false
+        submitBtn.classList.toggle('disabled')
+        submitBtn.classList.add('btn-primary')
     }
-
-    renderQuestion(questions[currentQuestion], currentQuestion)
+    saveToSessionStorage(activeSub["sub"], active_subData)
+    
 }
 
+const renderQuestion = (questionObj) => {
+    const questionPanel = document.getElementById("question-panel")
+    questionPanel.replaceChildren()
 
-const renderQuestion = (questionObj, order) => {
-    const flashCard = document.getElementById("flash_card")
-    flashCard.innerHTML = ''
-    if (questionObj["passage"] != null){
-        const passage = document.createElement('p')
-        passage.id="passage_text"
-        passage.textContent = questionObj["passage"]
-        flashCard.append(passage)
-    }
-
-    const questions = questionObj["questions"]
-    
-    let num = order + 1
-    questions.forEach(question => {
-        const qnaDiv = document.createElement('div')
+    const buildQuestionCards = (qObj)=> {
+       
+        const card = document.createElement('div')
+        card.classList.add("card")
+        const h3 = document.createElement('h3')
+        h3.textContent = `Question ${qObj["number"]}`
+        card.append(h3)
+        const cardContent = document.createElement('div')
+        cardContent.classList.add('card-content')
+        const questionParagraph = document.createElement('p')
+        let quiz = qObj["question"]
+        questionParagraph.textContent = quiz
+        cardContent.append(questionParagraph)
+                
         const choicesDiv = document.createElement('div')
-        qnaDiv.classList.add("q_n_a")
         choicesDiv.classList.add("choices")
-        let quiz = question["question"]
-        qnaDiv.innerHTML = `<p><span>${num}.</span>${quiz}</p>`
-        
-        const answers = question["answers"]
-        const question_id = question["question_id"]
-        const storedAnswers = getItemFromSessionStorage("answers")
+                
+        const answers = qObj["answers"]
+        const question_id = qObj["question_id"]
+    
+        let storedAnswerId = getUserAnswers(question_id)   
+            
         answers.forEach(answer => {
-            let val = storedAnswers[`qnID_${question_id}`] 
-            const isChecked = val == answer["answer_id"] ? true : false
-            
-            choicesDiv.innerHTML += `<div>
-                  <input type="radio" name="answer_${question_id}" id="ans_${answer["answer_id"]}" value="${answer["answer_id"]}" ${isChecked ? "checked": ""}>
-                  <label for="ans_${answer["answer_id"]}" >${answer["text"]}</label>
-                </div>`
-            
+            const checked = storedAnswerId == answer["answer_id"]
+            choicesDiv.innerHTML += `<div class="choice-row">
+                <input type="radio" name="answer_${question_id}" id="ans_${answer["answer_id"]}" value="${answer["answer_id"]}" ${checked ? 'checked': ''}>
+                <label for="ans_${answer["answer_id"]}" >${answer["text"]}</label>
+            </div>`
+                    
         })
         choicesDiv.addEventListener('change', (e) => {
             const selectedAnswer = e.target.value
             const questionId = e.target.name.split('_')[1]
-            
-            storedAnswers[`qnID_${questionId}`] = selectedAnswer
-            saveToSessionStorage("answers", storedAnswers)
-            const updates = getItemFromSessionStorage("answers")
-        
+            updateUserAnswers(questionId, selectedAnswer)
+            updateNavigationQuestionAnswered(questionId)
+            activateSuccessButtonState()
+                                
         })
-        qnaDiv.append(choicesDiv)
-        flashCard.append(qnaDiv)
-        num++;
-    })
+        cardContent.append(choicesDiv)
+        card.append(cardContent)
+        questionPanel.append(card)
+    }
+
+    questionObj.forEach(qObj => {
+        if (qObj["passage"] != null){
+            const passage = document.createElement('p')
+            passage.id="passage_text"
+            passage.textContent = qObj["passage"]
+            questionPanel.append(passage)
+            const questions = qObj["questions"]
+            questions.forEach(question => {
+                buildQuestionCards(question)
+                
+            })
+        }else {
+            buildQuestionCards(qObj)
+        }
+    })   
 }
 
+function startCountdown(duration) {
+    let timer = duration, hours, minutes, seconds;
+
+    const countdownDisplay = document.getElementById("timer");
+    const display = countdownDisplay.children[0]
+    const modal = document.getElementById("modal")
+    const intervalId = setInterval(() => {
+        
+        hours = Math.floor(timer / 3600);
+        minutes = Math.floor((timer % 3600) / 60);
+        seconds = timer % 60;
+    
+        if (hours == 0 && minutes <= 10 && countdownDisplay.classList.contains('on-time')){
+            
+            countdownDisplay.classList.remove('on-time')
+            countdownDisplay.classList.add('time_danger')
+        }
+        // Format as hh:mm:ss
+        display.textContent = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        
+        if (--timer < 0) {
+            clearInterval(intervalId);
+            countdownDisplay.classList.remove('time_danger')
+            modal.classList.toggle('hide-modal')
+            display.textContent = "00:00:00";
+        }
+    }, 1000);
+}
 
 
 export const submitAnswers = () => {
