@@ -203,3 +203,63 @@ export const submitTest = async (test_id) => {
       }
   }
 }
+
+
+export const subscribe = async (payment_details) => {
+  const url = BASE_URL + '/payments/premium'
+    const options = createOptions('POST', payment_details)
+
+    try {
+      const response = await sendRequest(url, options)
+      if (response.status !== 200){
+        return {
+          status: response.status,
+          data: null,
+          error: await response.json()
+        }
+      }
+      return {
+        status: response.status,
+        data: await response.json(),
+        error: null
+      }
+    } catch (err) {
+      return {
+        status: 500,
+        data: null,
+        error: err
+      }
+    }
+}
+
+export const verifyPayment = async ()=> {
+  const reference = getItemFromSessionStorage("reference")
+  const url = BASE_URL + '/payments/verify-premium/' + reference
+  const options = createOptions('GET')
+  try {
+      const response = await sendRequest(url, options)
+      if (response.status !== 200) {
+          const err = await response.json()
+          console.log(err)
+          return {
+              status: response.status,
+              data: null,
+              error: err
+          }
+      }
+     const resp = await response.json()
+      return {
+          status: response.status,
+          data: data,
+          error: null
+      }
+      
+  } catch (err) {
+      return {
+          status: 500,
+          data: null,
+          error: err
+      }
+  }
+  
+}

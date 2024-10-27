@@ -1,5 +1,6 @@
 
-import { generate_test, signUp, login, submitTest, updateUserProfile } from "./apiService.js"
+
+import { generate_test, signUp, login, submitTest, updateUserProfile, subscribe } from "./apiService.js"
 import {saveToSessionStorage, getItemFromSessionStorage } from './utils.js'
 import {exam} from './data.js'
 
@@ -81,7 +82,11 @@ export const submitLoginForm = () => {
             const profile = user.profile_data
             const userId = user["id"]
             const profileId = profile["id"]
-            saveToSessionStorage("user", {"userId": userId, "profileId": profileId, "firstname": user.first_name})
+            saveToSessionStorage("user", 
+                                {"userId": userId, 
+                                 "profileId": profileId,
+                                 "firstname": user.first_name,
+                                 "email": user.email})
             window.location.replace('/dashboard.html')
             
 

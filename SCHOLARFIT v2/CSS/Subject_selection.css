@@ -205,10 +205,6 @@ a:hover{
 }
 .btn_nav {
   background: #f44336;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
   background-image: linear-gradient(to bottom, #3498db, #2980b9);
   -webkit-border-radius: 8;
   -moz-border-radius: 8;
@@ -240,4 +236,191 @@ a:hover{
   font-optical-sizing: auto;
   font-weight: 3.125em;
   font-style: normal;
+}
+
+.btn_nav1{
+  color: #f44336;
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border-radius: 0.5em;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding: 0.3125em 0.625em;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.5em 0;
+  text-align: center;
+  width: auto;
+}
+
+.btn_nav1:hover {
+  background: #30e3cb;
+  background-image: -webkit-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -moz-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -ms-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
+  background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
+  text-decoration: none;
+}
+
+/* General styling for larger screens */
+body {
+  color: #40514E;
+  margin-right: 0em;
+  margin-left: 0em;
+  text-align: center;
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 3.125em;
+  font-style: normal;
+}
+ul {
+  list-style-type: none;
+  padding-right: 3.125em;
+  overflow: hidden;
+  font-size: 0.625em;
+}
+li a {
+  float: right;
+  display: flex;
+  color: black;
+  text-align: center;
+  padding-right: 3.125em;
+  text-decoration: none;
+}
+li img {
+  display: block;
+  padding: 0em 0em;
+  text-decoration: none;
+}
+.sc {
+  display: block;
+  color: black;
+  font-size: 0.625em;
+  text-align: left;
+  padding: 0em 0em;
+  text-decoration: none;
+}
+li a:hover:not(.active) {
+  background-color: #eaf6f6;
+}
+a {
+  color: #11999E;
+  font-family: 'Lexend', sans-serif;
+  margin: 0.625em 3.125em;
+  text-decoration: none;
+}
+a:hover {
+  color: #eaf6f6;
+}
+.Subject,
+.subject2,
+.Time {
+  display: flex;
+}
+.Subject > div,
+.subject2 > div,
+.Time > div {
+  margin: 6.25em;
+  padding: 0em;
+}
+.Card1g,
+.Card1h,
+.Card1i,
+.card1j,
+.Card1k {
+  width: 24em;
+  height: 3.75em;
+  border-radius: 0.5em;
+  box-shadow: 0em 0.25em 0.75em rgba(0, 0, 0, 0.25);
+}
+.book {
+  color: #5664f5;
+  fill: #5664f5;
+  font-size: 1.125em;
+  width: 1.125em;
+  height: 1.75em;
+}
+.text {
+  color: #030303;
+  font-size: 1.25em;
+  font-family: "Roboto";
+  font-weight: 600;
+  line-height: 1.75em;
+}
+.Middle_Container {
+  color: #40514E;
+  margin-right: 3.125em;
+  margin-left: 3.125em;
+  text-align: left;
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 3.125em;
+  font-style: normal;
+}
+.btn_nav {
+  background: #f44336;
+  border-radius: 0.5em;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 1.25em;
+  padding: 0.3125em 0.625em;
+  text-decoration: none;
+}
+.btn_nav:hover {
+  background: #30e3cb;
+}
+.SBcontent {
+  color: #40514E;
+  margin-right: 6.25em;
+  margin-left: 12.5em;
+  margin-bottom: 18.75em;
+  display: center;
+  text-align: center;
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 3.125em;
+  font-style: normal;
+}
+
+/* Responsive styling for screens with max-width 768px */
+@media only screen and (max-width: 768px) {
+  body {
+    display: inherit;
+    text-align: left; /* Adjust alignment for smaller screens */
+  }
+  
+  ul {
+    padding-right: 1.25em; /* Reduce padding for smaller screens */
+  }
+
+  li a {
+    padding-right: 1.25em; /* Adjust spacing */
+  }
+
+  .Subject, .subject2, .Time {
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center; /* Center elements */
+  }
+
+  .Subject > div, .subject2 > div, .Time > div {
+    margin: 2em 0; /* Reduce margin for smaller screens */
+  }
+
+  .Card1g, .Card1h, .Card1i, .card1j, .Card1k {
+    width: 90%; /* Make cards responsive to screen size */
+    height: auto; /* Allow height to adjust */
+    margin: 1em auto; /* Center cards */
+  }
+
+  .btn_nav {
+    width: 100%; /* Make the button take full width */
+    font-size: 1em; /* Reduce font size */
+  }
+
+  .SBcontent {
+    margin-right: 0em; /* Adjust margins for smaller screens */
+    margin-left: 0em;
+    padding: 1em; /* Add some padding */
+  }
 }
