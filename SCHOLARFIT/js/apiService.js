@@ -204,6 +204,86 @@ export const submitTest = async (test_id) => {
   }
 }
 
+export const get_chats = async () => {
+  const url = BASE_URL + '/learner-center/ai'
+  const options = createOptions('GET')
+  try {
+      const response = await sendRequest(url, options)
+      if (response.status === 200){
+        return {
+          status: response.status,
+          data: await response.json(),
+          error: null
+        }
+      }
+      return {
+        status: response.status,
+        data: null,
+        error: await response.json()
+      }
+  } catch (err) {
+      return {
+        status: 500,
+        data: null,
+        error: err
+    }
+  }
+}
+export const start_chat = async (promptText) => {
+  const url = BASE_URL + '/learner-center/ai'
+  const options = createOptions('POST', promptText)
+  try {
+      const response = await sendRequest(url, options)
+      if (response.status === 201){
+        return {
+          status: response.status,
+          data: await response.json(),
+          error: null
+        }
+
+      }
+      return {
+        status: response.status,
+        data: null,
+        error: await response.json()
+      }
+      
+  } catch (err) {
+      return {
+        status: 500,
+        data: null,
+        error: err
+    }
+  }
+}
+
+export const continue_chat = async (promptText, conversationId) => {
+  const url = BASE_URL + `/learner-center/ai/${conversationId}`
+  const options = createOptions('POST', promptText)
+  try {
+      const response = await sendRequest(url, options)
+      if (response.status === 200){
+        return {
+          status: response.status,
+          data: await response.json(),
+          error: null
+        }
+
+      }
+      return {
+        status: response.status,
+        data: null,
+        error: await response.json()
+      }
+      
+  } catch (err) {
+      return {
+        status: 500,
+        data: null,
+        error: err
+    }
+  }
+}
 
 export const subscribe = async (payment_details) => {
   const url = BASE_URL + '/payments/premium'

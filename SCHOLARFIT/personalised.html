@@ -37,15 +37,15 @@
     <div>
       <div class="Personalised">
         <div class="">
-          <h2 class="heading">Personalised Learning Plan</h2>
+          <h2 class="heading hidden">Personalised Learning Plan</h2>
           <div class="row personalised-main">
             <div class="ai-box" id="ai-box">
               <h2 class="heading">AI Tutor: Rita </h2>
               <div class="ai-box-inner">
-                <img class="image" src="img/fine_lady.png" alt="AI_lady">
-                <h2 class="heading">Ask Rita a Question ..</h2>
+                <img class="image hidden" src="img/fine_lady.png" alt="AI_lady">
+                <h2 class="heading hidden">Ask Rita a Question ..</h2>
                 <div class="chat-messages" id="chat-messages">
-                  <div class="user-prompt message">
+                  <!-- <div class="user-prompt message">
                     <div class="profile profile_person">
                       <div>M</div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="msg">
                       Lorem ipsum dolor
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <form class="AI" id="AI" method="post">
                   <input class="input" type="text" name="AI" placeholder= "Ask Rita.. ">
@@ -126,6 +126,10 @@
         </div>
       </div>
   </div>
+  <script src="">
+    import {chat} from './js/ai.js'
+    chat()
+  </script>
 </body>
 
 </html>
