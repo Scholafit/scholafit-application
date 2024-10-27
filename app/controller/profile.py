@@ -33,6 +33,14 @@ def update_user_profile(profileId: int):
     updated_profile = profile.update_profile(profileId, **data)
 
     if updated_profile is None:
-        return make_response(jsonify({"error": "Profile not found"}), 404)
+        return make_response(
+            jsonify({
+                "status": "Profile not found",
+                "status_code": 404,
+                "message": "Profile not found",
+                "errors": [{"field": "Profile not found", "error": "Profile not found"}]
+            }),
+            404
+        )
 
     return make_response(jsonify({"updated_profile": updated_profile, "msg": "SUCCESS"}), 200)
