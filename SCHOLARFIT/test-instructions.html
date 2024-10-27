@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Instructions</title>
+</head>
+<link rel="stylesheet" href="css/instructionStyles.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="icon" href="./img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+<body>
+    <div class="header">
+        <div class="header_wrapper container row">
+          <div class="logo row">
+            <img class="active" src="img/favicon.ico" alt="cap_img">
+            <p>Scholafit</p>
+          </div>
+          <div class="header_nav">
+               <nav class="row nav">
+                    <div class="nav__item"><a href="">Home</a></div>
+                    <div class="nav__item"><a href="">Dashboard</a></div>
+                    <div class="nav__item"><a href="">Pricing</a></div>
+                    <div class="nav__item"><a href="">Payment</a></div>
+                </nav> 
+            </div>
+            
+            <div class="nav__item"><a href="">
+                <button class="btn btn-secondary-sm">Logout</button>
+            </a></div>
+        </div>
+    </div>
+    <div class="instructions container">
+        <div class="instructions_heading">
+            <h1 class="heading-md">Online Exam Instructions</h1>
+            <p>Please read all instructions carefully before starting the exam.</p>
+            <div class="row">
+                <div class="row instructions_heading__p">
+                    <p>Duration</p>
+                    <p>2 hours (120 minutes)</p>
+                </div>
+                <div class="row instructions_heading__p">
+                    <p>Subjects</p>
+                    <p>4 subjects</p>
+                </div>
+            </div>
+        </div>
+        <div class="guide_wrapper">
+            <div class="navigation_guide guide">
+                <h2 class="guide_heading heading row"><span><img src="img/compass.svg" alt="" class="img"></span><span>Navigation Instructions</span></h2>
+                <div class="guide_content">
+                    <ul>
+                        <li>Use the subject tabs at the top of the page to switch between different subjects</li>
+                        <li>Navigate between questions using the 'prev' and 'next' buttons at the bottom of the page</li>
+                        <li>On desktop, use the question grid to jump to any question directly</li>
+                        <li>Track your progress through the color coded indicators</li>
+                    </ul>
+                    <div class="color-coded__instruction row">
+                        <div>
+                            <h3 class="heading">Tab colors</h3>
+                            <div class="row">
+                                <div class="color color-as"></div>
+                                <p>Active subject</p>
+                            </div>
+                            <div class="row">
+                                <div class="color color-is"></div>
+                                <p>Inactive subject</p>
+                            </div>
+                            <div class="row">
+                                <div class="color color-cs"></div>
+                                <p>Completed subject</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="heading">Question Grid (Applicable to desktop users only)</h3>
+                            <div class="row">
+                                <div class="color color-uq"></div>
+                                <p>Unanswered question</p>
+                            </div>
+                            <div class="row">
+                                <div class="color color-aq"></div>
+                                <p>Answered question</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="interface-elements guide">
+                <h2 class="guide_heading heading row"><span><img src="img/layout.svg" alt="" class="img"></span><span>Interface Elements</span></h2>
+                <div class="guide_content">
+                    <div class="card">
+                        <h3>Subject Tabs</h3>
+                        <div>
+                            <img src="img/tab-states.png" alt="">
+                            <small>showing Active, Inactive & Completed states</small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Navigation grid</h3>
+                        <div>
+                            <img src="img/nav-grid-states.png" alt="">
+                            <small>Answered questions vs Unanswered questions</small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Submit Button</h3>
+                        <div>
+                            <div>
+                                <img src="img/submit-button-status.png" alt="">
+                                <small>Active submit button vs Inactive submit button</small>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Pop up dialog</h3>
+                        <div>
+                            <img src="img/timeout.png" alt="">
+                            <small>Example pop up dialog. Lapsed time top right corner</small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exam-completion guide">
+                <h2 class="guide_heading heading row"><span><img src="img/clock.svg" alt="" class="img"></span><span>Exam Completion</span></h2>
+                <div class="guide_content">
+                    <ul>
+                        <li>The submit button remains disabled unitl all questions are answered</li>
+                        <li>When enabled the submit button will appear in purple</li>
+                        <li>In the event time runs out before submitting, a pop up will appear prompting you to submit</li>
+                        <li>Review your answers using the navigation grid before submitting (Applicable to desktop users only)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="notes guide card">
+                <h4 class="guide_heading heading row"><span><img src="img/notice.svg" alt="" class="img"></span><span>Important Notes</span></h4>
+                <div class="guide_content">
+                    <ul>
+                        <li>Ensure stable internet connection throughout the exam</li>
+                        <li>Do not refresh or close the browser window during the exam</li>
+                        <li>Answer all questions before the time limit expires</li>
+                        <li>Your 2 hour timer will begin immediately after clicking the 'Start Exam' button</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="start-exam">
+            <a href="practice.html">
+                <button class="btn btn-primary">Start Exam</button>
+            </a>
+        </div>
+        
+    </div>
+</body>
+</html>

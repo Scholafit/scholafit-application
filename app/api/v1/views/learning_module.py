@@ -1,11 +1,17 @@
 from . import app_views
-from app.controller.learning_module import add_user_subjects, create_user_exam, submit_exam, get_all_subjects, create_chat_with_ai, continue_chat
+from app.controller.learning_module import add_user_subjects, create_user_exam, submit_exam, get_all_subjects, create_chat_with_ai, continue_chat, initial_profile_build
 from flask import request
 
 # create subjects
 @app_views.route('/learner-center/subjects/<int:profile_id>', methods=['POST'])
 def user_subjects(profile_id):
     return add_user_subjects(profile_id, request)
+
+@app_views.route('/learner-center/learner-profile/<int:profile_id>', methods=['POST'])
+def initialize_profile(profile_id):
+    print('In route')
+    return initial_profile_build(profile_id, request)
+
 
 # generate tests
 @app_views.route('/learner-center/tests/<int:profile_id>', methods=['POST'])

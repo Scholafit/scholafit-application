@@ -4,7 +4,8 @@ from app.models.database import get_db
 from app.models.error import AiModelError
 from .ai import generate_questions, AI, create_anthropic_client
 from .question import question, answerChoices, passage, DB_Question
-from .subject import subject
+from .subject import subject, userSubject
+from app.models.profile import profile
 from .test import userTest, subjectTest, subjectTestQuestion
 from .user_question_history import DB_UserQuestionHistory
 from sqlalchemy import select, and_, func
@@ -48,8 +49,9 @@ def extract_data_from_response(resp, match_pattern)-> list | None:
 
 def create_answers(answers: list, question_id: int):
     for answer in answers:
-    
-        answerChoices.create_answer(answer.get("choice"), answer.get("is_correct_answer"), question_id)
+        is_correct_answer = answer.get("is_correct_answer")
+        correct_answer = True if is_correct_answer or is_correct_answer == 'True' else False
+        answerChoices.create_answer(answer.get("choice"), correct_answer, question_id)
 
 def create_passage_based_question(data: dict, subject_id: int):
     explanation = data.get("explanation")
@@ -235,3 +237,18 @@ def chat_with_ai(prompt_message: str, chat_history: list):
         return str(e)
     except Exception as e:
         print(e)
+
+
+def init_user_profile(profile_data, subjects_data, profile_id):
+    user_profile = profile.update_profile(profile_id, **profile_data)
+    if user_profile:
+        user_selection = [subject.get_subject_name(sb) for sb in subjects_data]
+        subject_ids = [sub["id"] for sub in user_selection]
+        user_subjects = userSubject.create_user_subjects(profile_id, subject_ids)
+        user_subjects = [sb.to_dict() for sb in user_subjects]
+        return {
+            "profile": user_profile,
+            "subjects": user_subjects
+        }
+
+    return None

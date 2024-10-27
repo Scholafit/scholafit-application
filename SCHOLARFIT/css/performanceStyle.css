@@ -1,0 +1,71 @@
+
+.Panalysis {
+ 
+}
+.upgrade {
+  background-color: #f0f1ff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+@media only screen and (min-width: 65em){
+  .Panalysis{
+    
+    column-gap: 1em;
+    justify-content: space-between;
+    width: 96%;
+    margin-inline: auto;
+    padding-top: 2em;
+    margin-bottom: 3em;
+  }
+  .panalysis-analysis {
+    width: 60%;
+  }
+  .score-graph {
+    align-items: center;
+  }
+  .score-graph img {
+    width: 40%;
+  }
+  .subject-scores__wrapper {
+    justify-content: space-between;
+    width: 70%;
+    padding-block: 1em;
+  }
+  .subject p, .score p {
+    margin-bottom: .5em;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: .5em;
+  }
+  .upgrade {
+    width: 40%;
+    padding-inline: 1em;
+    padding-block: 2.5em;
+  }
+  .upgrade > h2 {
+    margin-bottom: 1em;
+  }
+  .Upgrade_button {
+    margin-block: 2.5em;
+  }
+  .footer {
+    padding: 1em;
+    background-color: #f0f1ff;
+  }
+  .footer_wrapper {
+    justify-content: space-between;
+    padding-top: .65em;
+  }
+  .footer_wrapper a {
+    display: block;
+  }
+  .recommendations {
+    margin-top: 2em;
+  }
+  .recommendations h2 {
+    margin-bottom: .5;
+  }
+}

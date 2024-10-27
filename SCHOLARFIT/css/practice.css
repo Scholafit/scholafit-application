@@ -1,13 +1,98 @@
+body {
+  position: relative;
+}
+.practice_wrapper {
 
+  padding-block: 2em;
+}
+.pg-title {
+  display: none;
+}
+.timer {
+  min-width: 100px;
+  text-align: center;
+  padding-inline: .25em;
+}
+.on-time {
+  color: green;
+}
+.time_danger {
+  color: red !important;
+}
 #subject_tabs {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 1em;
+  margin-bottom: 1.5em;
+}
+.subj {
+  background-color: #3b5998 !important;
+  border: 1px solid transparent;
+}
+.active__btn {
+  background-color: var(--primary-color) !important;
+}
+.finished__btn {
+  background-color: #00d632 !important;
+}
+.active__finished {
+  border: 2px solid #3b5998 !important;
+}
+.answered {
+  background-color: var(--primary-color) !important;
+  color: #FFFFFF !important;
+}
+#passage_text {
+  margin-bottom: 1.5em;
+  padding-inline: .5em;
+  padding-block: .5em;
+}
+.question-panel .card {
+  margin-bottom: 2em;
+}
+.choices {
+  margin-top: 1em;
+}
+.choice-row {
+  margin-bottom: .25em
+}
+.test__nav-controls {
+  width: 100%;
+  justify-content: space-between;
+}
+.submit-test {
+  display: grid;
+  margin-top: 3em;
+  margin-bottom: 1em;
+}
+.submit-test button {
+  justify-self: center;
+  width: 40%;
+}
+.submit-test button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.disabled {
+  padding-inline: 2em;
+  padding-block: .75em;
+  border-radius: 10px;
+  background-color: lightgray;
+  color: rgb(146, 146, 146);
 }
 
-.timer {
-  color: green;
+.navigation {
+  display: none;
+}
+.pause-test{
+  display: none;
+}
+.footer {
+  padding-block: .65em;
+  background-color: #f0f1ff;
+  text-align: center;
+  margin-top: 3em;
 }
 @media only screen and (min-width: 65em){
   .practice_wrapper {
@@ -17,11 +102,19 @@
     width: 98%;
     margin-inline: auto;
   }
+  .pg-title {
+    display: block;
+  }
  .practice_test {
   width: 70%;
  }
  #subject_tabs {
   flex-wrap: nowrap;
+}
+#passage_text {
+  margin-bottom: 1em;
+  padding-inline: .5em;
+  padding-block: .5em;
 }
 
 .question-panel {
@@ -33,12 +126,9 @@
   margin-bottom: 1em;
 }
 
-.test__nav-controls {
-  width: 100%;
-  justify-content: space-between;
-}
+
 .navigation {
- 
+  display: block;
   width: 30%;
 }
 .Question {
@@ -61,12 +151,6 @@
 .pause-test button{
   width: 100%;
   margin-top: 1em;
-}
-.footer {
-  padding-block: .65em;
-  background-color: #f0f1ff;
-  text-align: center;
-  margin-top: 3em;
 }
 
 }

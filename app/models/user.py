@@ -9,6 +9,7 @@ from .profile import DB_Profile, Profile
 from itsdangerous import URLSafeTimedSerializer
 import re
 import os
+import dotenv
 
 class DB_User(BaseModel):
 
@@ -53,6 +54,7 @@ class UserRepository(Repository):
 
 
 class User:
+    dotenv.load_dotenv()
     def __init__(self, dbRepository: Repository) -> None:
         self.db = dbRepository
         self.serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))

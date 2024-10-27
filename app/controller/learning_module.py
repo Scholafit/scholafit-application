@@ -1,7 +1,7 @@
 from flask import make_response, jsonify, Request, session
 from app.models.learning_module.subject import userSubject, subject
 from app.models.learning_module.test import subjectTest,userTest
-from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record, create_conversation_ai, chat_with_ai
+from app.models.learning_module.learning_service import generate_test_exam, create_user_test_record, create_conversation_ai, chat_with_ai, init_user_profile
 from uuid import uuid4
 import json
 
@@ -106,3 +106,21 @@ def continue_chat(conversation_id:str, request: Request):
     }
 
     return make_response(jsonify({"response": response, "conversation_id":conversation_id}), 200)
+
+
+def initial_profile_build(profile_id, request: Request):
+    req = request.json
+    profile_data = req["profile_data"]
+    subjects = req["subject_data"]
+    print(req)
+    response = init_user_profile(profile_data,subjects, profile_id)
+
+    if not response:
+        return make_response(jsonify({
+            "status": "Failed to create profile",
+            "code": "ERR",
+            "status_code": 400,
+            "errors": []
+        }), 400)
+    
+    return make_response(jsonify({"response": "OK"}), 200)

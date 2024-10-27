@@ -1,0 +1,57 @@
+@media only screen and (min-width: 65em){
+  
+  .profile_wrapper{
+    display: grid;
+    justify-content: center;
+  }
+  .profile-header {
+    text-align: center;
+    margin-top: 3em;
+    padding-block: 2em;
+  }
+  .profile_wrapper__form {
+    width: 60%;
+    justify-self: center;
+  }
+  fieldset {
+    border: none;
+  }
+  .form-section {
+    margin-bottom: 2em;
+  }
+  .form-section h2 {
+    text-align: center;
+    margin-bottom: 2em;
+  }
+  .selection_instructions {
+    padding-block: 1em;
+  }
+  .selection_instructions p{
+    margin-bottom: .5em;
+  }
+  .sub_input {
+    display: flex;
+    margin-bottom: 1em; 
+  }
+  .sub_input label {
+    text-wrap: nowrap;
+  }
+  .sub_input input {
+    margin-right: 1em;
+  }
+  .button-section {
+    display: grid;
+    width: 100%;
+  }
+  .button-section button{
+    width: 60%;
+    justify-self: center;
+
+  }
+  .footer {
+    background-color: #f0f1ff;
+    text-align: center;
+    padding-block: 1.5em;
+    margin-top: 3em;
+  }
+}

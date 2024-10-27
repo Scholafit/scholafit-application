@@ -49,7 +49,7 @@ class SubjectRepository(Repository):
         Returns:
             DB_Subject or None: The subject object if found, otherwise None.
         """
-        return self.database.session.execute(select(DB_Subject).filter_by(name=name.lower())).scalar_one_or_none()
+        return self.database.session.execute(select(DB_Subject).where(DB_Subject.name.lower()==name.lower())).scalar_one_or_none()
     
     def get_subject_by_id(self, subject_id: int):
         """
@@ -104,7 +104,8 @@ class Subject:
             DB_Subject or None: The subject object if found, otherwise None.
         """
         sub = self.db.get_subject_by_name(name.lower())
-        return sub
+        if sub:
+            return sub.to_dict()
     
     def get_subject_by_id(self, subject_id: int):
         """
@@ -116,7 +117,9 @@ class Subject:
         Returns:
             DB_Subject or None: The subject object if found, otherwise None.
         """
-        return self.db.get_subject_by_id(subject_id)
+        sub = self.db.get_subject_by_id(subject_id)
+        if sub:
+            return sub.to_dict()
     
     def get_subjects(self):
         """
@@ -162,7 +165,7 @@ class UserSubjectRepository(Repository):
 
 class UserSubject:
 
-    MAX_SELECTABLE_SUBJECTS = 3
+    MAX_SELECTABLE_SUBJECTS = 4
     def __init__(self, repo: Repository):
         self.db = repo
     

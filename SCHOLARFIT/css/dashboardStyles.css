@@ -1,0 +1,40 @@
+
+
+.dashboard-welcome {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #001441;
+}
+.Deadlines {
+   
+}
+.Notification {
+  
+}
+.Notification > div {
+ 
+}
+
+
+@media only screen and (min-width: 65em){
+  
+  .dashboard {
+    background-color: #FFF;
+    padding-block: 2em;
+   
+  }
+  .recent_activity {
+    column-gap: 1em;
+    padding-block: 2em;
+  }
+  
+  .Deadlines {
+    column-gap: 1em;
+    padding-block: 2em;
+  }
+  .Notification {
+    padding-block: 2em;
+  
+  }
+  
+}
