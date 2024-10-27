@@ -239,7 +239,7 @@ def chat_with_ai(prompt_message: str, chat_history: list):
         print(e)
 
 
-def init_user_profile(profile_data, subjects_data, profile_id):
+def create_user_profile(profile_data, subjects_data, profile_id):
     user_profile = profile.update_profile(profile_id, **profile_data)
     if user_profile:
         user_selection = [subject.get_subject_name(sb) for sb in subjects_data]
