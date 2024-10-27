@@ -39,18 +39,62 @@
         <div class="">
           <h2 class="heading">Personalised Learning Plan</h2>
           <div class="row personalised-main">
-            <div class="ai-box">
+            <div class="ai-box" id="ai-box">
               <h2 class="heading">AI Tutor: Rita </h2>
               <div class="ai-box-inner">
                 <img class="image" src="img/fine_lady.png" alt="AI_lady">
                 <h2 class="heading">Ask Rita a Question ..</h2>
+                <div class="chat-messages" id="chat-messages">
+                  <div class="user-prompt message">
+                    <div class="profile profile_person">
+                      <div>M</div>
+                    </div>
+                    <div class="msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat optio inventore doloribus. Sunt minus doloremque maiores. Hic magnam veniam quaerat voluptate fuga, voluptates amet et soluta quas porro cumque? Nobis, eos beatae! Deleniti sit aspernatur odit aliquid, et quae reprehenderit mollitia obcaecati dolorum, quis veniam nulla iste ut corrupti voluptatibus!</div>
+                  </div>
+                  <div class="ai-response message">
+                    <div class="profile profile_ai">
+                      <div>R</div>
+                    </div>
+                    <div class="msg">
+                      Lorem ipsum dolor
+                    </div>
+                  </div>
+                  <div class="user-prompt message">
+                    <div class="profile profile_person">
+                      <div>M</div>
+                    </div>
+                    <div class="msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat optio inventore doloribus. Sunt minus doloremque maiores. Hic magnam veniam quaerat voluptate fuga, voluptates amet et soluta quas porro cumque? Nobis, eos beatae! Deleniti sit aspernatur odit aliquid, et quae reprehenderit mollitia obcaecati dolorum, quis veniam nulla iste ut corrupti voluptatibus!</div>
+                  </div>
+                  <div class="ai-response message">
+                    <div class="profile profile_ai">
+                      <div>R</div>
+                    </div>
+                    <div class="msg">
+                      Lorem ipsum dolor
+                    </div>
+                  </div>
+                  <div class="user-prompt message">
+                    <div class="profile profile_person">
+                      <div>M</div>
+                    </div>
+                    <div class="msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat optio inventore doloribus. Sunt minus doloremque maiores. Hic magnam veniam quaerat voluptate fuga, voluptates amet et soluta quas porro cumque? Nobis, eos beatae! Deleniti sit aspernatur odit aliquid, et quae reprehenderit mollitia obcaecati dolorum, quis veniam nulla iste ut corrupti voluptatibus!</div>
+                  </div>
+                  <div class="ai-response message">
+                    <div class="profile profile_ai">
+                      <div>R</div>
+                    </div>
+                    <div class="msg">
+                      Lorem ipsum dolor
+                    </div>
+                  </div>
+                </div>
                 <form class="AI" action="index.html" method="post">
-                  <input class="input" type="text" name="AI" value= "Type your question here... ">
+                  <input class="input" type="text" name="AI" placeholder= "Ask Rita.. ">
                   <button type="submit" class="btn btn-submit-prompt">
                     <img src="img/arrow-up.svg" alt="">
                   </button>
+                  <small class="disclaimer">Rita can make mistakes. Please double check responses.</small>
                 </form>
-                <small class="disclaimer">Rita can make mistakes. Please double check responses.</small>
               </div>
             </div>
             <div class="previous-chats">
