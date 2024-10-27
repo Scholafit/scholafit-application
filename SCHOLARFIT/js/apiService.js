@@ -234,7 +234,7 @@ export const subscribe = async (payment_details) => {
 
 export const verifyPayment = async ()=> {
   const reference = getItemFromSessionStorage("reference")
-  const url = BASE_URL + '/payments/verify-premium/' + reference
+  const url = BASE_URL + '/payments/verify-premium/' + reference.reference
   const options = createOptions('GET')
   try {
       const response = await sendRequest(url, options)

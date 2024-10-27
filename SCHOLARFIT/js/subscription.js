@@ -39,7 +39,7 @@ export const clickSubscribeButton = () => {
 
             const { authorization_url: authUrl, reference } = response.data;
 
-            saveToSessionStorage('reference', { reference });
+            saveToSessionStorage('reference', { "reference": reference });
 
             const popup = window.open(
                 authUrl,
