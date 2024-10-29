@@ -24,6 +24,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 <body>
+  <div class="loading-screen" id="loading-screen">
+    <div class="loader">
+      <img src="img/graduation-cap.png" alt="">
+    </div>
+  </div>
   <div class="modal hide-modal" id="modal">
     <div class="modal_card">
       <h2 class="heading-md">Time's up</h2>
@@ -32,7 +37,7 @@
         <p>Click 'submit answers' below to save your progress, and feel free to return for another attempt whenever suits you best. We'll be here to help you succeed.</p>
 
         <div class="modal-btn">
-          <button class="btn btn-primary">Submit Answers</button>
+          <button class="btn btn-primary" id="modal-submit">Submit Answers</button>
         </div>
       </div>
     </div>
@@ -79,7 +84,7 @@
         <div class="key"></div>
       </div>
       <div class="pause-test">
-        <button class="btn btn-secondary-sm">Pause Test</button>
+        <button class="btn btn-secondary-sm ">Pause Test</button>
       </div>
     </div>
   </div>
@@ -89,7 +94,7 @@
 <script type="module">
   import {loadExam, submitAnswers} from './js/renderData.js' 
     loadExam()
-  // submitAnswers()
+  submitAnswers()
 </script>
 </body>
 </html>

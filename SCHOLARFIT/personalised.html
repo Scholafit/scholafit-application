@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 <body>
-  <div class="personalised-wrapper">
+  <div class="personalised-wrapper" id="personalised-wrapper">
     <div class="header">
       <div class="container row header-wrapper">
         <div class="logo row">
@@ -46,28 +46,32 @@
       </div>
     </div>
     <div>
-      <div class="Personalised">
+      <div class="Personalised" >
         <div class="">
           <h2 class="heading hidden">Personalised Learning Plan</h2>
           <div class="row personalised-main">
             <div class="ai-box" id="ai-box">
-              <h2 class="heading">AI Tutor: Rita </h2>
+              <h2 class="heading hidden ">AI Tutor: Rita </h2>
               <div class="ai-box-inner">
                 <img class="image hidden" src="img/fine_lady.png" alt="AI_lady">
-                <h2 class="heading hidden">Ask Rita a Question ..</h2>
+                <h2 class="heading hidden ">Ask Rita a Question ..</h2>
                 <div class="chat-messages" id="chat-messages">
-                  <!-- <div class="user-prompt message">
-                    <div class="profile profile_person">
-                      <div>M</div>
+                  <!-- <div class="om">
+                    <div class="user-prompt message">
+                      <div class="profile profile_person">
+                        <div>M</div>
+                      </div>
+                      <div class="msg">Hello</div>
                     </div>
-                    <div class="msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat optio inventore doloribus. Sunt minus doloremque maiores. Hic magnam veniam quaerat voluptate fuga, voluptates amet et soluta quas porro cumque? Nobis, eos beatae! Deleniti sit aspernatur odit aliquid, et quae reprehenderit mollitia obcaecati dolorum, quis veniam nulla iste ut corrupti voluptatibus!</div>
                   </div>
-                  <div class="ai-response message">
-                    <div class="profile profile_ai">
-                      <div>R</div>
-                    </div>
-                    <div class="msg">
-                      Lorem ipsum dolor
+                  <div class="om">
+                    <div class="ai-response message">
+                      <div class="profile profile_ai">
+                        <div>R</div>
+                      </div>
+                      <div class="msg">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum, sint ea optio non enim modi blanditiis tempora accusamus nostrum iste?
+                      </div>
                     </div>
                   </div>
                   <div class="user-prompt message">
@@ -99,11 +103,14 @@
                     </div>
                   </div> -->
                 </div>
-                <form class="AI" id="AI" method="post">
-                  <input class="input" type="text" name="AI" placeholder= "Ask Rita.. ">
-                  <button type="submit" class="btn btn-submit-prompt" id="submit-prompt">
-                    <img src="img/arrow-up.svg" alt="">
-                  </button>
+                <form class="AI" id="AI" method="">
+                  <div class="AI-form__wrapper row">
+                    
+                     <textarea class="input" name="AI" id="textArea" cols="" rows="1" data-min-rows="1" placeholder="Ask Rita"></textarea>
+                    <button type="submit" class="btn btn-submit-prompt" id="submit-prompt">
+                      <img src="img/arrow-up.svg" alt="">
+                    </button>
+                  </div>
                   <small class="disclaimer">Rita can make mistakes. Please double check responses.</small>
                 </form>
               </div>
@@ -111,7 +118,7 @@
             <div class="previous-chats">
               <div class="prev-chats-wrapper">
                 <div class="start-chat-btn">
-                  <button class="btn btn-secondary-sm">start new chat</button>
+                  <button class="btn btn-secondary-sm" id="startNewChat">start new chat</button>
                 </div>
                 <div class="chat-categories" id="chat-categories">
                   <p class="primary-text prev-chats-heading">Recent discussions</p>
@@ -137,7 +144,7 @@
         </div>
       </div>
   </div>
-  <script src="">
+  <script type="module">
     import {chat} from './js/ai.js'
     chat()
   </script>

@@ -1,4 +1,143 @@
+.profile-screen {
+  padding-top: 2em;
+}
+.perf-analysis {
+  row-gap: 1em;
+  padding-block: 2em;
+  flex-direction: column;
+}
+.perf-analysis .card .card-content__demo_img {
+ 
+  width: 100%;
+  margin-inline: auto;
+}
+.card-content__results {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
 
+}
+.card-content__results p {
+  font-size: 2.5em;
+  font-weight: 600;
+  align-self: center;
+  color: green;
+}
+
+.comparison-line-graph {
+ 
+  padding-block: 2em;
+}
+
+.comparison-line-graph .card .card-content__demo_img {
+  width: 30%;
+  margin-inline: auto;
+}
+
+.strength-weakness {
+  padding-block: 2em;
+}
+.revision {
+  padding-block: 2em;
+  max-height: 500px;
+  margin-bottom: 4em;
+  position: relative;
+}
+.revision .card {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-bottom: 2em;
+  padding-top: 0 !important;
+}
+#p-subject_tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 1em;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+  position: sticky;
+  background-color: #FFF;
+  padding-block: 1em;
+  padding-inline: .5em;
+  box-shadow: 2px 2px 10px 1px rgba(5, 5, 65, 0.2);
+
+  top: 0;
+}
+.subj {
+  background-color: #3b5998 !important;
+  border: 1px solid transparent;
+}
+.active__btn {
+  background-color: var(--primary-color) !important;
+}
+.q_n_a {
+  margin-bottom: 1em;
+  border: .5px solid lightgray;
+  padding-inline: .5em;
+  padding-block: .5em;
+  border-radius: 8px;
+  background-color: #f0f1ff;
+}
+.question {
+  align-items: center;
+  padding-block: 1em;
+  padding-inline: .5em;
+}
+.question p {
+  margin-bottom: .85em;
+}
+
+.answer {
+  display: block;
+  width: 98%;
+  margin-inline: auto;
+  background-color: #fff;
+  padding-inline: .5em;
+  padding-block: .75em;
+  border-radius: 8px;
+}
+.answer >:first-child {
+  font-weight: 600;
+}
+.answer p {
+  margin-bottom: .85em;
+}
+
+.ai-recommendation {
+  padding-block: 2em;
+  margin-block: 2em;
+  flex-direction: column;
+  row-gap: 2em;
+}
+.ai-recommendation > div .card-content p {
+  margin-bottom: 1em;
+}
+
+.ai-btn > a {
+  
+  display: block;
+  width: 70%;
+  margin-inline: auto;
+}
+.ai-btn > a > button {
+  width: 100%;
+}
+
+.butn {
+  display: grid;
+  margin-bottom: 3em;
+}
+.butn a {
+  display: block;
+  justify-self: flex-end;
+}
+.footer {
+  background-color: #f0f1ff;
+  text-align: center;
+  padding-block: 1.5em;
+}
 
 @media only screen and (min-width: 65em){
   .profile-screen {
@@ -7,10 +146,11 @@
   .perf-analysis {
     column-gap: 1em;
     padding-block: 2em;
+    flex-direction: row;
   }
   .perf-analysis .card .card-content__demo_img {
    
-    width: 60%;
+    width: 100%;
     margin-inline: auto;
   }
   .card-content__results {
@@ -50,6 +190,11 @@
     overflow-y: auto;
     padding-block: 2em;
   }
+  #p-subject_tabs {
+    
+    flex-wrap: nowrap;
+  
+  }
   .q_n_a {
     margin-bottom: 1em;
     border: .5px solid lightgray;
@@ -86,10 +231,18 @@
     margin-block: 2em;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
   }
   .ai-recommendation > div .card-content p {
     margin-bottom: 1em;
   }
+  .ai-btn > a {
+   
+    display: inline;
+    
+    
+  }
+  
   .butn {
     display: grid;
     margin-bottom: 3em;

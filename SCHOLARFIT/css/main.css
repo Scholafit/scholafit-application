@@ -7,7 +7,7 @@ body {
   background-color: #f0f1ff;
   border-bottom: 0.0625em solid #e5e7eb;
   box-shadow: 0.125em -0.125em 0.625em rgba(3,3,3,0.1);
-  width: 100%;
+
   overflow: hidden;
   
 }
@@ -15,7 +15,9 @@ body {
 .header_wrapper {
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  margin-inline: auto;
+  overflow: hidden;
+  
   
 }
 .logo {
@@ -45,9 +47,14 @@ nav a {
   transform: translateX(100%);
   transition: transform 300ms ease-in;
   z-index: 90;
+
 }
 .open-menu {
   transform: translateX(0);
+  
+}
+.close-menu {
+  display: none;
 }
 .m-menu {
   padding-top: 2em;
@@ -65,15 +72,16 @@ nav a {
 }
 .home-body {
   overflow: hidden;
+  width: 100%;
 }
 .promo-banner {
   background-color: #3498db;
   padding-block: 1em;
   padding-inline: 1em;
-  width: 100%;
   color: #FFF;
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
 .promo-banner a {
   color: #fff !important;
@@ -83,6 +91,9 @@ nav a {
   top: 5%;
   right: 2%;
   cursor: pointer;
+}
+.hero-section {
+
 }
 .intro-section {
   padding-top: 1em;
@@ -168,17 +179,18 @@ nav a {
   text-align: center;
 }
 .footer {
-  padding: 1.25em 0 1.25em;
   background-color: #f0f1ff;
   border-top: 0.125em solid #e5e7eb;
   margin-top: 5em;
+  padding-block: 2em;
 }
+
 .footer-menu {
   margin-top: 1.5em;
 }
 .footer-menu a {
   display: inline-block;
-  margin-left: 1em;
+  /* margin-left: 1em; */
   text-decoration-line: none;
 }
 
@@ -210,6 +222,9 @@ nav a {
   }
   .m-menu-img {
     display: none;
+  }
+  .close-menu {
+    display: block;
   }
 
   .home-body {

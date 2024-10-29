@@ -7,7 +7,7 @@ export const submitRegistrationForm = () => {
     const registrationForm = document.getElementById('registration_form')
     if (registrationForm) {
         registrationForm.addEventListener('submit', async (evt) => {
-    
+            
             evt.preventDefault()
             const formData = new FormData(registrationForm)
             const data = {

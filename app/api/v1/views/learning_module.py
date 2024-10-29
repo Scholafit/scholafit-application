@@ -37,7 +37,7 @@ def fetch_chats():
 
 #get chat by id
 
-@app_views.route('/learner-center/ai/<string:conversation_id>', methods=['POST'])
+@app_views.route('/learner-center/ai/<string:conversation_id>', methods=['GET'])
 def fetch_chat_by_id(conversation_id):
     return get_chat_by_id(conversation_id)
 
@@ -50,4 +50,5 @@ def start_chat():
 # continue conversation with AI
 @app_views.route('/learner-center/ai/<string:conversation_id>', methods=['POST'])
 def continue_chat_with_ai(conversation_id):
+    print('in api endpoint calling controller')
     return continue_chat(conversation_id, request)

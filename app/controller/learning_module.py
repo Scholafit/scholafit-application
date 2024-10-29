@@ -44,6 +44,7 @@ def create_user_exam(profile_id:int):
 
 
 def submit_exam(test_id: int, request: Request):
+    print('submitting exam')
     req = request.json
     try:
         answer_ids = json.loads(req["answers"])
@@ -120,18 +121,20 @@ def create_chat_with_ai(request: Request):
         "user_id": user_id,
         "conversations": conversations
     }
-    print(f"this is the ai: {ai_response}")
     ai_response["updated_at"] = updated_at
     return make_response(jsonify({"response":ai_response, "conversation_id": conversation_id}),201)
 
 
 def continue_chat(conversation_id:str, request: Request):
+    print(f'continue chat - {conversation_id}')
     session_id = session.get('session_id', None)
     req = request.json
     prompt_message = req["message"]
     user_data = session.get(session_id)
     conversations = user_data["conversations"]
+    
     conversation = conversations[conversation_id]
+    # print(conversation)
     if len(conversation) == 0:
         return make_response(jsonify({
             "error": "Invalid id",
@@ -139,7 +142,6 @@ def continue_chat(conversation_id:str, request: Request):
             "status_code": 400,
             "errors": []
         }), 400)
-
     response = chat_with_ai(prompt_message, conversation["conversation"])
 
     updated_at = datetime.now(timezone.utc)
@@ -148,6 +150,7 @@ def continue_chat(conversation_id:str, request: Request):
         "user": prompt_message,
         "assistant": response["response"]
     })
+    conversations[conversation_id] = conversation
     session[session_id] = {
         "user_id": user_data["user_id"],
         "conversations": conversations
@@ -198,9 +201,9 @@ def initial_profile_build(profile_id, request: Request):
     req = request.json
     profile_data = req["profile_data"]
     subjects = req["subject_data"]
-    print(req)
+    
     response = create_user_profile(profile_data,subjects, profile_id)
-
+    print(response)
     if not response:
         return make_response(jsonify({
             "status": "Failed to create profile",
