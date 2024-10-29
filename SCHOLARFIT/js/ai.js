@@ -135,6 +135,7 @@ newChatBtn.addEventListener('click', (e) => {
     aiBox.classList.remove('chat-mode')
     hideOnChatMode.forEach(hcm => hcm.classList.remove('cm_no__show'))
     textArea.value = ''
+    history.pushState(null, '', '/personalised.html')
 })
 
 const getScrollHeight = (el) => {
