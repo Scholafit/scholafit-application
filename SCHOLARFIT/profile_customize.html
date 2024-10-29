@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Profile Customisation</title>
-  </head>  
-  <link rel="stylesheet" href="css/profileStyle.css">
-  <link rel="stylesheet" href="css/index.css">
+    <script>
+      const getItemFromSessionStorage = (key) => {
+          return JSON.parse(sessionStorage.getItem(key));
+      };
+
+      // Check if user is logged in
+      if (!getItemFromSessionStorage('user')) {
+          // User is not logged in, redirect to login page
+          window.location.href = 'login.html';
+      }
+  </script>
+  </head>
+  <link rel="stylesheet" href="css/Profile.css">
   <link rel="icon" href="./img/Scholafit-logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

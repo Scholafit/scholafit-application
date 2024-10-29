@@ -38,12 +38,14 @@ def extract_data_from_response(resp, match_pattern)-> list | None:
 
     if match:
         json_string = match.group()
+        cleaned_json_string = re.sub(r'\s+', ' ', json_string).strip()
         try:
-            data = json.loads(json_string)
+            data = json.loads(cleaned_json_string)
             return data
         except json.JSONDecodeError as err:
             print(f'JSONDecodeError: {err}')
-            print(f'json string: {json_string}')
+            print(f'Original json string: {json_string}')
+            print(f'Cleaned JSON String: {cleaned_json_string}')
             raise err
 
 
