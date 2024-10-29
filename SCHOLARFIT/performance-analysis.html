@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Performance Analysis</title>
+    <script>
+      const getItemFromSessionStorage = (key) => {
+          return JSON.parse(sessionStorage.getItem(key));
+      };
+
+      // Check if user is logged in
+      if (!getItemFromSessionStorage('user')) {
+          // User is not logged in, redirect to login page
+          window.location.href = 'login.html';
+      }
+  </script>
   </head>
   <link rel="stylesheet" href="css/performanceStyle.css">
   <link rel="stylesheet" href="css/index.css">

@@ -72,6 +72,22 @@ def verify_payment_premium(reference):
         payment.update_payment_status(payments, 'SUCCESS')
         return make_response(jsonify(profile.to_dict()), 200)
     if response.get('data') and response['data']['status'] == 'abandoned':
-        return make_response(jsonify({"error": response}), 402)
+        return make_response(
+            jsonify({
+                "status": "Payment not successful",
+                "status_code": 402,
+                "message": response['data'].get('message', 'No additional details provided'),
+                "errors": [{"field": "payment_status", "error": response['data'].get('gateway_response', 'Abandoned')}]
+            }),
+            402
+        )
 
-    return make_response(jsonify({"error": "Payment verification failed"}), 400)
+    return make_response(
+            jsonify({
+                "status": "Payment verification failed",
+                "status_code": 500,
+                "message": "Unexpected error during payment verification",
+                "errors": [{"field": "response", "error": response}]
+            }),
+            500
+        )

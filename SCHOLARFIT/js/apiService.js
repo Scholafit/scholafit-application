@@ -286,7 +286,7 @@ export const continue_chat = async (promptText, conversationId) => {
 }
 
 export const subscribe = async (payment_details) => {
-  const url = BASE_URL + '/payments/premium'
+  const url = BASE_URL + '/payments/top-up'
     const options = createOptions('POST', payment_details)
 
     try {
