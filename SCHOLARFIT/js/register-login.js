@@ -7,7 +7,7 @@ export const submitRegistrationForm = () => {
     const registrationForm = document.getElementById('registration_form')
     if (registrationForm) {
         registrationForm.addEventListener('submit', async (evt) => {
-    
+            
             evt.preventDefault()
             const formData = new FormData(registrationForm)
             const data = {
@@ -34,7 +34,7 @@ export const submitRegistrationForm = () => {
             const profle = respData["new_profile"]
             const userId = user["id"]
             const profileId = profle["id"]
-            saveToSessionStoragesaveToSessionStorage("user", 
+            saveToSessionStorage("user", 
                 {"userId": userId, 
                  "profileId": profileId,
                  "firstname": user.first_name,

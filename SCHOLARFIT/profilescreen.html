@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <script src="js/script.js" defer></script>
+  <head> 
+    <!-- <script src="js/script.js" defer></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Profile Screen</title>
@@ -16,8 +16,8 @@
     <div class="header">
       <div class="header_wrapper container row">
         <div class="logo row">
-          <img src="img/favicon.ico" alt="">
-          <p>Scholafit</p>
+          <img class="logo_img" src="img/Scholafit-logo.jpg" alt="">
+          
         </div>
         <div>
           <button class="btn btn-primary-sm">Print</button>
@@ -30,14 +30,15 @@
         <div class="perf-analysis row">
           <div class="card">
             <h2 class="heading">Overall Score</h2>
-            <div class="card-content card-content__results">
+            <div class="card-content card-content__results" id="score_card">
               <p>120 / 150</p>
             </div>
           </div>
           <div class="card" >
             <h2 class="heading">Performance Breakdown by subjects.</h2>
             <div class="card-content card-content__demo_img" >
-              <img src="img/bar-chart-side.svg" alt="">
+              
+              <canvas id="subject_bar_graph"></canvas>
             </div>
           </div>
         </div>
@@ -62,8 +63,14 @@
         </div>
         <div class="revision">
           <div class="card">
+            <div id="p-subject_tabs">
+              <div class="btn btn-primary-sm subj"></div>
+              <div class="btn btn-secondary-sm subj "></div>
+              <div class="btn btn-secondary-sm subj "></div>
+              <div class="btn btn-secondary-sm subj "></div>
+            </div>
             <h2 class="heading">Correct Answers for missed questions</h2>
-            <div class="card-content">
+            <div class="card-content" id="revision-panel">
               <div class="q_n_a">
                 <div class="question row">
                   <p>What is the square root of 25?</p>
@@ -147,9 +154,9 @@
               <p>Use AI-flashcards for efficient memorisation and recall of key concepts.</p>
             </div>
           </div>
-          <div>
+          <div class="ai-btn">
             <a href="personalised.html">
-              <button class="btn btn-primary">Ask Rita</button>
+              <button class="btn btn-primary ">Ask Rita</button>
             </a>
           </div>
         </div>
@@ -163,12 +170,7 @@
     <div class="footer">
       <p class="text"> &#169 2023 Scholafit. all rights reserved.</p>
     </div>
-
-
-      <script type="module">
-        import {renderResults, renderRevision} from './js/renderData.js'
-        renderResults()
-        renderRevision()
-      </script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+      <script src="js/profilescreen.js" type="module"></script>
   </body>
 </html>

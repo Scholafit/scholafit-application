@@ -74,7 +74,10 @@ class Profile:
         for key, value in kwargs.items():
             if key == 'university_choices':
                 choices = profile.university_choices
-                choices.append(value)
+                if not choices:
+                    profile.university_choices = [value]
+                else:
+                    profile.university_choices.append(value)
                 setattr(profile, key, choices)
             elif hasattr(profile, key):
                 setattr(profile, key, value)

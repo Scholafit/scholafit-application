@@ -164,7 +164,7 @@ class AI:
             "role": "user",
             "content": prompt_message
         })
-
+        print(messages)
         return self.send_follow_up_prompt(messages)
             
 

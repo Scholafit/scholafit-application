@@ -34,7 +34,6 @@ class UserTestRepository(Repository):
         if test:
             subjects = test.subject_tests
             return[db_test_question.question for subject in subjects for db_test_question in subject.test_questions ]
-        
 
 
 class UserTest:

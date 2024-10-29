@@ -109,14 +109,15 @@ NEW_QUESTION_LIMIT = 60
 SEEN_QUESTION_LIMIT = 40
 TOTAL_QUESTIONS = 20
 def create_test(profile_id: int, subject_ids: list[int]) -> list[DB_Question]:
-
+    print('creating test')
+    print(f'subject_ids---- {subject_ids}')
   
     new_questions_limit = int((NEW_QUESTION_LIMIT / 100) * TOTAL_QUESTIONS)
     seen_questions_limit = TOTAL_QUESTIONS - new_questions_limit
 
     user_history_exists = DB.session.execute(
         select(DB_UserQuestionHistory).filter_by(profile_id=profile_id)).first()
-
+    print(f'user_history_exists {user_history_exists}')
     if not user_history_exists:
         new_questions_limit = TOTAL_QUESTIONS
 
@@ -144,7 +145,7 @@ def create_test(profile_id: int, subject_ids: list[int]) -> list[DB_Question]:
 
     combined_query = new_question_query.union_all(seen_question_query)
     question_ids = DB.session.execute(combined_query).scalars().all()
-    
+    print(f'question_ids--- {question_ids}')
     test_question_query = (
         select(DB_Question)
         .where(DB_Question.id.in_(question_ids))
@@ -160,12 +161,15 @@ def create_test(profile_id: int, subject_ids: list[int]) -> list[DB_Question]:
 
 def generate_test_exam(profile_id: int, subject_ids: list[int]):
 
-   
+    print('generating test')
     test_question_objects = create_test(profile_id, subject_ids)
+    print(f'test object list {test_question_objects}')
     test_questions = []
     passages_in_test = []
     subjects = {}
     for test_question in test_question_objects:
+        print('generating test')
+        print(f'subjects dict-- {subjects}')
         data = {}
         if test_question.passage and test_question.passage_id not in passages_in_test:
             passages_in_test.append(test_question.passage_id)
@@ -178,13 +182,14 @@ def generate_test_exam(profile_id: int, subject_ids: list[int]):
         
         subject_name = test_question.subject.name
         subject_id = test_question.subject_id
+        print(f'subject name {subject_name}')
         if subject_name in subjects:
             subject_data = subjects[subject_name]
             subject_data["data"].append(data)
         else:
             subjects[subject_name] = {"subject_name": subject_name,"subject_id": subject_id, "data": [data]}
             test_questions.append(subjects[subject_name])
-            
+        print(f'data is --{data}')   
     
     return test_questions
 
@@ -243,8 +248,12 @@ def create_user_profile(profile_data, subjects_data, profile_id):
     user_profile = profile.update_profile(profile_id, **profile_data)
     if user_profile:
         user_selection = [subject.get_subject_name(sb) for sb in subjects_data]
+        print(f'user-select {user_selection}')
         subject_ids = [sub["id"] for sub in user_selection]
+        print(f'subject_ids --{subject_ids}')
         user_subjects = userSubject.create_user_subjects(profile_id, subject_ids)
+        print(f'user_subject list{user_subjects}')
+        # fix error here sb.to_dict not a function
         user_subjects = [sb.to_dict() for sb in user_subjects]
         return {
             "profile": user_profile,

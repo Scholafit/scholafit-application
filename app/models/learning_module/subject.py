@@ -2,7 +2,7 @@ from app.models.base_model import BaseModel
 from app.models.database import Repository, get_db
 from app.models.error import ValidationError
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean, Integer, ForeignKey, select
+from sqlalchemy import String, Boolean, Integer, ForeignKey, select, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
  
@@ -49,7 +49,7 @@ class SubjectRepository(Repository):
         Returns:
             DB_Subject or None: The subject object if found, otherwise None.
         """
-        return self.database.session.execute(select(DB_Subject).where(DB_Subject.name.lower()==name.lower())).scalar_one_or_none()
+        return self.database.session.execute(select(DB_Subject).where(func.lower( DB_Subject.name)==func.lower(name))).scalar_one_or_none()
     
     def get_subject_by_id(self, subject_id: int):
         """

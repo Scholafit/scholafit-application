@@ -1,16 +1,10 @@
 
 
-import { generate_test, signUp, login, submitTest, updateUserProfile, subscribe } from "./apiService.js"
-import {saveToSessionStorage, getItemFromSessionStorage } from './utils.js'
-import {exam} from './data.js'
+import { generate_test, submitTest, updateUserProfile, subscribe } from "./apiService.js"
+import {saveToSessionStorage, getItemFromSessionStorage, titleCase } from './utils.js'
+import {data} from './testData.js'
 
 const TOTAL_SUBJECTS = 4
-
-const titleCase = (words) => {
-
-    return words.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-}
-
    
 export const loadSubjects = (data) => {
     let subjectDisplay = document.querySelectorAll('.utme__subjects')
@@ -30,12 +24,14 @@ export const loadSubjects = (data) => {
     }
     
 }
-
+ 
 
 const subjectTabs = document.querySelectorAll(".subj")
 const nextButton = document.getElementById("nxt_question")
 const prevButton = document.getElementById("prev_question")
-const submitButton = document.getElementById('submit__test_btn')
+const submitButton = document.getElementById('submit-test_btn')
+const modalSubmitBtn = document.getElementById('modal-submit')
+
 const navigationPad = document.getElementById('navigation__nav')
 
 nextButton.addEventListener('click', () => {
@@ -92,10 +88,11 @@ const selectSubject = (subjectTabs) => {
             renderQuestion(questions)
         })
     })
-    subjectTabs[0].click()
-    
 }
+
 const createPages = (subject, subjectData) => {
+    
+   
     const QUESTIONS_PER_PAGE = 3
     const data = {}
     data["currentPage"] = 0
@@ -104,75 +101,74 @@ const createPages = (subject, subjectData) => {
     data["pages"] = pages
     let x = 0
     
-    if (subjectData.length === 1 && !subjectData[0]["passage"]){
-        const questions = subjectData[0]["questions"]
-        let number = 1
-        while (x < questions.length) {
-            let pg = questions.slice(x, x + QUESTIONS_PER_PAGE)
-            pg = pg.map(p => {
-                p = {...p, 'number': number}
-                number++;
-                return p
-            })
-            pages.push(pg)
-            x += QUESTIONS_PER_PAGE
-        }
-        data["totalQuestions"] = number -1
-        saveToSessionStorage(subject.toLowerCase(), data)
-        return
-    }
     let number = 1
+    let group = []
     subjectData.forEach(sbData => {
+        if (group.length === QUESTIONS_PER_PAGE){
+                pages.push(group)
+                group = []
+        }
         if (sbData["passage"]){
+            
             sbData["questions"] = sbData["questions"].map(p => {
                 p = {...p, 'number': number}
                 number++;
                 return p
             })
-           
-            pages.push([sbData])
-        } else {
-            const questions = sbData["questions"]
-            while (x < questions.length) {
-                let pg = questions.slice(x, x + QUESTIONS_PER_PAGE)
-                pg = pg.map(p => {
-                p = {...p, 'number': number}
-                number++;
-                return p
-                })
-                pages.push(pg)
-                x += QUESTIONS_PER_PAGE
-            }
+            group.push(sbData)
+        }else {
+
+            let question = sbData["questions"][0]
+            question = {...question, 'number': number}
+            
+            group.push(question)
+            number++;
         }
+            
+        
     })
+    if (group.length > 0) pages.push(group)
+    
     data["totalQuestions"] = number - 1
     saveToSessionStorage(subject.toLowerCase(), data)
 }
-export const loadExam = async () => {
-    // const user = getItemFromSessionStorage("user")
-    // const profileId = user.profileId
-    
-    // const respData = await generate_test(parseInt(profileId))
-    // const data = respData["data"]
-    // const testId = data["test_id"]
-    // saveToSessionStorage("testId", testId)
-    // saveToSessionStorage("answers", {})
-    // const exams = data["exam"]
-    const exams = exam["test_questions"]
-    setSubjectNames(exams, subjectTabs)
 
+const loadingScreen = document.getElementById('loading-screen')
+export const loadExam = async () => {
+    const user = getItemFromSessionStorage("user")
+    const profileId = user.profileId
+    
+    const respData = await generate_test(parseInt(profileId))
+    
+    const data = respData["data"]
+    const testId = data["test_id"]
+    saveToSessionStorage("testId", testId)
+    saveToSessionStorage("answers", {})
+    const exams = data["exam"]
+    setTimeout(()=>{
+        loadingScreen.classList.add('hide-loading-screen')
+
+    }, 3000)
+    
+    setSubjectNames(exams, subjectTabs)
     selectSubject(subjectTabs)
+    
     exams.forEach(ex => {
         let subName = ex["subject_name"]
         let data = ex["data"]
         createPages(subName, data)
     })
     saveToSessionStorage("answers", {})
-    startCountdown(12 * 60)
+    subjectTabs[0].click()
+    setTimeout(()=>{
+        
+        startCountdown(30 * 60)
+    },1500)
     
 }
 
 const getQuestions = () => {
+    
     const activeSubject = getItemFromSessionStorage("active_sub")
     const currentSubjectData = getItemFromSessionStorage(activeSubject["sub"])
     const page = currentSubjectData["currentPage"]
@@ -346,6 +342,7 @@ const activateSuccessButtonState = () => {
 }
 
 const renderQuestion = (questionObj) => {
+    
     const questionPanel = document.getElementById("question-panel")
     questionPanel.replaceChildren()
 
@@ -442,15 +439,22 @@ function startCountdown(duration) {
 
 
 export const submitAnswers = () => {
-    submitButton.addEventListener('click', async ()=> {
+    const submit = async() => {
         const testId = getItemFromSessionStorage("testId")
         const response = await submitTest(testId)
+        console.log(response)
         if (response.status == 200){
             const data = response.data
             saveToSessionStorage("results", data["results"])
             saveToSessionStorage("results_questions", data["questions"])
             window.location.replace('/profilescreen.html')
         }
+    }
+    submitButton.addEventListener('click', async ()=> {
+        await submit()
+    })
+    modalSubmitBtn.addEventListener('click', async() => {
+        await submit()
     })
 }
 

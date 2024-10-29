@@ -231,7 +231,7 @@ export const get_chats = async () => {
 }
 export const start_chat = async (promptText) => {
   const url = BASE_URL + '/learner-center/ai'
-  const options = createOptions('POST', promptText)
+  const options = createOptions('POST', {"message": promptText})
   try {
       const response = await sendRequest(url, options)
       if (response.status === 201){
@@ -259,7 +259,7 @@ export const start_chat = async (promptText) => {
 
 export const continue_chat = async (promptText, conversationId) => {
   const url = BASE_URL + `/learner-center/ai/${conversationId}`
-  const options = createOptions('POST', promptText)
+  const options = createOptions('POST',{"message": promptText})
   try {
       const response = await sendRequest(url, options)
       if (response.status === 200){
