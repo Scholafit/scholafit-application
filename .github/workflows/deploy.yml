@@ -1,0 +1,26 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to monitor
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH and Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          AWS_HOST: ${{ secrets.AWS_HOST }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$AWS_HOST << 'EOF'
+            cd /path/to/your/app
+            git pull origin main
+            docker-compose down
+            docker-compose up -d --build
+          EOF
