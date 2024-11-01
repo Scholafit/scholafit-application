@@ -1,4 +1,4 @@
-const BASE_URL = 'http:/api/v1'
+const BASE_URL = 'https:/api/v1'
 
 import {getItemFromSessionStorage} from './utils.js'
 const createOptions = (requestType, body="")=>{

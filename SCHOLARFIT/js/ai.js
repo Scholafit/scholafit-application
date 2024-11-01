@@ -132,10 +132,12 @@ export const chat = () => {
 const newChatBtn = document.getElementById('startNewChat')
 
 newChatBtn.addEventListener('click', (e) => {
+    const chatMessages = document.getElementById('chat-messages')
+    chatMessages.replaceChildren()
     aiBox.classList.remove('chat-mode')
     hideOnChatMode.forEach(hcm => hcm.classList.remove('cm_no__show'))
     textArea.value = ''
-    history.pushState(null, '', '/personalised.html')
+    history.replaceState({}, '', '/personalised.html')
 })
 
 const getScrollHeight = (el) => {
