@@ -3,7 +3,7 @@ name: Deploy to AWS
 on:
   push:
     branches:
-      - main #Test settings
+      - main  # Or your chosen branch
 
 jobs:
   deploy:
@@ -13,12 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH and Deploy
+      - name: Setup SSH Key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > /tmp/ssh_key
+          chmod 600 /tmp/ssh_key
+
+      - name: SSH and Deploy
+        env:
           AWS_HOST: ${{ secrets.AWS_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$AWS_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key ubuntu@$AWS_HOST << 'EOF'
             cd /path/to/your/app
             git pull origin main
             docker-compose down
