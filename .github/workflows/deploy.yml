@@ -3,7 +3,7 @@ name: Deploy to AWS
 on:
   push:
     branches:
-      - main  # Or your chosen branch
+      - main
 
 jobs:
   deploy:
@@ -25,8 +25,7 @@ jobs:
           AWS_HOST: ${{ secrets.AWS_HOST }}
         run: |
           ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key ubuntu@$AWS_HOST << 'EOF'
-            cd /path/to/your/app
+            cd scholafit-application
             git pull origin main
-            docker-compose down
             docker-compose up -d --build
           EOF
