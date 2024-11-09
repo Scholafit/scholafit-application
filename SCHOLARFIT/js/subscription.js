@@ -11,13 +11,17 @@ export const clickSubscribeButton = () => {
         return;
     }
 
+    if (subscribePremiumButton.getAttribute('data-listener') === 'true') return;
+    subscribePremiumButton.setAttribute('data-listener', 'true');
+    
     subscribePremiumButton.addEventListener('click', async (event) => {
         event.preventDefault();
         
         const user = getItemFromSessionStorage('user');
         
         if (!user || !user.profileId || !user.email) {
-            alert('User data is missing or incomplete.');
+            window.location.href = 'login.html';
+            //alert('User data is missing or incomplete.');
             return;
         }
 
@@ -46,7 +50,17 @@ export const clickSubscribeButton = () => {
                 '_blank',
                 'width=800,height=600,scrollbars=yes'
             );
-            verifyPayment();
+
+            // Polling to detect when the popup is closed
+            const popupCheckInterval = setInterval(() => {
+                if (popup.closed) {
+                    clearInterval(popupCheckInterval);
+                    // Redirect to verifying payment page
+                    window.location.href = 'verifying-payment.html';
+                }
+            }, 500); // Check every 500ms
+
+            //verifyPayment();
             // Redirect the user to the authorization URL (Paystack)
             //window.location.replace(authUrl);
         } catch (error) {

@@ -312,34 +312,39 @@ export const subscribe = async (payment_details) => {
     }
 }
 
-export const verifyPayment = async ()=> {
-  const reference = getItemFromSessionStorage("reference")
-  const url = BASE_URL + '/payments/verify-premium/' + reference.reference
-  const options = createOptions('GET')
+export const verifyPayment = async (reference) => {
+  const url = BASE_URL + '/payments/verify-premium/' + reference;
+  const options = createOptions('GET');
+
   try {
-      const response = await sendRequest(url, options)
+      const response = await sendRequest(url, options);
+
       if (response.status !== 200) {
-          const err = await response.json()
-          console.log(err)
+          // Parse the error response
+          const err = await response.json();
+          console.log('Error:', err);
           return {
               status: response.status,
               data: null,
               error: err
-          }
+          };
       }
-     const resp = await response.json()
+
+      // Parse the successful response
+      const resp = await response.json();
+
       return {
           status: response.status,
-          data: data,
+          data: resp.data,  // Access 'data' from the parsed response
           error: null
-      }
-      
+      };
+
   } catch (err) {
+      console.error('Request error:', err);
       return {
           status: 500,
           data: null,
           error: err
-      }
+      };
   }
-  
-}
+};

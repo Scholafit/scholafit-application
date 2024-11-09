@@ -50,7 +50,7 @@ class Payment:
             "email": email,
             "amount": int(amount * 100),
             "reference": reference,
-            "callback_url": f"https://localhost:5000/api/v1/payments/verify/{reference}"
+            "callback_url": f"http://localhost:3000/verifying-payment.html"
         }
 
         response = requests.post("https://api.paystack.co/transaction/initialize", json=payment_data, headers=headers)
@@ -66,7 +66,7 @@ class Payment:
 
     def create_payment_controller(self, profile_id, email, amount):
         # Initialize payment with Paystack
-        auth_url, reference = payment.initialize_payment(profile_id, email, amount)
+        auth_url, reference = self.initialize_payment(profile_id=profile_id, email=email, amount=amount)
 
         if auth_url:
             print('success')
@@ -81,6 +81,7 @@ class Payment:
             return make_response(jsonify({"error": "Failed to initialize payment"}), 500)
     
     def get_payment_by_reference(self, reference):
+        print(self.db.database.session.query(DB_Payment).filter_by(reference=reference))
         payment = self.db.database.session.query(DB_Payment).filter_by(reference=reference).first()
         return payment
 
@@ -103,7 +104,7 @@ class Payment:
             "email": email,
             "amount": int(5000 * 100),
             "reference": reference,
-            "callback_url": f"https://localhost:5000/api/v1/payments/verify-premium/{reference}"
+            "callback_url": f"http://localhost:5000/api/v1/payments/verify-premium/{reference}"
         }
 
         response = requests.post("https://api.paystack.co/transaction/initialize", json=payment_data, headers=headers)
@@ -118,7 +119,7 @@ class Payment:
         
     def create_payment_5000(self, profile_id, email, amount=5000):
         # Initialize payment with Paystack
-        auth_url, reference = payment.initialize_payment_5000(profile_id, email, amount)
+        auth_url, reference = payment.initialize_payment_5000(profile_id=profile_id, email=email, amount=amount)
 
         if auth_url:
             print('success')

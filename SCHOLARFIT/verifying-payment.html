@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifying Payment</title>
+</head>
+<body>
+    <h2>Verifying your payment, please wait...</h2>
+    <script type="module">
+        import { verifyPayment } from './js/apiService.js';
+        import { getItemFromSessionStorage } from './js/utils.js';
+
+        (async () => {
+            const referenceData = getItemFromSessionStorage('reference');
+            if (!referenceData || !referenceData.reference) {
+                console.error('No reference found for payment verification.');
+                return;
+            }
+
+            try {
+                const verificationResponse = await verifyPayment(referenceData.reference);
+                console.log('Verification response:', verificationResponse);
+
+                if (verificationResponse.status === 200 && verificationResponse.data && verificationResponse.data.subscription_status === "ACTIVE") {
+                    alert('Payment verified successfully!');
+                    window.location.href = 'paymentconfirmation.html'; // Redirect to success page
+                } else {
+                    console.warn('Payment verification failed:', verificationResponse);
+                    alert('Payment verification failed. Please contact support.');
+                    window.location.href = 'payment-failed.html'; // Redirect to failure page
+                }
+            } catch (error) {
+                console.error('Error verifying payment:', error);
+                alert('An error occurred during payment verification.');
+            }
+        })();
+    </script>
+</body>
+</html>
