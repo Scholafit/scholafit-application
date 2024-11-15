@@ -50,7 +50,7 @@ class Payment:
             "email": email,
             "amount": int(amount * 100),
             "reference": reference,
-            "callback_url": f"http://localhost:3000/verifying-payment.html"
+            "callback_url": f"https://scholafit.com/verifying-payment.html"
         }
 
         response = requests.post("https://api.paystack.co/transaction/initialize", json=payment_data, headers=headers)
