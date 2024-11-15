@@ -67,10 +67,12 @@ def verify_payment_premium(reference):
     response = requests.get(url, headers=headers).json()
     if response.get('data') and response['data']['status'] == 'success':
         profile = profileRepo.get_by_id(DB_Profile, payments.profile_id)
-        subscription.create_subscription(user_id=profile.user_id, plan='premium')
+        print(profile.to_dict())
+        subscription.create_subscription(user_id=profile.user_id, plan='PREMIUM')
         #payment.update_profile_balance(profile, payments.amount)
         payment.update_payment_status(payments, 'SUCCESS')
-        return make_response(jsonify(profile.to_dict()), 200)
+        user_profile = profileRepo.get_by_id(DB_Profile, payments.profile_id)
+        return make_response(jsonify({"data": user_profile.to_dict(), "success": "Verified"}), 200)
     if response.get('data') and response['data']['status'] == 'abandoned':
         return make_response(
             jsonify({

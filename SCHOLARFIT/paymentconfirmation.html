@@ -21,7 +21,39 @@
         // User is not logged in, redirect to login page
         window.location.href = 'login.html';
     }
-</script>
+
+    const reference = getItemFromSessionStorage('reference');
+    const user = getItemFromSessionStorage('user');
+    const currentDateTime = new Date();
+    const formattedDateTime = currentDateTime.toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'medium',
+      hour12: true, // Use 12-hour time with AM/PM
+    });
+    nextDate = new Date();
+    nextDate.setDate(currentDateTime.getDate() + 30);
+    const nextDateTime = nextDate.toLocaleString('en-US', {
+      dateStyle: 'medium',
+      timeStyle: 'medium',
+      hour12: true, // Use 12-hour time with AM/PM
+    });
+
+    // Insert data into the HTML elements once the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        if (user && user.firstname) {
+            document.getElementById('userFirstName').textContent = user.firstname;
+        }
+        if (reference && reference.reference) {
+            document.getElementById('orderReference').textContent = reference.reference;
+        }
+        if (formattedDateTime) {
+            document.getElementById('currentDateTime').textContent = formattedDateTime;
+        }
+        if (nextDateTime) {
+          document.getElementById('nextDateTime').textContent = nextDateTime;
+        }
+    });
+  </script>
 </head>
 
 <body>
@@ -39,15 +71,14 @@
       <img src="check.svg" alt="check_img">
     </div>
     <h2>Payment Successful</h2>
-    <p class="welcome">Welcome to Scholafit Premium [Customer Name]</p>
+    <p class="welcome">Welcome to Scholafit Premium <span id="userFirstName"></span></p>
 
     <!-- Transaction Details -->
     <h3>Transaction Details</h3>
     <div class="tran_details">
-      <p>Order ID: 12345</p>
-      <p>Date: 23rd October 2024</p>
-      <p>Time: 10:45 AM</p>
-      <p>Amount Paid: $50.00</p>
+      <p>Order ID: <span id="orderReference"></span></p>
+      <p>Date/Time: <span id="currentDateTime"></span></p>
+      <p>Amount Paid: N5000</p>
       <p>Payment Method: Credit Card</p>
       <p>Subscription Plan: Premium</p>
     </div>
@@ -61,7 +92,7 @@
     <a href="#" class="btn1">View Receipt</a><br>
     <a href="#" class="btn2">Download Receipt</a><br>
     <a href="#" class="btn3">Email Receipt</a>
-    <p>Next billing: 23rd October 2025</p>
+    <p>Next billing: <span id="nextDateTime"></span></p>
 
     <!-- Customer Support Section -->
     <h3>Customer Support</h3>
